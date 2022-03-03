@@ -12,6 +12,7 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -30,7 +31,19 @@ module.exports = {
             }
           ]
         }
-      }
+      },
+       // Images
+       {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: 
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
+          },
+        
+      },
     ]
   },
   resolve: {
