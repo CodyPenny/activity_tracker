@@ -1,0 +1,43 @@
+{
+  "name": "activity-tracker-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "build": "webpack --watch",
+    "start": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.8.6",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "express": "4.17.3",
+    "firebase": "^9.4.1",
+    "formik": "^2.1.4",
+    "framer-motion": "^6.2.8",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.6",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "styled-components": "^5.3.3",
+    "yup": "^0.28.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.9.2",
+    "babel-loader": "^8.0.5",
+    "dotenv-webpack": "^7.1.0",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
