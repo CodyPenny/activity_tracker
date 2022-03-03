@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // Chakra + Forms
 import { Formik, Form } from 'formik';
-import { Button, useToast, Flex, Box, Image } from '@chakra-ui/react';
+import { Button, useToast, Box, Image, Grid, GridItem } from '@chakra-ui/react';
 import { registerValid } from '../../helpers/formValidators';
 
 // Components
@@ -23,28 +23,28 @@ const Register = () => {
   }, []);
 
   return (
-    // <Flex direction="column" align="center" justify="center">
-    <Box
-        bg="#BEEBE9"
-        p={[2, 4, 6, 8]}
-        height="100%"
-        width={[
-          '100%', // base
-          '50%', // 480px upwards
-          '25%', // 768px upwards
-          '15%' // 992px upwards
-        ]}
-        paddingLeft="10%"
-        paddingRight="10%"
-        paddingTop="15%"
+    <Grid
+    h='100%'
+    bg="brand.100"
+    templateRows='1fr 3fr'
+    >
+      <GridItem 
+        pl="10%"
+        pr="10%"
+        pt="15%"
       >
         <Image
           rounded="full"
           width="220px"
-          marginLeft="15%"
+          marginLeft={["auto","30%"]}
           marginBottom="10%"
           src="https://mvp2020.s3-us-west-1.amazonaws.com/blueemail2.png"
         />
+      </GridItem>
+      <GridItem
+        pl="10%"
+        pr="10%"
+      >
         <Formik
           initialValues={{ email: '', password: '', displayName: '' }}
           validationSchema={registerValid}
@@ -129,8 +129,9 @@ const Register = () => {
             </Form>
           )}
         </Formik>
-    </Box>
-    // </Flex>
+      </GridItem>
+    
+    </Grid>
   );
 };
 
