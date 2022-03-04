@@ -1,37 +1,35 @@
 // Dependencies
 import React, { Component } from 'react';
-//import { auth, db, storage } from '../../firebase.js';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import ToastFileHelper from './ToastFileHelper.jsx';
 import { MdOutlineFileDownload } from 'react-icons/md'
+import { getUserUid } from '../../firebase/user.js'
+import { getRef, storage } from '../../firebase/index.js'
 
 class UploadFile extends Component {
   imageInput = null;
 
-  get uid() {
-    return auth.currentUser.uid;
-  }
-
-  get userRef() {
-    return db.doc(`users/${this.uid}`);
-  }
+//   get userRef() {
+//     return db.doc(`users/${this.uid}`);
+//   }
 
   get file() {
     return this.imageInput && this.imageInput.files[0];
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
+    const uid = await getUserUid()
 
     if (this.file) {
       storage
         .ref()
         .child('user-profiles')
-        .child(this.uid)
+        .child(uid)
         .child(this.file.name)
         .put(this.file)
         .then((response) => response.ref.getDownloadURL())
-        .then((photoURL) => this.userRef.update({ photoURL }));
+        .then((photoURL) => getRef("users", uid).update({ photoURL }));
     }
   };
 

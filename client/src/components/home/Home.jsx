@@ -19,6 +19,10 @@ const Home = () => {
   const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
   const iconSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
+  const sign_out = () => {
+    signOutOfApp()
+    navigate('/login')
+  }
   /**
    * If token exists, remain on the page, or be pushed to the login screen
    */
@@ -104,7 +108,7 @@ const Home = () => {
               aria-label="sign out"
               icon={<MdLogout />}
               variant="solid"
-              onClick={signOutOfApp}
+              onClick={sign_out}
               bg="brand.500"
               size={iconSize}
             />

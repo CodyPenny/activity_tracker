@@ -1,5 +1,5 @@
 import { setDoc, getDoc } from "firebase/firestore";
-import { getRef } from ".";
+import { getRef, auth } from ".";
 
 /**
  * Creates a new user document with firebase
@@ -53,3 +53,10 @@ export const getUserDocument = async (UID) => {
     }
   };
   
+  /**
+   * 
+   * @returns user's uid
+   */
+  export const getUserUid = async() => {
+    return await auth.currentUser.uid
+  }
