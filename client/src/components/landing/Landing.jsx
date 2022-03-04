@@ -27,7 +27,7 @@ const Landing = () => {
                  <Box
                  as={Button}
                  rounded="20px"
-                 background="#FFB6BA"
+                 background="brand.300"
                  color="#373737"
                  width="90%"
                  height="40px"
@@ -44,7 +44,7 @@ const Landing = () => {
              <Link to="/register" style={{ width: '80%' }}>
                  <Box
                  as={Button}
-                 background="#FFB6BA"
+                 background="brand.300"
                  color="#373737"
                  rounded="20px"
                  width="90%"

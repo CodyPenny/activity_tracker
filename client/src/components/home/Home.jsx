@@ -4,166 +4,114 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // Chakra + Forms
 import { signOutOfApp } from '../../firebase/auth';
-import { AccordionPanel, Accordion, Avatar, Box, Button, Flex, Heading, IconButton, SimpleGrid, Stack } from '@chakra-ui/react';
-import { FiLogOut, FiUsers, FiEdit } from 'react-icons/fi';
-import { MdPlaylistAdd } from 'react-icons/md';
+import { Avatar, Box, Flex, IconButton, Grid, GridItem, Text, useBreakpointValue } from '@chakra-ui/react';
+
+import { MdPlaylistAdd, MdLogout, MdEdit, MdGroup } from 'react-icons/md';
+import test_pic from '../../../static/avatar.png'
 
 // Components + Styles
 // import AddFriend from './AddFriend.jsx';
-// import { StyledStack,StyledAccItem, StyleAccHeader, StyledBox, StyledText } from '../../styledComponents/userPageStyles.js';
 // import ActiveChallenges from './ActiveChallenges.jsx';
 
 const Home = () => {
   const user = useContext(UserContext);
   let navigate = useNavigate();
-
+  const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
+  const iconSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
   /**
    * If token exists, remain on the page, or be pushed to the login screen
    */
-  useEffect(() => {
-    let authToken = sessionStorage.getItem('Auth Token')
+  // useEffect(() => {
+  //   let authToken = sessionStorage.getItem('Auth Token')
 
-    if (authToken) {
-        navigate('/profile')
-    }
+  //   if (authToken) {
+  //       navigate('/profile')
+  //   }
 
-    if (!authToken) {
-        navigate('/login')
-    }
-  }, [])
+  //   if (!authToken) {
+  //       navigate('/login')
+  //   }
+  // }, [])
 
   return (
-    <Flex position="absolute" top="0" height="100%" width="100%">
-      <StyledStack
-        position="absolute"
-        height="100%"
-        width="100%"
-        spacing="1rem"
+    <Grid
+    h='100%'
+    bg="brand.100"
+    templateRows='1fr 1fr 3fr 1fr'
+    >
+      <GridItem 
+        pl="10%"
+        pr="10%"
+        pt="15%"
+        textAlign="center"
       >
-        <Box>
-          <Avatar
-            name={user.displayName}
-            src={user.photoURL}
-            size="xl"
-          ></Avatar>
-
-        <Accordion>
-          <StyledAccItem>
-            <StyleAccHeader>
-              <Box flex="1">{user.displayName}</Box>
-            </StyleAccHeader>
-              <AccordionPanel>{user.uid}</AccordionPanel>
-          </StyledAccItem>
-        </Accordion>
-        </Box>
-{/* 
-        <Flex justifyContent="space-between" overflowX="scroll">
-          <StyledBox>
-            <Box minWidth="80px">
-              <Heading as="h6" size="sm" paddingBottom="0.35rem">
-                Completed
-              </Heading>
-              <StyledText>{user.completed}</StyledText>
-            </Box>
-          </StyledBox>
-          <StyledBox>
-            <Box minWidth="80px">
-              <Heading as="h6" size="sm" paddingBottom="0.35rem">
-                Wins
-              </Heading>
-              <StyledText>{user.wins}</StyledText>
-            </Box>
-          </StyledBox>
-          <StyledBox>
-            <Box minWidth="80px">
-              <Heading as="h6" size="sm" paddingBottom="0.35rem">
-                Friends
-              </Heading>
-              <StyledText>{Object.keys(user.friends).length - 1}</StyledText>
-            </Box>
-          </StyledBox>
-        </Flex> */}
-
-        {/* <StyledBox>
-          {Object.keys(user.challenges).length === 0 ? (
-            <Heading as="h6" size="sm">
-              No Active Challenges
-            </Heading>
-          ) : (
-            <Stack spacing="0.25rem">
-              <Heading as="h6" size="sm">
-                Active Challenges
-              </Heading>
-              <SimpleGrid columns={3}>
-                <Heading as="h6" size="xs">
-                  Challenge
-                </Heading>
-                <Heading as="h6" size="xs">
-                  Members
-                </Heading>
-                <Heading as="h6" size="xs">
-                  Duration
-                </Heading>
-              </SimpleGrid>
-              <ActiveChallenges user={user} />
-            </Stack>
-          )}
-        </StyledBox> */}
-
-        <Box>
-          <AddFriend />
-        </Box>
-      </StyledStack>
-      <Box
-        position="absolute"
-        bottom="0"
-        width="100%"
-        paddingLeft="1rem"
-        paddingRight="1rem"
-        bg="#F7EEC7"
+        <Avatar
+          name={"name"}
+          src={test_pic}
+          // name={user.displayName}
+          // src={user.photoURL}
+          size={avatarSize}
+        />
+      </GridItem>
+      <GridItem
+        textAlign="center"
+        mt="1rem"
+        fontSize={['md', 'xl']}
       >
-        <Flex align="center" justify="center" justifyContent="space-between">
-          {window.location.href.slice(window.location.href.length - 7) ===
-          'profile' ? (
+        <Text fontWeight="semibold">display name</Text>
+      </GridItem>
+         
+      <GridItem>
+        {/* <AddFriend /> */}
+      </GridItem>
+      <GridItem
+        pl="5%"
+        pr="5%"
+        mt="8%"
+      >
+        <Box
+          bg="brand.500"
+          rounded="20px"
+        >
+          <Flex align="center" justify="center" justifyContent="space-evenly">
             <IconButton
-              icon={FiLogOut}
+              aria-label="Edit"
+              icon={<MdEdit />}
+              as={Link}
+              to="/edit"
+              variant="solid"
+              bg="brand.500"
+              size={iconSize}
+            />
+            <IconButton
+              icon={<MdGroup />}
+              as={Link}
+              to="/friends"
+              variant="solid"
+              bg="brand.500"
+              size={iconSize}
+            />
+            <IconButton
+              icon={<MdPlaylistAdd />}
+              as={Link}
+              to="/challenge/create"
+              variant="solid"
+              bg="brand.500"
+              size={iconSize}
+            />
+            <IconButton
+              aria-label="sign out"
+              icon={<MdLogout />}
               variant="solid"
               onClick={signOutOfApp}
-              bg="#F7EEC7"
+              bg="brand.500"
+              size={iconSize}
             />
-          ) : (
-            <Button as={Link} to="/profile" variant="solid" bg="#F7EEC7">
-              Back To Your Profile
-            </Button>
-          )}
-
-          <IconButton
-            icon={FiEdit}
-            as={Link}
-            to="/edit"
-            variant="solid"
-            bg="#F7EEC7"
-          />
-
-          <IconButton
-            icon={FiUsers}
-            as={Link}
-            to="/friends"
-            variant="solid"
-            bg="#F7EEC7"
-          />
-
-          <IconButton
-            icon={MdPlaylistAdd}
-            as={Link}
-            to="/challenge/create"
-            variant="solid"
-            bg="#F7EEC7"
-          />
-        </Flex>
-      </Box>
-    </Flex>
+          </Flex>
+        </Box>
+      </GridItem>
+    </Grid>
   );
 };
 

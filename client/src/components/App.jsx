@@ -19,12 +19,12 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<Landing/>} />  
+          <Route path="/" element={<Home/>} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />
             <Route path="reset_confirmation" element={<ResetConfirmation/>}/>
-            <Route path="profile" element={<Home />} />
+            <Route path="home" element={<Home />} />
         </Routes>
       </Router> 
     </BoxWrapper>

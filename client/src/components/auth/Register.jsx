@@ -57,7 +57,7 @@ const Register = () => {
               user.displayName = data.displayName
               await createUserProfileDocument( user );
               resetForm();
-              navigate('/profile')
+              navigate('/home')
             } catch (error) {
               console.log('error in form', error)
               toast({

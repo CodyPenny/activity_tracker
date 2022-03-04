@@ -39,7 +39,7 @@ const Login = () => {
             try {
               await signInWithEmail(data.email, data.password);
               resetForm();
-              navigate('/profile')
+              navigate('/home')
             } catch (error) {
               toast({
                 title: 'An error occurred.',
@@ -68,7 +68,7 @@ const Login = () => {
               />
 
               <Button
-                bg="#FFB6BA"
+                bg="brand.300"
                 rounded="20px"
                 fontWeight="semibold"
                 isDisabled={isSubmitting}
@@ -86,7 +86,7 @@ const Login = () => {
               </Button>
 
               <Button
-                bg="#FF6161"
+                bg="brand.400"
                 mt="10%"
                 rounded="20px"
                 fontWeight="semibold"
