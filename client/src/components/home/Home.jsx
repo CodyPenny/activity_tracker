@@ -79,7 +79,7 @@ const Home = () => {
               aria-label="Edit"
               icon={<MdEdit />}
               as={Link}
-              to="/edit"
+              to="/editProfile"
               variant="solid"
               bg="brand.500"
               size={iconSize}

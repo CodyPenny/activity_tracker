@@ -10,6 +10,7 @@ import Register from './auth/Register.jsx';
 import ForgotPassword from './auth/ForgotPassword.jsx';
 import ResetConfirmation from './auth/ResetConfirmation.jsx';
 import Home from './home/Home.jsx';
+import EditProfile from './profile/EditProfile.jsx';
 
 const App = () => {
   
@@ -19,12 +20,13 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home/>} />  
+          <Route path="/" element={<EditProfile/>} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />
             <Route path="reset_confirmation" element={<ResetConfirmation/>}/>
             <Route path="home" element={<Home />} />
+            <Route path="/editProfile" element={<EditProfile/>} />
         </Routes>
       </Router> 
     </BoxWrapper>
