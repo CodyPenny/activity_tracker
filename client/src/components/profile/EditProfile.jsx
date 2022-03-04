@@ -4,8 +4,9 @@ import { UserContext } from '../providers/UsersProvider.jsx';
 
 // Chakra + Forms
 import { Formik, Form } from 'formik';
-import { useToast,  Box,  Flex, Avatar, Text, Button, Stack, Grid, GridItem, } from '@chakra-ui/react';
+import { useToast,  Box,  Flex, Avatar, Text, Button, Grid, GridItem, } from '@chakra-ui/react';
 import ValidatorForm from '../formHelpers/ValidateForm.jsx';
+import UploadFile from './UploadFile.jsx';
 
 const EditProfile = () => {
     const user = useContext(UserContext);
@@ -33,17 +34,10 @@ const EditProfile = () => {
                 </Text>
             </GridItem>
             <GridItem>
-                <Box align="center">
-                    <Avatar
-                    ml="auto"
-                    mr="auto"
-                    //src={user.photoURL}
-                    size="2xl"
-                    position="relative"
-                    mb="-8%"
-                    />
+                <Box align="center"
+                >
+                <UploadFile />
                 </Box>
-                {/* <FileHelper /> */}
                 <Text
                     mt="3%"
                     fontSize="sm"
