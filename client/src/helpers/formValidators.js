@@ -23,6 +23,13 @@ const validateEmailPasswordFormat = yup.object().shape({
     .max(20, errorMax(20))
 });
 
+const validateSearchFriend = yup.object().shape({
+  searchText: yup.string()
+  .test(errorHTML, errorHTML, (value) => !containsHTML(value))
+  .max(30, errorMax(30))
+
+})
+
 const registerValid = yup.object().shape({
   email: yup
     .string()
@@ -71,5 +78,6 @@ export {
   registerValid,
   friendCodeValid,
   emailValid,
-  displayNameValid
+  displayNameValid,
+  validateSearchFriend
 };

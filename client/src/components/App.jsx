@@ -11,6 +11,8 @@ import ForgotPassword from './auth/ForgotPassword.jsx';
 import ResetConfirmation from './auth/ResetConfirmation.jsx';
 import Home from './home/Home.jsx';
 import EditProfile from './profile/EditProfile.jsx';
+import FriendsHelper from './friends/FriendsHelper.jsx';
+import SearchFriends from './search/SearchFriends.jsx';
 
 const App = () => {
   
@@ -20,13 +22,14 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<EditProfile/>} />  
+          <Route path="/" element={<SearchFriends/>} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />
             <Route path="reset_confirmation" element={<ResetConfirmation/>}/>
             <Route path="home" element={<Home />} />
-            <Route path="/editProfile" element={<EditProfile/>} />
+            <Route path="editProfile" element={<EditProfile/>} />
+            <Route path="friends" element={<FriendsHelper/>} />
         </Routes>
       </Router> 
     </BoxWrapper>

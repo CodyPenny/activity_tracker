@@ -53,10 +53,30 @@ export const getUserDocument = async (UID) => {
     }
   };
   
+/**
+ * 
+ * @returns user's uid
+ */
+export const getUserUid = async() => {
+  return await auth.currentUser.uid
+}
+
   /**
-   * 
-   * @returns user's uid
-   */
-  export const getUserUid = async() => {
-    return await auth.currentUser.uid
+ * 
+ * @param {*} UID 
+ * @returns 
+ */
+export const getUser = async (UID) => {
+  if (!UID) return null;
+
+  try {
+    const fRef = getRef('users', UID);
+    const fDoc = await fRef.get();
+
+
+    return fDoc.data();
+  } catch (error) {
+    console.error('getUserDocument Error:', error);
+    return 'getUserDocument Error';
   }
+};

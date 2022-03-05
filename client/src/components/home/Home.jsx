@@ -21,22 +21,22 @@ const Home = () => {
 
   const sign_out = () => {
     signOutOfApp()
-    navigate('/login')
+    navigate('/')
   }
   /**
    * If token exists, remain on the page, or be pushed to the login screen
    */
-  // useEffect(() => {
-  //   let authToken = sessionStorage.getItem('Auth Token')
+  useEffect(() => {
+    let authToken = sessionStorage.getItem('Auth Token')
 
-  //   if (authToken) {
-  //       navigate('/profile')
-  //   }
+    if (authToken) {
+        navigate('/profile')
+    }
 
-  //   if (!authToken) {
-  //       navigate('/login')
-  //   }
-  // }, [])
+    if (!authToken) {
+        navigate('/login')
+    }
+  }, [])
 
   return (
     <Grid

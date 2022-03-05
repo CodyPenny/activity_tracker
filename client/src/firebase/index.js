@@ -34,3 +34,12 @@ export const provider = new GoogleAuthProvider();
  export const getRef = (collection, UID) => {
   return doc( db, collection, UID )
 }
+
+/**
+ * 
+ * @param {*} docRef reference to a collection
+ * @param {*} updates new data
+ * @returns 
+ */
+ export const performUpdate = async (docRef, updates) =>
+ await docRef.update({ ...updates });

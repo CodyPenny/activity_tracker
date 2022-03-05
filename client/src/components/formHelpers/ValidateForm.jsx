@@ -3,7 +3,7 @@ import { useField, Field } from 'formik';
 import { Input, FormControl, FormErrorMessage, Box } from '@chakra-ui/react';
 
 const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
-  const [field, meta] = useField(props);
+  const [ field, meta ] = useField(props);
 
   const errorText = meta.error && meta.touched ? meta.error : '';
 
@@ -17,11 +17,12 @@ const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
           >
             <Box
               as={Input}
-              variant="flushed"
+              variant={props.variant ? props.variant : "flushed"}
               placeholder={placeholder}
               type={type}
               {...field}
               isInvalid={!!errorText}
+              bg={props.bg && props.bg}
             />
             <FormErrorMessage>{form.errors[field.name]}</FormErrorMessage>
           </FormControl>
