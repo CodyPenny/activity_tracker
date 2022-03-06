@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Avatar, Box, Text, Button } from '@chakra-ui/react'
+import { Avatar, Box, Text, Button, useBreakpointValue } from '@chakra-ui/react'
 import { StyledFriendAdded } from '../styles/friendStyles'
-import { set } from 'lodash'
+
 
 const FriendAvatar = ({name, photoURL, id}) => {
     const [showConfirmation, setShowConfirmation ] = useState(false)
+    const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
     const addFriend = () => {
         console.log('key', id)
         setShowConfirmation(true)
@@ -17,15 +18,27 @@ const FriendAvatar = ({name, photoURL, id}) => {
         p="1rem"
         onClick={addFriend}
     >
-        <Avatar size='xl' src={photoURL}/>
-        <Text pt=".5rem">{name}</Text>
+        <Avatar 
+            size={avatarSize}
+            src={photoURL}
+        />
+        <Text 
+            fontSize={['sm', 'md']}
+            pt=".5rem"
+        >
+            {name}
+        </Text>
 
         <StyledFriendAdded
             style={{
                 visibility: showConfirmation ? 'visible' : 'hidden'
             }}
         >
-            Request Sent
+            <Text
+            fontSize={['xs', 'md']}
+            >
+                Request Sent
+            </Text>
         </StyledFriendAdded>
     </Button>
   )

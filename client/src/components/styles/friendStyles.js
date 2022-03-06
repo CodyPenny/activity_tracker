@@ -11,10 +11,10 @@ export const StyledIconButton = styled(IconButton)`
 `;
 
 export const StyledFriendAdded = styled.span`
-  position: absolute;
-  padding: 1rem;
-  background: rgba(0,0,0,.2);
-  color: white;
-  visibility: hidden;
+    position: absolute;
+    padding: 6%;
+    background: rgba(0,0,0,.2);
+    color: white;
+    visibility: hidden;
 `
 
