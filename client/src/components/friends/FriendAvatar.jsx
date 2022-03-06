@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, Box, Text, Button, useBreakpointValue } from '@chakra-ui/react'
+import { Avatar, Text, Button, useBreakpointValue } from '@chakra-ui/react'
 import { StyledFriendAdded } from '../styles/friendStyles'
 
 

@@ -22,7 +22,7 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<SearchFriends/>} />  
+          <Route path="/" element={<Register/>} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />
@@ -30,6 +30,7 @@ const App = () => {
             <Route path="home" element={<Home />} />
             <Route path="editProfile" element={<EditProfile/>} />
             <Route path="friends" element={<FriendsHelper/>} />
+            <Route path="searchFriends" element={<SearchFriends/>} />  
         </Routes>
       </Router> 
     </BoxWrapper>

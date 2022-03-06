@@ -32,3 +32,4 @@ export const addFriend = async (UID, friendUID) => {
       return 'addFriend Error';
     }
   };
+

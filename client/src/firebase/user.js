@@ -71,7 +71,7 @@ export const getUser = async (UID) => {
 
   try {
     const fRef = getRef('users', UID);
-    const fDoc = await fRef.get();
+    const fDoc = await getDoc(fRef)
 
 
     return fDoc.data();

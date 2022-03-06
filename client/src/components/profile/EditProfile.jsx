@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik';
 import { useToast,  Box,  Flex, Text, Button, Grid, GridItem, } from '@chakra-ui/react';
 import ValidatorForm from '../formHelpers/ValidateForm.jsx';
 import UploadFile from './UploadFile.jsx';
+import NavButton from '../home/NavButton.jsx';
 
 const EditProfile = () => {
     const user = useContext(UserContext);
@@ -16,7 +17,7 @@ const EditProfile = () => {
         <Grid
         h='100%'
         bg="brand.100"
-        templateRows='1fr 2fr 3fr'
+        templateRows='1fr 2fr 3fr 1fr'
         pl="10%"
         pr="10%"
         >
@@ -51,15 +52,10 @@ const EditProfile = () => {
             </GridItem>
 
             <GridItem>
-                <Flex
-                    flexDirection="column"
-                    justifyContent="space-evenly"
-                    height="70%"
-                >
                     <Formik
-                    initialValues={{ displayName: '' }}
+                        initialValues={{ displayName: '' }}
                     //validationSchema={displayNameValid}
-                    onSubmit={async (data, { resetForm }) => {
+                        onSubmit={async (data, { resetForm }) => {
                         // try {
                         //   await editProfile(user.uid, data);
                         //   toast({
@@ -81,28 +77,24 @@ const EditProfile = () => {
                         // } finally {
                         //   return null;
                         // }
-                    }}
+                        }}
                     >
                         {({ values, isSubmitting }) => (
                             <Flex
                             as={Form}
                             direction="column"
-                            marginBottom="1.5rem"
+                            gap="1.5rem"
                             >
-                                <Text fontSize="sm" textAlign="left" mb="-0.5.5rem">
+                          
+                                <Text fontSize="sm" textAlign="left" >
                                     Display Name
                                 </Text>
-                                {/* <ValidatorForm
-                                    placeholder={user.displayName}
-                                    name="displayName"
-                                    value={values.displayName}
-                                    type="input"
-                                /> */}
                                 <ValidatorForm
-                                    placeholder="display name"
+                                    placeholder=" Enter new display name"
                                     name="displayName"
                                     value={values.displayName}
                                     type="input"
+                                    bg="#fff"
                                 /> 
                     
                                 <Button
@@ -111,49 +103,51 @@ const EditProfile = () => {
                                     fontWeight="semibold"
                                     w="100%"
                                     h="40px"
-                                    marginTop="2rem"
                                     isDisabled={isSubmitting}
                                     isLoading={isSubmitting}
                                     type="submit"
                                 >
                                     Save
                                 </Button>
-                            </Flex>
-                        )}
-                    </Formik>
                     <Button
-                    as={Link}
-                    to="/home"
-                    align="center"
-                    bg="#F7EEC7"
-                    w="100%"
-                    h="40px"
-                    bg="#F7EEC7"
-                    rounded="20px"
-                    marginBottom="1.5rem"
+                        as={Link}
+                        to="/home"
+                        align="center"
+                        bg="#F7EEC7"
+                        w="100%"
+                        h="40px"
+                        bg="#F7EEC7"
+                        rounded="20px"
                     >
                     Cancel
                     </Button>
             
                     <Button
-                    bg="#FF5454"
-                    rounded="20px"
-                    variant="solid"
-                    w="100%"
-                    color="white"
-                    onClick={() => {
-                        toast({
-                        title: 'No leaving.',
-                        description: '​👹​👺​👻​',
-                        status: 'error',
-                        duration: 9001,
-                        isClosable: true
-                        });
-                    }}
+                        bg="#FF5454"
+                        rounded="20px"
+                        variant="solid"
+                        w="100%"
+                        color="white"
+                        onClick={() => {
+                            toast({
+                            title: 'No leaving.',
+                            description: '​👹​👺​👻​',
+                            status: 'error',
+                            duration: 9001,
+                            isClosable: true
+                            });
+                        }}
                     >
                     Delete Account
                     </Button>
-                </Flex>
+
+                    </Flex>
+                        )}
+                </Formik>
+             
+            </GridItem>
+            <GridItem>
+                <NavButton />
             </GridItem>
       </Grid>
     );

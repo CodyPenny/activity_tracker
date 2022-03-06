@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Formik, Form, useField, Field  } from 'formik';
 import { validateSearchFriend } from '../../helpers/formValidators';
 import { Grid, GridItem, Stack, Box, Button, Input, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import ValidateForm from '../formHelpers/ValidateForm.jsx';
 import SearchFriendList from '../friends/SearchFriendList';
 import NavButton from '../home/NavButton';
+import { getUser } from '../../firebase/user';
 
 const SearchFriends = () => {
     const [ friendResults, setFriendResults ] = useState([])
+
+    const getFriends = async () => {
+        let defaultFriend = await getUser('S9yP99wNPVlTHGF25na5')
+        console.log('def friend', defaultFriend)
+    }
+
+    useEffect( () => {
+        getFriends()
+    }, [])
 
     return (
         <Grid
@@ -16,7 +26,6 @@ const SearchFriends = () => {
         templateRows='1fr 5fr 1fr'
         pr="10%" 
         pl="10%" 
-        // pt="8%"
         >
             <GridItem
                 pt="8%"
