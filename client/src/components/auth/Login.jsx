@@ -21,14 +21,14 @@ const Login = () => {
       templateRows='2fr 2fr 1fr'
     >
      <GridItem>
-      <Image
-        rounded="full"
-        size="150px"
-        src="https://mvp2020.s3-us-west-1.amazonaws.com/enter.png"
-        ml="auto"
-        mr="auto"
-        mt="12%"
-      />
+        <Image
+          rounded="full"
+          size="150px"
+          src="https://mvp2020.s3-us-west-1.amazonaws.com/enter.png"
+          ml="auto"
+          mr="auto"
+          mt="12%"
+        />
     </GridItem>
     <GridItem>
       <Box pl="10%" pr="10%" pt="8%">

@@ -3,6 +3,8 @@ import { Formik, Form, useField, Field  } from 'formik';
 import { validateSearchFriend } from '../../helpers/formValidators';
 import { Grid, GridItem, Stack, Box, Button, Input, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import ValidateForm from '../formHelpers/ValidateForm.jsx';
+import SearchFriendList from '../friends/SearchFriendList';
+import NavButton from '../home/NavButton';
 
 const SearchFriends = () => {
     const [ friendResults, setFriendResults ] = useState([])
@@ -11,15 +13,15 @@ const SearchFriends = () => {
         <Grid
         h='100%'
         bg="brand.100"
-        templateRows='1fr 4fr'
+        templateRows='1fr 5fr 1fr'
+        pr="10%" 
+        pl="10%" 
+        // pt="8%"
         >
-            <GridItem>
-                 <Box
-                    pl="10%" 
-                    pr="10%" 
-                    pt="8%"
-     
-                >
+            <GridItem
+                pt="8%"
+            >
+                 {/* <Box> */}
                     <Formik
                         initialValues={{ searchText: '' }}
                         validationSchema={validateSearchFriend}
@@ -75,10 +77,15 @@ const SearchFriends = () => {
                         </Form>
                     )}
                     </Formik>
-                </Box>
+                {/* </Box> */}
+            </GridItem>
+            <GridItem
+                pt="3rem"
+            >
+                <SearchFriendList />
             </GridItem>
             <GridItem>
-
+                <NavButton />
             </GridItem>
         
         </Grid>

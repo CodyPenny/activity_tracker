@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../providers/UsersProvider.jsx';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Chakra + Forms
-import { signOutOfApp } from '../../firebase/auth';
-import { Avatar, Box, Flex, IconButton, Grid, GridItem, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Avatar,Grid, GridItem, Text, useBreakpointValue } from '@chakra-ui/react';
 
-import { MdPlaylistAdd, MdLogout, MdEdit, MdGroup } from 'react-icons/md';
 import test_pic from '../../../static/avatar.png'
+import NavButton from './NavButton.jsx';
 
 // Components + Styles
 // import AddFriend from './AddFriend.jsx';
@@ -17,12 +16,7 @@ const Home = () => {
   const user = useContext(UserContext);
   let navigate = useNavigate();
   const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
-  const iconSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
-  const sign_out = () => {
-    signOutOfApp()
-    navigate('/')
-  }
   /**
    * If token exists, remain on the page, or be pushed to the login screen
    */
@@ -74,46 +68,7 @@ const Home = () => {
         pr="5%"
         mt="8%"
       >
-        <Box
-          bg="brand.500"
-          rounded="20px"
-        >
-          <Flex align="center" justify="center" justifyContent="space-evenly">
-            <IconButton
-              aria-label="Edit"
-              icon={<MdEdit />}
-              as={Link}
-              to="/editProfile"
-              variant="solid"
-              bg="brand.500"
-              size={iconSize}
-            />
-            <IconButton
-              icon={<MdGroup />}
-              as={Link}
-              to="/friends"
-              variant="solid"
-              bg="brand.500"
-              size={iconSize}
-            />
-            <IconButton
-              icon={<MdPlaylistAdd />}
-              as={Link}
-              to="/challenge/create"
-              variant="solid"
-              bg="brand.500"
-              size={iconSize}
-            />
-            <IconButton
-              aria-label="sign out"
-              icon={<MdLogout />}
-              variant="solid"
-              onClick={sign_out}
-              bg="brand.500"
-              size={iconSize}
-            />
-          </Flex>
-        </Box>
+        <NavButton />
       </GridItem>
     </Grid>
   );
