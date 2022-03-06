@@ -55,6 +55,7 @@ const Register = () => {
                 data.password,
                );
               user.displayName = data.displayName
+              console.log('test', user)
               await createUserProfileDocument( user );
               resetForm();
               navigate('/home')
@@ -80,7 +81,7 @@ const Register = () => {
                 type="input"
               />
 
-              <Box paddingTop="10%">
+              <Box paddingTop="5%">
                 <ValidateForm
                   placeholder="Password"
                   name="password"
@@ -88,10 +89,9 @@ const Register = () => {
                   type="password"
                 />
               </Box>
-
-              <Box paddingTop="10%">
+              <Box paddingTop="5%">
                 <ValidateForm
-                  placeholder="Display Name"
+                  placeholder="Full Name"
                   name="displayName"
                   value={values.displayName}
                   type="input"

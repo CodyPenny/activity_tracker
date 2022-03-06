@@ -12,7 +12,8 @@ const SearchFriends = () => {
 
     const getFriends = async () => {
         let defaultFriend = await getUser('S9yP99wNPVlTHGF25na5')
-        console.log('def friend', defaultFriend)
+        console.log('def ', defaultFriend)
+        setFriendResults([...friendResults, defaultFriend])
     }
 
     useEffect( () => {
@@ -30,7 +31,6 @@ const SearchFriends = () => {
             <GridItem
                 pt="8%"
             >
-                 {/* <Box> */}
                     <Formik
                         initialValues={{ searchText: '' }}
                         validationSchema={validateSearchFriend}
@@ -86,12 +86,11 @@ const SearchFriends = () => {
                         </Form>
                     )}
                     </Formik>
-                {/* </Box> */}
             </GridItem>
             <GridItem
                 pt="3rem"
             >
-                <SearchFriendList />
+                <SearchFriendList friends={friendResults}/>
             </GridItem>
             <GridItem>
                 <NavButton />
