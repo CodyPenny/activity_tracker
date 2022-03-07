@@ -1,9 +1,10 @@
 import { getDoc } from "firebase/firestore";
-import { set } from "firebase/database";
+import { set, get, child } from "firebase/database";
 import { getRef, auth } from ".";
 
 /**
  * Creates a new user document 
+ * Use uppercase for simpler queries
  * @param {*} user 
  * @returns new user document
  */
@@ -15,9 +16,10 @@ import { getRef, auth } from ".";
       const { email, photoURL, displayName, uid } = user;
       const uRef = getRef("users", uid );
       await set( uRef , {
-        email,
+        email: email.toUpperCase(),
         photoURL: photoURL ? photoURL : '',
-        displayName,
+        displayName: displayName.toUpperCase(),
+        id: uid.substring(0, 6)
       });
 
     } catch (error) {
@@ -66,12 +68,11 @@ export const getUser = async (UID) => {
 
   try {
     const fRef = getRef('users', UID);
-    const fDoc = await getDoc(fRef)
+    const snapshot = await get( fRef )
+    return snapshot.val();
 
-
-    return fDoc.data();
   } catch (error) {
-    console.error('getUserDocument Error:', error);
+    console.error('getUser Error:', error);
     return 'getUserDocument Error';
   }
 };

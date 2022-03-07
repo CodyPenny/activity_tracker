@@ -1,6 +1,7 @@
 import { getRef, performUpdate, getCollection, getDocsAsAList, db } from '../firebase/index.js'
-import { getDocs, query, where, limit, onSnapshot, collection } from "firebase/firestore";
+import { query, ref, orderByChild, orderByKey, get, startAt, onValue, endAt, limitToFirst } from "firebase/database";
 import { resetPasswordWithEmail } from './auth.js';
+
 
 
 export const addFriend = async (UID, friendUID) => {
@@ -36,11 +37,22 @@ export const addFriend = async (UID, friendUID) => {
     }
   };
 
+  /**
+   * 
+   * @param {*} text 
+   * @returns 
+   */
   export const searchMatchingFriends = async ( text ) => {
-    const friend_Ref = getCollection('users')
-    const q = friend_Ref.orderByKey().startAt(text).endAt(text + '\uf8ff')
+    const results = []
+    const db_Ref = getCollection("users")
+    const snapshot = await get(query( db_Ref, ...[ orderByChild("displayName"), startAt(text), endAt(text + '\uf8ff'), limitToFirst(10) ] ))
+    //return await snapshot.val()
+    snapshot.forEach( doc => { results.push( doc.val() ) } )
+   
+    return results
+
    // const q = query(friend_Ref, where("displayName", "startAt", text));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => doc.data());
+   // const snapshot = await getDocs(q);
+    //return snapshot.docs.map(doc => doc.data());
 
   }

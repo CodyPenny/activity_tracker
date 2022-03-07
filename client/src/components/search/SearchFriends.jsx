@@ -13,7 +13,7 @@ const SearchFriends = () => {
     const toast = useToast();
 
     const getFriends = async () => {
-        let defaultFriend = await getUser('S9yP99wNPVlTHGF25na5')
+        let defaultFriend = await getUser('DtDkNYyJYNZdT5o4wUmgBBnvh3I2')
         setFriendResults([...friendResults, defaultFriend])
     }
 
@@ -37,12 +37,9 @@ const SearchFriends = () => {
                         validationSchema={validateSearchFriend}
                         onSubmit={async (data, { resetForm }) => {
                             try {
-                            console.log('test', data.searchText)
-                            const results = await searchMatchingFriends(data.searchText);
-                            console.log('res ', results)
-                            //results.forEach(res => console.log(res.data()))
+                            const results = await searchMatchingFriends(data.searchText.toUpperCase());
+                            setFriendResults([...results])
                             resetForm();
-                        // update results
                             } catch (error) {
                             console.log('err', error)
                             toast({

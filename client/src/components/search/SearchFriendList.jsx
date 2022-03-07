@@ -6,7 +6,6 @@ import test_pic from '../../../static/avatar.png'
 //TODO: add loader
 
 const SearchFriendList = ({friends}) => {
-  const testFriendList = [{name: "f1", photoURL:test_pic}, {name: "f2", photoURL:test_pic}, {name: "f3", photoURL:test_pic}, {name: "f4", photoURL:test_pic}]
 
   return (
     <Stack 
@@ -20,7 +19,7 @@ const SearchFriendList = ({friends}) => {
                 key={i} 
                 name={friend.displayName} 
                 photoURL={friend.photoURL}
-                id={i}
+                id={friend.id}
             />
         ))}
     </Stack>

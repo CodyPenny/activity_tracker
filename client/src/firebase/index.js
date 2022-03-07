@@ -45,7 +45,8 @@ export const provider = new GoogleAuthProvider();
  */
  export const getCollection = (collection_name) => {
    //return collection(db, collection_name)
-   return ref(db, collection + '/')
+   return ref(db, collection_name + '/')
+   //return ref(db, collection_name )
  }
 
 /**
