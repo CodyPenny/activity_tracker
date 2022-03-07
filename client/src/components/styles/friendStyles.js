@@ -13,7 +13,7 @@ export const StyledIconButton = styled(IconButton)`
 export const StyledFriendAdded = styled.span`
     position: absolute;
     padding: 6%;
-    background: rgba(0,0,0,.2);
+    background: rgba(0,0,0,.3);
     color: white;
     visibility: hidden;
 `

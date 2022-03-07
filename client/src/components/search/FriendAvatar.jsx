@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../providers/UsersProvider.jsx';
 import { Avatar, Text, Button, useBreakpointValue } from '@chakra-ui/react'
 import { StyledFriendAdded } from '../styles/friendStyles'
+import { addFriendToUser } from '../../firebase/friend.js';
 
-
+/**
+ * Friend avatar in the Search Friends page
+ * @param {name, photoURL, id} user  
+ * @returns 
+ */
 const FriendAvatar = ({name, photoURL, id}) => {
+    const user = useContext(UserContext);
     const [showConfirmation, setShowConfirmation ] = useState(false)
     const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
     const addFriend = () => {
-        console.log('key', id)
+        addFriendToUser(id, user.uid)
         setShowConfirmation(true)
     }
 
@@ -37,7 +44,7 @@ const FriendAvatar = ({name, photoURL, id}) => {
             <Text
             fontSize={['xs', 'md']}
             >
-                Request Sent
+                Friend Added
             </Text>
         </StyledFriendAdded>
     </Button>

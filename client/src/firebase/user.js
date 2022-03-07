@@ -1,6 +1,6 @@
 import { getDoc } from "firebase/firestore";
-import { set, get, child } from "firebase/database";
-import { getRef, auth } from ".";
+import { set, get, child, query, orderByChild, equalTo } from "firebase/database";
+import { getRef, auth, getCollection } from ".";
 
 /**
  * Creates a new user document 
@@ -19,7 +19,7 @@ import { getRef, auth } from ".";
         email: email.toUpperCase(),
         photoURL: photoURL ? photoURL : '',
         displayName: displayName.toUpperCase(),
-        id: uid.substring(0, 6)
+        id: uid
       });
 
     } catch (error) {

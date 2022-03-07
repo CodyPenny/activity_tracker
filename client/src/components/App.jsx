@@ -22,7 +22,7 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<SearchFriends />} />  
+          <Route path="/" element={<Landing />} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />

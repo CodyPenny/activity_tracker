@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Formik, Form, useField, Field  } from 'formik';
+import React, { useState, useEffect } from 'react';
+import { Formik, Form,  } from 'formik';
 import { validateSearchFriend } from '../../helpers/formValidators';
-import { Grid, GridItem, Stack, Box, Button, Input, FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
+import { Grid, GridItem, Button, useToast } from '@chakra-ui/react';
 import ValidateForm from '../formHelpers/ValidateForm.jsx';
 import SearchFriendList from './SearchFriendList';
 import NavButton from '../home/NavButton';
@@ -60,7 +60,7 @@ const SearchFriends = () => {
                                 gap: ".5rem"
                             }}>
                             <ValidateForm
-                                placeholder="Search Friends"
+                                placeholder="Search Friends By Name"
                                 name="searchText"
                                 value={values.searchText}
                                 type="input"
