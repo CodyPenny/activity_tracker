@@ -1,10 +1,10 @@
-import { setDoc, getDoc } from "firebase/firestore";
+import { getDoc } from "firebase/firestore";
+import { set } from "firebase/database";
 import { getRef, auth } from ".";
 
 /**
- * Creates a new user document with firebase
+ * Creates a new user document 
  * @param {*} user 
- * @param {*} additionalData 
  * @returns new user document
  */
  export const createUserProfileDocument = async (user) => {
@@ -12,19 +12,14 @@ import { getRef, auth } from ".";
     if (!user) return;
     
     try {
-      const { email, photoURL, displayName } = user;
-      const createdAt = new Date();
-      const uRef = doc(db, "users", user.uid)
-      await setDoc( uRef , {
+      const { email, photoURL, displayName, uid } = user;
+      const uRef = getRef("users", uid );
+      await set( uRef , {
         email,
-        photoURL,
+        photoURL: photoURL ? photoURL : '',
         displayName,
-        createdAt
-      })
-  
-      const uDoc = await getDoc( uRef );
-  
-      return await getUserDocument(user.uid);
+      });
+
     } catch (error) {
       console.error('createUserProfileDocument Error:', error);
       return 'createUserProfileDocument Error';

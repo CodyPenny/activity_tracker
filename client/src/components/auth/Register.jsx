@@ -55,7 +55,6 @@ const Register = () => {
                 data.password,
                );
               user.displayName = data.displayName
-              console.log('test', user)
               await createUserProfileDocument( user );
               resetForm();
               navigate('/home')

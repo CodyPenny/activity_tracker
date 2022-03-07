@@ -1,5 +1,5 @@
 import React from 'react'
-import FriendAvatar from './FriendAvatar'
+import FriendAvatar from '../friends/FriendAvatar'
 import { Stack } from '@chakra-ui/react'
 import test_pic from '../../../static/avatar.png'
 

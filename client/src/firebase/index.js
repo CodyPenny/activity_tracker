@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, } from "firebase/auth";
-import { getFirestore, doc } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+//import { getFirestore, doc, collection, onSnapshot } from "firebase/firestore";
+import { getDatabase, ref } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
 
@@ -11,6 +12,7 @@ import { getStorage } from "firebase/storage";
  const config = {
     apiKey: process.env.APIKEY,
     authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
     projectId: process.env.PROJECT_ID,
     storageBucket: process.env.STORAGE_BUCKET,
     messagingSenderId: process.env.MESSAGING_SENDER_ID,
@@ -19,7 +21,7 @@ import { getStorage } from "firebase/storage";
   };
 
 const streakApp = initializeApp(config);
-export const db = getFirestore(streakApp);
+export const db = getDatabase(streakApp);
 export const storage = getStorage(streakApp);
 export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
@@ -32,8 +34,19 @@ export const provider = new GoogleAuthProvider();
  * @returns document object matching the UID
  */
  export const getRef = (collection, UID) => {
-  return doc( db, collection, UID )
+  //return doc( db, collection, UID )
+  return ref(db, collection + '/' + UID)
 }
+
+/**
+ * 
+ * @param {*} collection_name 
+ * @returns reference to the collection
+ */
+ export const getCollection = (collection_name) => {
+   //return collection(db, collection_name)
+   return ref(db, collection + '/')
+ }
 
 /**
  * 
@@ -43,3 +56,4 @@ export const provider = new GoogleAuthProvider();
  */
  export const performUpdate = async (docRef, updates) =>
  await docRef.update({ ...updates });
+
