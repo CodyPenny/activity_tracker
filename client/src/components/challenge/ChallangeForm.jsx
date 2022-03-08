@@ -1,20 +1,33 @@
-import React from 'react'
-import { Flex, HStack, Button, Box, Input, FormErrorMessage, Textarea, Text, Slider, SliderTrack, SliderFilledTrack, SliderThumb, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react'
+import { UserContext } from '../providers/UsersProvider.jsx';
+import { Flex, HStack, Button, Box, Input, Textarea, Text, Slider, SliderTrack, SliderFilledTrack, SliderThumb, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import ValidatorForm from '../formHelpers/ValidateForm';
 import { challengeValid } from '../../helpers/formValidators';
+import { createChallenge } from '../../firebase/challenge';
 
 
 const ChallangeForm = ({}) => {
+  const user = useContext(UserContext);
+  let navigate = useNavigate();
 
   return (
     <>
     <Formik
         initialValues={{ name: '', task: '', streak: 1, duration: 7 }}
         validationSchema={challengeValid}
-        onSubmit= { (data, { resetForm }) => {
+        onSubmit= { async ( data, { resetForm }) => {
             console.log('submitting challenge', data)
+            // save to database
+            // go to add friends to challenge section
+            // pass down challenge uid to next page
+            try {
+                const cuid = await createChallenge( data, user.user.uid )
+                console.log('ret cuid', cuid)
+                navigate('/addFriendsChallenge')
+            } catch (error) {
+                
+            }
         }}
     >
         {({ values, errors, touched, isSubmitting, handleChange, handleSubmit, setFieldValue }) => (

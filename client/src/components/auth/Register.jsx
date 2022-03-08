@@ -48,7 +48,7 @@ const Register = () => {
         <Formik
           initialValues={{ email: '', password: '', displayName: '' }}
           validationSchema={registerValid}
-          onSubmit={async (data, { resetForm }) => {
+          onSubmit={ async ( data, { resetForm }) => {
             try {
               const user = await registerWithEmailAndPassword(
                 data.email,

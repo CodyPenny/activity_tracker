@@ -14,6 +14,7 @@ import EditProfile from './profile/EditProfile.jsx';
 import SearchFriends from './search/SearchFriends.jsx';
 import FriendPage from './friends/FriendPage.jsx';
 import BuildChallenge from './challenge/BuildChallenge.jsx';
+import ChallengeAddFriends from './challenge/ChallengeAddFriends.jsx';
 
 const App = () => {
   
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="friends" element={<FriendPage/>} />
             <Route path="searchFriends" element={<SearchFriends/>} /> 
             <Route path="buildChallenge" element={<BuildChallenge />} /> 
+            <Route path="addFriendsChallenge" element={<ChallengeAddFriends />} /> 
         </Routes>
       </Router> 
     </BoxWrapper>
