@@ -21,12 +21,14 @@ const BuildChallenge = () => {
                 textAlign="center" 
                 fontSize={["xl", "2xl"]}
                 color="#464646"
-                mt={["35%", "30%"]}
+                mt={["25%", "30%"]}
             >
                 Create a Challenge
             </Text>
         </GridItem>
-        <GridItem>
+        <GridItem
+          pt={"1rem"}
+        >
             <ChallangeForm />
         </GridItem>
         {/* <GridItem>
