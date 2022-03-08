@@ -21,6 +21,7 @@ const Home = () => {
    * If token exists, remain on the page, or be pushed to the login screen
    */
   useEffect(() => {
+    console.log('test in Home',  user)
     let authToken = sessionStorage.getItem('Auth Token')
 
     if (authToken) {
@@ -47,8 +48,8 @@ const Home = () => {
         <Avatar
           name={"name"}
           src={test_pic}
-          // name={user.displayName}
-          // src={user.photoURL}
+          // name={user.user.displayName}
+          // src={user.user.photoURL}
           size={avatarSize}
         />
       </GridItem>

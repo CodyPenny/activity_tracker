@@ -21,6 +21,8 @@ import { getRef, auth, getCollection } from ".";
         displayName: displayName.toUpperCase(),
         id: uid
       });
+      // set session
+      //sessionStorage.setItem('Auth Token', user.accessToken)
 
     } catch (error) {
       console.error('createUserProfileDocument Error:', error);
@@ -33,22 +35,19 @@ import { getRef, auth, getCollection } from ".";
  * @param {*} UID user's firestore unique ID
  * @returns 
  */
-export const getUserDocument = async (UID) => {
-    if (!UID) return null;
+// export const getUserDocument = async ( UID ) => {
+//     if ( !UID ) return null;
   
-    const uRef = getRef('users', UID);
+//     const uRef = getRef( 'users', UID );
   
-    try {
-        const uDoc = await getDoc( uRef );
-  
-      //TODO: add default friends
+//     try {
+//       return await get( uRef )
 
-      return uRef;
-    } catch (error) {
-      console.error('getUserDocument Error:', error);
-      return 'getUserDocument Error';
-    }
-  };
+//     } catch ( error ) {
+//       console.error('getUserDocument Error:', error);
+//       return 'getUserDocument Error';
+//     }
+//   };
   
 /**
  * 
@@ -58,10 +57,10 @@ export const getUserUid = async() => {
   return await auth.currentUser.uid
 }
 
-  /**
+/**
  * 
  * @param {*} UID 
- * @returns 
+ * @returns user data
  */
 export const getUser = async (UID) => {
   if (!UID) return null;

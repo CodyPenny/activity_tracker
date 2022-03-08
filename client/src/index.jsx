@@ -8,7 +8,7 @@ import App from './components/App.jsx'
 
 // Contexts
 import UsersProvider from './components/providers/UsersProvider.jsx';
-import FriendProvider from './components/providers/FriendProvider.jsx';
+
 
 // custom values
 const theme = extendTheme({
@@ -35,9 +35,9 @@ const theme = extendTheme({
 ReactDOM.render(
   <ChakraProvider theme={theme}>
       <UsersProvider>
-        <FriendProvider>
+
           <App />
-        </FriendProvider>
+
       </UsersProvider>
   </ChakraProvider>,
   document.getElementById('root')

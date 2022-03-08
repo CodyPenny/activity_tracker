@@ -1,18 +1,43 @@
 import React, { Component, createContext } from 'react';
 import { auth } from '../../firebase/index.js';
 import  { onAuthStateChanged } from "firebase/auth";
-
+import { getFriendsCollection } from '../../firebase/friend.js';
+import { onValue } from "firebase/database";
+import { getUser } from '../../firebase/user.js';
 
 export const UserContext = createContext({});
 
 /**
- * Runs on website load for user state
- * On register, a new user document is created once the users new username and pw is authenticated
+ * Runs on website load - gets friends and user profile
  * Uses an observer that gets called whenever the user's sign-in state changes
  */
 class UsersProvider extends Component {
-    state = { user: null };
+    state = { 
+        user: null,
+       friends: [] 
+    };
     unsubscribeFromAuth = null;
+
+    getFriends = async () => {
+        const db_Ref = getFriendsCollection( this.state.user.uid  )
+        const friendsToFetch = []
+
+        onValue( db_Ref, (snapshot) => {
+            snapshot.forEach( doc => {
+                friendsToFetch.push(doc.key)
+            })
+
+            Promise.all( friendsToFetch.map( async (id) => {
+                return await getUser( id )
+            }))
+            .then((val) => {
+                this.setState({
+                    friends:[...this.state.friends, ...val]
+                })
+            })
+            
+        })
+    }
 
     componentDidMount = () => {
 
@@ -20,20 +45,26 @@ class UsersProvider extends Component {
             if (user) {
             
                 console.log('user in user provider ', user)
+
                 this.setState({ 
-                    user: { uid: user.uid,
+                    user: { 
+                    uid: user.uid,
                     email: user.email,
                     displayName: user.displayName,
                     photoURL: user.photoURL
-                        } 
-                    })
-            
+                    } 
+                })
+                sessionStorage.setItem('Auth Token', user.accessToken)
 
+            this.getFriends()
+          
             } else {
             // user is signed out
             //this.setState({ user: userAuth });
             }
         })
+
+
     };
 
     componentWillUnmount = () => {
@@ -43,7 +74,7 @@ class UsersProvider extends Component {
     render() {
         const { children } = this.props;
     
-        return <UserContext.Provider value={this.state.user}>{children}</UserContext.Provider>;
+        return <UserContext.Provider value={this.state}>{children}</UserContext.Provider>;
     }
 }
 

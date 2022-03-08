@@ -1,5 +1,5 @@
 import { getRef, performUpdate, getCollection, getDocsAsAList, db } from '../firebase/index.js'
-import { query, ref, orderByChild, orderByKey, get, startAt, onValue, endAt, limitToFirst, set } from "firebase/database";
+import { query, ref, orderByChild, orderByKey, get, startAt, endAt, limitToFirst, set, onValue } from "firebase/database";
 import { resetPasswordWithEmail } from './auth.js';
 
 
@@ -76,4 +76,9 @@ import { resetPasswordWithEmail } from './auth.js';
    // const snapshot = await getDocs(q);
     //return snapshot.docs.map(doc => doc.data());
 
+  }
+
+
+  export const getFriendsCollection = ( uid ) => {
+    return getRef("friends", uid)
   }
