@@ -29,7 +29,6 @@ const App = () => {
             <Route path="reset_confirmation" element={<ResetConfirmation/>}/>
             <Route path="home" element={<Home />} />
             <Route path="editProfile" element={<EditProfile/>} />
-            {/* <Route path="friends" element={<FriendsHelper/>} /> */}
             <Route path="friends" element={<FriendPage/>} />
             <Route path="searchFriends" element={<SearchFriends/>} />  
         </Routes>
