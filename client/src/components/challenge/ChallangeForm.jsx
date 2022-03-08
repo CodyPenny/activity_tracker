@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, HStack, Button, Box, Input, FormErrorMessage, Textarea } from '@chakra-ui/react'
+import { Flex, HStack, Button, Box, Input, FormErrorMessage, Textarea, Text, Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import ValidatorForm from '../formHelpers/ValidateForm';
@@ -7,29 +7,19 @@ import { challengeValid } from '../../helpers/formValidators';
 
 
 const ChallangeForm = ({}) => {
+
   return (
     <Flex
         flexDirection="column"
     >
         <Formik
-            initialValues={{ name: '', task: '', streak: '', duration: '' }}
-            // validate={values => {
-            //     const errors = {};
-            //     if (!values.name) {
-            //       errors.name = 'The challenge name is required';
-            //     } 
-            //     if (!values.task) {
-            //       errors.task = 'The challenge task is required';
-            //     } 
-
-            //     return errors;
-            //   }}
+            initialValues={{ name: '', task: '', streak: 1, duration: '' }}
             validationSchema={challengeValid}
             onSubmit= { (data, { resetForm }) => {
                 console.log('submitting challenge', data)
             }}
         >
-            {({ values, errors, touched, isSubmitting, handleChange, handleSubmit }) => (
+            {({ values, errors, touched, isSubmitting, handleChange, handleSubmit, setFieldValue }) => (
             <Form onSubmit={handleSubmit}>
                 <Box
                   borderRadius='lg'
@@ -59,6 +49,33 @@ const ChallangeForm = ({}) => {
                     />
                 </Box>
                     {errors.task && touched.task && errors.task}
+                <Box
+                    borderRadius='lg'
+                    background="brand.500"
+                    p={["0.5rem", "1rem"]}
+                >
+                    <Text>How many times should participants check in their challenge progress throughout the day?</Text>
+                    <Slider
+                        flex='1'
+                        focusThumbOnChange={false}
+                        name="streak"
+                        value={values.streak}
+                        onChange={(value) => {
+                            setFieldValue('streak', value)
+                        }}
+                        aria-label='slider'
+                        min={1}
+                        max={12}
+                        step={1}
+                        colorScheme="brand.400"
+                    >
+                        <SliderTrack>
+                         <SliderFilledTrack />
+                        </SliderTrack>
+                        <SliderThumb fontSize='sm' boxSize='32px' children={values.streak} />
+                    </Slider>
+   
+                </Box>
                 <HStack>
                     <Button
                       as={Link}
