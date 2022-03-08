@@ -49,6 +49,20 @@ const registerValid = yup.object().shape({
     .max(64, errorMax(64))
 });
 
+const challengeValid = yup.object().shape({
+  name: yup
+    .string()
+    .required(errorRequired)
+    .test(errorHTML, errorHTML, (value) => !containsHTML(value))
+    .max(64, errorMax(64)),
+  task: yup
+    .string()
+    .required("A challenge task is required")
+    .test(errorHTML, errorHTML, (value) => !containsHTML(value))
+    .max(200, "Let's keep it shorter and bring it down to no more than 200 chars.")
+
+})
+
 const friendCodeValid = yup.object().shape({
   friendCode: yup
     .string()
@@ -79,5 +93,6 @@ export {
   friendCodeValid,
   emailValid,
   displayNameValid,
-  validateSearchFriend
+  validateSearchFriend,
+  challengeValid
 };

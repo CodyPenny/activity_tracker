@@ -55,7 +55,7 @@ const NavButton = () => {
             <IconButton
                 icon={<MdPlaylistAdd />}
                 as={Link}
-                to="/challenge/create"
+                to="/buildChallenge"
                 variant="solid"
                 bg="brand.500"
                 size={iconSize}

@@ -13,6 +13,7 @@ import Home from './home/Home.jsx';
 import EditProfile from './profile/EditProfile.jsx';
 import SearchFriends from './search/SearchFriends.jsx';
 import FriendPage from './friends/FriendPage.jsx';
+import BuildChallenge from './challenge/BuildChallenge.jsx';
 
 const App = () => {
   
@@ -22,7 +23,7 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<FriendPage />} />  
+          <Route path="/" element={<BuildChallenge />} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />
@@ -30,7 +31,8 @@ const App = () => {
             <Route path="home" element={<Home />} />
             <Route path="editProfile" element={<EditProfile/>} />
             <Route path="friends" element={<FriendPage/>} />
-            <Route path="searchFriends" element={<SearchFriends/>} />  
+            <Route path="searchFriends" element={<SearchFriends/>} /> 
+            <Route path="buildChallenge" element={<BuildChallenge />} /> 
         </Routes>
       </Router> 
     </BoxWrapper>

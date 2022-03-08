@@ -30,24 +30,6 @@ import { getRef, auth, getCollection } from ".";
     }
   };
 
-  /**
- * 
- * @param {*} UID user's firestore unique ID
- * @returns 
- */
-// export const getUserDocument = async ( UID ) => {
-//     if ( !UID ) return null;
-  
-//     const uRef = getRef( 'users', UID );
-  
-//     try {
-//       return await get( uRef )
-
-//     } catch ( error ) {
-//       console.error('getUserDocument Error:', error);
-//       return 'getUserDocument Error';
-//     }
-//   };
   
 /**
  * 
