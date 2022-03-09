@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Box, Flex, IconButton, useBreakpointValue } from '@chakra-ui/react'
 import { MdHomeFilled, MdEdit, MdGroup, MdPersonSearch, MdPlaylistAdd, MdLogout } from 'react-icons/md';
 import { signOutOfApp } from '../../firebase/auth';
 
 const NavButton = () => {
+  let navigate = useNavigate()
   const iconSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
   const sign_out = () => {

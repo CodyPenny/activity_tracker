@@ -16,6 +16,7 @@ const StatHelper = ({stat}) => {
               width="100%"
               p=".2rem"
               m=".8rem"
+              rounded="10px"
             >
                 {stat.val}
             </Center>
