@@ -1,6 +1,5 @@
-import { getDoc } from "firebase/firestore";
-import { set, get, child, query, orderByChild, equalTo } from "firebase/database";
-import { getRef, auth, getCollection } from ".";
+import { set, get } from "firebase/database";
+import { getRef, auth } from ".";
 
 /**
  * Creates a new user document 
@@ -19,10 +18,10 @@ import { getRef, auth, getCollection } from ".";
         email: email.toUpperCase(),
         photoURL: photoURL ? photoURL : '',
         displayName: displayName.toUpperCase(),
-        id: uid
+        id: uid,
+        completed: 0,
+        wins: 0
       });
-      // set session
-      //sessionStorage.setItem('Auth Token', user.accessToken)
 
     } catch (error) {
       console.error('createUserProfileDocument Error:', error);

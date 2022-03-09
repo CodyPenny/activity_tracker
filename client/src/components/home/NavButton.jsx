@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex, IconButton, useBreakpointValue } from '@chakra-ui/react'
-import { MdPlaylistAdd, MdLogout, MdEdit, MdGroup, MdHomeFilled,  } from 'react-icons/md';
+import { MdHomeFilled, MdEdit, MdGroup, MdPersonSearch, MdPlaylistAdd, MdLogout } from 'react-icons/md';
 import { signOutOfApp } from '../../firebase/auth';
 
 const NavButton = () => {

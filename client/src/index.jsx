@@ -26,7 +26,8 @@ const theme = extendTheme({
       300: "#FFB6BA", //pink
       400: "#FF6161", //tomato
       500: "#F7EEC7", //pastel yellow
-      600: "#d2f1f0" // lighter blue
+      600: "#d2f1f0", // lighter blue
+      700: "#97dfdc" // darker blue
       // // ...
       // 900: "#1a202c",
     },
