@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Center, Flex } from '@chakra-ui/react'
+import ActiveChallengeItem from './ActiveChallengeItem'
 
 const ActiveChallenges = () => {
+  const [ challenges, setChallenges ] = useState(["A", "B", "C"])
   return (
     <Flex
       flexDir="column"
@@ -21,6 +23,15 @@ const ActiveChallenges = () => {
             <Center>
                 Duration
             </Center>
+        </Flex>
+        <Flex
+          flexDir="column"
+        >
+            { challenges.map((item, i) => (
+                <ActiveChallengeItem 
+                    key={i}
+                />
+            ))}
         </Flex>
     </Flex>
   )

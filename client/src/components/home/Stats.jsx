@@ -11,7 +11,7 @@ const Stats = () => {
     setUserStats([
         {name: "Completed", val: user.user.completed}, 
         {name: "Wins", val: user.user.wins}, 
-        {name: "Friends", val: user.friends.lengths}
+        {name: "Friends", val: user.friends.length}
     ])
   }
 

@@ -8,6 +8,7 @@ import { Avatar,Grid, GridItem, Text, useBreakpointValue, Flex } from '@chakra-u
 import test_pic from '../../../static/avatar.png'
 import NavButton from './NavButton.jsx';
 import Stats from './Stats.jsx';
+import ActiveChallenges from './ActiveChallenges.jsx';
 
 // Components + Styles
 // import ActiveChallenges from './ActiveChallenges.jsx';
@@ -51,8 +52,8 @@ const Home = () => {
           alignItems="center"
         >
           <Avatar
-            name={user.user.displayName}
-            src={user.user.photoURL}
+            name={user && user.user.displayName}
+            src={user && user.user.photoURL}
             size={avatarSize}
           />
           <Text 
@@ -69,7 +70,7 @@ const Home = () => {
           flexDir="column"
         >
           <Stats />
-
+          <ActiveChallenges />
         </Flex>
       </GridItem>
       

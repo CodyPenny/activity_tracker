@@ -58,7 +58,7 @@ class UsersProvider extends Component {
           
             } else {
             // user is signed out
-            this.setState({ user: userAuth });
+            //this.setState({ user: userAuth });
             }
         })
 
