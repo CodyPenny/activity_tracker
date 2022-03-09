@@ -1,4 +1,4 @@
-import { set, update } from 'firebase/database';
+import { onValue, set, update, get } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { getRef, performUpdate } from '../firebase/index.js'
 
@@ -59,6 +59,54 @@ export const addFriendToChallenge = async ( f_uid, c_uid) => {
   } catch (error) {
     console.error('addFriendToChallenge error:', error)
   }
+}
+
+/**
+ * Collects the ids of the user's challenges and fetches the data for each of the challenge
+ * @param {*} u_uid user's uid
+ */
+export const getAllChallengesForUser = async ( u_uid ) => {
+  const challenge_keys = []
+
+  try {
+    const u_c_ref = getRef("user-challenges", u_uid) 
+    onValue( u_c_ref, (snapshot) => {
+      snapshot.forEach( doc => {
+        challenge_keys.push(doc.key)
+    })
+
+      Promise.all( challenge_keys.map( async (id) => {
+        return await getChallenge( id )
+      }))
+      .then((val) => {
+        console.log('ret val', val)
+        return val
+      })
+
+    })
+
+  } catch (error) {
+    console.error('getAllChallengesForUser error:', error)
+  }
+}
+
+/**
+ * 
+ * @param {*} c_uid challenge uid
+ * @returns challenge data
+ */
+export const getChallenge = async ( c_uid ) => {
+   if (!c_uid) return null
+
+   try {
+     const c_ref = getRef('challenges', c_uid)
+     const snapshot = await get( c_ref )
+     return snapshot.val();
+     
+   } catch (error) {
+    console.error('getChallenge Error:', error);
+    return 'getUserDocument Error';
+   }
 }
 
 

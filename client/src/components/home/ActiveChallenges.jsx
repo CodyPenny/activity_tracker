@@ -1,9 +1,28 @@
-import React, { useState } from 'react'
-import { Center, Flex } from '@chakra-ui/react'
+import React, { useEffect, useState, useContext } from 'react'
+import { getAllChallengesForUser } from '../../firebase/challenge'
+import { UserContext } from '../providers/UsersProvider'
 import ActiveChallengeItem from './ActiveChallengeItem'
+import { Flex, Center,  } from '@chakra-ui/react'
 
 const ActiveChallenges = () => {
-  const [ challenges, setChallenges ] = useState(["A", "B", "C", "D", "E", "A", "B", "C", "A", "B", "C","A", "B", "C","A", "B", "C",])
+  const { user } = useContext(UserContext)
+  const [ challenges, setChallenges ] = useState([])
+  const [ participants, setParticipants ] = useState([])
+
+  const updateChallenges = async ( uid ) => {
+    let result = await getAllChallengesForUser( uid )
+  }
+
+
+  useEffect(() => {
+      if (user) {
+          // get all the challenges for the user
+          // set a limit to 5 per load
+          // get member count for each challenge
+          updateChallenges(user.uid)
+      }
+
+  }, [])
 
   return (
     <Flex
