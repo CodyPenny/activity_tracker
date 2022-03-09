@@ -4,11 +4,12 @@ import { UserContext } from '../providers/UsersProvider'
 import { limitToFirst, query, get } from "firebase/database";
 import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
-import { Flex, Center } from '@chakra-ui/react'
+import { Flex, Center, Button } from '@chakra-ui/react'
 
 const ActiveChallenges = () => {
   const { user } = useContext(UserContext)
   const [ challenges, setChallenges ] = useState([])
+  const [ showSpinner, setShowSpinner ] = useState(true)
 
   /**
    * Looks up the challenges associated with the user, then collects
@@ -38,6 +39,7 @@ const ActiveChallenges = () => {
                     new_challenge_data[i].member_count = num[i]
                 }
                 setChallenges([...new_challenge_data])
+                setShowSpinner(false)
                 
             }))
         })
@@ -62,6 +64,7 @@ const ActiveChallenges = () => {
       rounded="10px"
       overflowY="hidden"
       fontSize={['md', 'xl']}
+      position="relative"
     >
         <Center
           p="1rem"
@@ -85,6 +88,7 @@ const ActiveChallenges = () => {
           gap=".5rem"
           fontSize={["xs", "md"]}
           overflowY="auto"
+          visibility={showSpinner ? "hidden" : "visible"}
         >
             { challenges.map((item, i) => (
                 <ActiveChallengeItem 
@@ -93,6 +97,16 @@ const ActiveChallenges = () => {
                 />
             ))}
         </Flex>
+        <Button
+          bg="brand.700"
+          position="absolute"
+          width="92%"
+          height="92%"
+          overflow="hidden"
+          isLoading={showSpinner}
+          visibility={showSpinner ? "visible" : "hidden"}
+        >
+        </Button>
     </Flex>
   )
 }
