@@ -39,7 +39,25 @@ export const createChallenge = async ( criteria, user_uid ) => {
   // return cuid so friends can be added to the cuid
 }
 
+export const addFriendToChallenge = async ( f_uid, c_uid) => {
+  try {
+    const c_u_ref = getRef("challenges-user", c_uid)
+    const u_c_ref = getRef("user-challenges", f_uid) 
 
+    await update( c_u_ref, {
+      [f_uid] : true
+    })
+
+    await update( u_c_ref, {
+      [c_uid]: true
+    })
+
+    return
+
+  } catch (error) {
+    console.error('addFriendToChallenge error:', error)
+  }
+}
 
 
 
