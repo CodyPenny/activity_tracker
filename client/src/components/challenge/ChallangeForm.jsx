@@ -23,8 +23,8 @@ const ChallangeForm = ({}) => {
             // pass down challenge uid to next page
             try {
                 const cuid = await createChallenge( data, user.user.uid )
-                console.log('ret cuid', cuid)
-                navigate('/addFriendsChallenge')
+                console.log('ret cuid', cuid) // pass it thru url?
+                navigate(`/challengeAddFriends/${cuid}`)
             } catch (error) {
                 
             }

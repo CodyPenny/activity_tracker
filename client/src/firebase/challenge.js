@@ -15,7 +15,7 @@ export const createChallenge = async ( criteria, user_uid ) => {
   try {
     const c_ref = getRef("challenges", cuid)
     const c_u_ref = getRef("challenges-user", cuid)
-    const u_c_ref = getRef("user-challenges", user_uid)
+    const u_c_ref = getRef("user-challenges", user_uid) // todo: overrides instead of appending
 
     await set( c_ref, criteria )
     await set( c_u_ref, {

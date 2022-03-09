@@ -24,7 +24,7 @@ const App = () => {
       h={'min(100vh, 850px)'}>
       <Router>
         <Routes>
-          <Route path="/" element={<BuildChallenge />} />  
+          <Route path="/" element={<Landing />} />  
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
             <Route path="reset" element={<ForgotPassword/>} />
@@ -34,7 +34,8 @@ const App = () => {
             <Route path="friends" element={<FriendPage/>} />
             <Route path="searchFriends" element={<SearchFriends/>} /> 
             <Route path="buildChallenge" element={<BuildChallenge />} /> 
-            <Route path="addFriendsChallenge" element={<ChallengeAddFriends />} /> 
+            <Route path="challengeAddFriends/:cuid" element={<ChallengeAddFriends />} /> 
+
         </Routes>
       </Router> 
     </BoxWrapper>
