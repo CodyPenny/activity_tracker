@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from '@chakra-ui/react'
 import React from 'react'
 
-const ActiveChallengeItem = () => {
+const ActiveChallengeItem = ({data}) => {
   return (
     <SimpleGrid
       columns="3"
@@ -9,9 +9,9 @@ const ActiveChallengeItem = () => {
       rounded="3px"
       p=".2rem"
     >
-        <Box pl=".3rem">1</Box>
-        <Box textAlign="center">2</Box>
-        <Box textAlign="center">3 day(s)</Box>
+        <Box pl=".3rem">{data.name}</Box>
+        <Box textAlign="center">{data.member_count}</Box>
+        <Box textAlign="center">{data.duration} day(s)</Box>
     </SimpleGrid>
   )
 }

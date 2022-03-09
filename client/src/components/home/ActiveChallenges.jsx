@@ -87,6 +87,7 @@ const ActiveChallenges = () => {
             { challenges.map((item, i) => (
                 <ActiveChallengeItem 
                     key={i}
+                    data={item}
                 />
             ))}
         </Flex>
