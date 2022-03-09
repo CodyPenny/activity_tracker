@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Flex, Box, Text, useBreakpointValue, IconButton } from '@chakra-ui/react'
+import { Avatar, Flex, Box, Text, useBreakpointValue, IconButton, Center } from '@chakra-ui/react'
 import { MdPersonAddAlt1 } from 'react-icons/md'
 
 const ChallengeFriendListHelper = ({ friend, cuid }) => {

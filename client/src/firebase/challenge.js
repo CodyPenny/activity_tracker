@@ -1,4 +1,4 @@
-import { set } from 'firebase/database';
+import { set, update } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { getRef, performUpdate } from '../firebase/index.js'
 
@@ -15,13 +15,14 @@ export const createChallenge = async ( criteria, user_uid ) => {
   try {
     const c_ref = getRef("challenges", cuid)
     const c_u_ref = getRef("challenges-user", cuid)
-    const u_c_ref = getRef("user-challenges", user_uid) // todo: overrides instead of appending
+    const u_c_ref = getRef("user-challenges", user_uid) 
 
     await set( c_ref, criteria )
     await set( c_u_ref, {
       [user_uid] : true
     })
-    await set( u_c_ref, {
+    // user can have other challenges, use update method
+    await update( u_c_ref, {
       [cuid] : true
     })
 
