@@ -8,7 +8,7 @@ import { getUser } from '../../firebase/user.js';
 export const UserContext = createContext({});
 
 /**
- * Runs on website load - gets friends and user profile
+ * Runs on website load - gets friends and user profile from db once user is authenticated
  * Uses an observer that gets called whenever the user's sign-in state changes
  */
 class UsersProvider extends Component {
@@ -39,20 +39,18 @@ class UsersProvider extends Component {
         })
     }
 
+
     componentDidMount = () => {
 
-        this.unsubscribeFromAuth = onAuthStateChanged( auth, (user ) => {
+        this.unsubscribeFromAuth = onAuthStateChanged( auth, async (user ) => {
             if (user) {
             
                 console.log('user in user provider ', user)
 
-                this.setState({ 
-                    user: { 
-                    uid: user.uid,
-                    email: user.email,
-                    displayName: user.displayName,
-                    photoURL: user.photoURL
-                    } 
+                // get user info from db
+                let profile = await getUser( user.uid )
+                this.setState({
+                    user: profile
                 })
                 sessionStorage.setItem('Auth Token', user.accessToken)
 
@@ -60,7 +58,7 @@ class UsersProvider extends Component {
           
             } else {
             // user is signed out
-            //this.setState({ user: userAuth });
+            this.setState({ user: userAuth });
             }
         })
 

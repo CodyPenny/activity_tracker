@@ -18,7 +18,7 @@ import { getRef, auth } from ".";
         email: email.toUpperCase(),
         photoURL: photoURL ? photoURL : '',
         displayName: displayName.toUpperCase(),
-        id: uid,
+        uid,
         completed: 0,
         wins: 0
       });
