@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../providers/UsersProvider.jsx';
 import { Grid, GridItem, Text } from '@chakra-ui/react'
+import { useParams } from 'react-router'
+import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
 
 const ChallengeAddFriends = () => {
+  const { friends } = useContext(UserContext);
+  let { cuid } = useParams();
 
   return (
     <Grid
@@ -27,9 +32,12 @@ const ChallengeAddFriends = () => {
         <GridItem
             mt="1rem"
         >
-           
+           { friends.map((friend, i) => (
+              <ChallengeFriendListHelper friend={friend} key={i} cuid={cuid}/>
+            ))
+           }
         </GridItem>
-        <GridItem>
+        <GridItem> 
             
         </GridItem>
     </Grid>

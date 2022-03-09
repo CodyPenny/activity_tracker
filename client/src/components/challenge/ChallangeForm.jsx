@@ -32,7 +32,7 @@ const ChallangeForm = ({}) => {
     >
         {({ values, errors, touched, isSubmitting, handleChange, handleSubmit, setFieldValue }) => (
             <Form 
-            onSubmit={handleSubmit}
+                onSubmit={handleSubmit}
             >
                 <Flex
                     fontSize={['sm', 'lg']}
