@@ -3,6 +3,7 @@ import { UserContext } from '../providers/UsersProvider.jsx';
 import { Grid, GridItem, Text } from '@chakra-ui/react'
 import { useParams } from 'react-router'
 import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
+import ChallengeNav from './ChallengeNav.jsx';
 
 const ChallengeAddFriends = () => {
   const { friends } = useContext(UserContext);
@@ -24,7 +25,7 @@ const ChallengeAddFriends = () => {
                 textAlign="center" 
                 fontSize={["xl", "2xl"]}
                 color="#464646"
-                mt={["40%", "45%"]}
+                pt={"15%"}
             >
                 ADD FRIENDS TO YOUR CHALLENGE
             </Text>
@@ -38,7 +39,7 @@ const ChallengeAddFriends = () => {
            }
         </GridItem>
         <GridItem> 
-            
+            <ChallengeNav />
         </GridItem>
     </Grid>
   )

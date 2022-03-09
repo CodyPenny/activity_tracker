@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, Flex, Box, Text, useBreakpointValue, IconButton, Center } from '@chakra-ui/react'
-import { MdPersonAddAlt1 } from 'react-icons/md'
+import { MdPersonAddAlt1, MdCheck } from 'react-icons/md'
 
 const ChallengeFriendListHelper = ({ friend, cuid }) => {
+  const [showConfirmation, setShowConfirmation ] = useState(false)
   const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
   const clickHandler = () => {
-      console.log('in friend', friend.uid, cuid)
+      console.log('in friend', friend.id, cuid)
+      // add friend
+      // then show check
   }
   return (
     <Flex 
@@ -24,7 +27,7 @@ const ChallengeFriendListHelper = ({ friend, cuid }) => {
       <Box
         display="flex"
         flexDirection="column"
-       
+        width="60%"
       >
         <Text 
           fontSize={["lg", "xl"]}
@@ -34,10 +37,17 @@ const ChallengeFriendListHelper = ({ friend, cuid }) => {
           {friend.displayName}
         </Text>
       </Box>
-      <Center>
+      <Center
+        position="relative"
+      >
         <IconButton
+            position="absolute"
             icon={<MdPersonAddAlt1 />}
             onClick={clickHandler}
+        />
+        <IconButton
+            visibility={showConfirmation ? 'visible' : 'hidden'}
+            icon={<MdCheck />}
         />
       </Center>
 
