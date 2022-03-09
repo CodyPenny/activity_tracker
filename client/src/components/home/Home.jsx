@@ -65,7 +65,12 @@ const Home = () => {
       </GridItem>
          
       <GridItem>
-        <Stats />
+        <Flex
+          flexDir="column"
+        >
+          <Stats />
+
+        </Flex>
       </GridItem>
       
       <GridItem

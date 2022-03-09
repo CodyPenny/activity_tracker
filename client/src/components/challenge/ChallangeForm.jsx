@@ -18,9 +18,9 @@ const ChallangeForm = ({}) => {
         initialValues={{ name: '', task: '', streak: 1, duration: 7 }}
         validationSchema={challengeValid}
         onSubmit= { async ( data, { resetForm }) => {
-            console.log('submitting challenge', data)
             try {
                 const cuid = await createChallenge( data, user.user.uid )
+                resetForm()
                 navigate(`/challengeAddFriends/${cuid}`)
             } catch (error) {
                 console.log('error in challenge form', error)

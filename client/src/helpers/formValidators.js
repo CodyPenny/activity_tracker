@@ -49,12 +49,16 @@ const registerValid = yup.object().shape({
     .max(64, errorMax(64))
 });
 
+/**
+ * Valid the challenge build form
+ * Keep title short so it fits in containers nicely
+ */
 const challengeValid = yup.object().shape({
   name: yup
     .string()
     .required(errorRequired)
     .test(errorHTML, errorHTML, (value) => !containsHTML(value))
-    .max(64, errorMax(64)),
+    .max(15, errorMax(15)),
   task: yup
     .string()
     .required("A challenge task is required")
