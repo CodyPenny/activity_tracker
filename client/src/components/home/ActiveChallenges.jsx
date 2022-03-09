@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { getChallengeMemberCount, getUserChallengeCollection } from '../../firebase/challenge'
 import { UserContext } from '../providers/UsersProvider'
-import { onValue } from "firebase/database";
+import { limitToFirst, query, get } from "firebase/database";
 import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
-import { Flex, Center,  } from '@chakra-ui/react'
+import { Flex, Center } from '@chakra-ui/react'
 
 const ActiveChallenges = () => {
   const { user } = useContext(UserContext)
@@ -20,27 +20,28 @@ const ActiveChallenges = () => {
     const challenge_keys = []
     try {
         const u_c_ref = getUserChallengeCollection( uid )
-        onValue( u_c_ref, (snapshot) => {
-            snapshot.forEach( doc => {
-                challenge_keys.push(doc.key)
-            })
+        const snapshot= await get( query( u_c_ref, limitToFirst(8)))
 
-            Promise.all( challenge_keys.map( async (cuid) => { 
-                return await getChallenge( cuid )
-              }))
-              .then((new_challenge_data) => {
-                Promise.all( challenge_keys.map( async (id) => {
-                    return await getChallengeMemberCount( id )
-                }))
-                .then(( num => {
-                    for (let i = 0; i < new_challenge_data.length; i++) {
-                        new_challenge_data[i].member_count = num[i]
-                    }
-                    setChallenges([...new_challenge_data])
-                    
-                }))
-              })
+        snapshot.forEach( doc => {
+            challenge_keys.push(doc.key)
         })
+
+        Promise.all( challenge_keys.map( async (cuid) => { 
+            return await getChallenge( cuid )
+        }))
+        .then((new_challenge_data) => {
+            Promise.all( challenge_keys.map( async (id) => {
+                return await getChallengeMemberCount( id )
+            }))
+            .then(( num => {
+                for (let i = 0; i < new_challenge_data.length; i++) {
+                    new_challenge_data[i].member_count = num[i]
+                }
+                setChallenges([...new_challenge_data])
+                
+            }))
+        })
+
     } catch (error) {
         console.error('updateChallenges error:', error)
     }
@@ -83,7 +84,7 @@ const ActiveChallenges = () => {
           flexDir="column"
           gap=".5rem"
           fontSize={["xs", "md"]}
-          overflowY="scroll"
+          overflowY="auto"
         >
             { challenges.map((item, i) => (
                 <ActiveChallengeItem 
