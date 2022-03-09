@@ -9,15 +9,10 @@ const ChallengeFriendListHelper = ({ friend, cuid }) => {
   const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
   const clickHandler = async () => {
-      console.log('in friend', friend.id, cuid)
       setShowLoading(true)
       await addFriendToChallenge(friend.id, cuid)
       setShowLoading(false)
       setShowConfirmation(true)
-
-      // add friend
-      // then show check
-
   }
   return (
     <Flex 
