@@ -1,18 +1,23 @@
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, SimpleGrid, Button } from '@chakra-ui/react'
 import React from 'react'
 
 const ActiveChallengeItem = ({data}) => {
   return (
-    <SimpleGrid
-      columns="3"
-      bg="brand.200"
-      rounded="3px"
-      p=".2rem"
+    <Button
     >
-        <Box pl=".3rem">{data.name}</Box>
-        <Box textAlign="center">{data.member_count}</Box>
-        <Box textAlign="center">{data.duration} day(s)</Box>
-    </SimpleGrid>
+      <SimpleGrid
+        columns="3"
+        pt=".8rem"
+        pb=".8rem"
+        fontSize={["xs", "sm"]}
+        width="100%"
+        backgroundColor="transparent"
+      >
+          <Box textAlign="left">{data.name}</Box>
+          <Box textAlign="center">{data.member_count}</Box>
+          <Box textAlign="right">{data.duration} day(s)</Box>
+      </SimpleGrid>
+    </Button>
   )
 }
 

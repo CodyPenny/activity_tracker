@@ -86,7 +86,6 @@ const ActiveChallenges = () => {
         <Flex
           flexDir="column"
           gap=".5rem"
-          fontSize={["xs", "md"]}
           overflowY="auto"
           visibility={showSpinner ? "hidden" : "visible"}
         >
