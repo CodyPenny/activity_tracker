@@ -65,8 +65,8 @@ const Home = () => {
           pb="1.5rem"
         >
           <Center 
-            fontSize={['lg', 'xl']}
-            fontWeight="semibold"
+            fontSize={['md', 'xl']}
+            fontWeight="600"
             pt=".5rem"
           >
             {user.user.displayName}

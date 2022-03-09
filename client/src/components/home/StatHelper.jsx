@@ -8,7 +8,6 @@ const StatHelper = ({stat}) => {
             rounded="8px"
             flexDir="column"
             p="1rem"
-            fontWeight="600"
             width="30%"
         >
             {stat.name}

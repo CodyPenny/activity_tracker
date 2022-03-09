@@ -12,17 +12,19 @@ const ActiveChallenges = () => {
       p="1rem"
       rounded="10px"
       overflowY="scroll"
+      fontSize={['md', 'xl']}
     >
         <Center
           p="1rem"
-          fontSize={["md", "lg"]}
+          fontSize={["md", "xl"]}
           fontWeight="600"
         >
             Active Challenges
         </Center>
         <Flex
           justifyContent="space-around"
-          fontWeight="600"
+          fontWeight="500"
+          fontSize={["sm", "lg"]}
         >
             {["Challenge", "Members", "Duration"].map((title, i) => (
                 <Center key={i} >{title}</Center>
@@ -32,6 +34,7 @@ const ActiveChallenges = () => {
           flexDir="column"
           gap=".5rem"
           pt="1rem"
+          fontSize={["xs", "md"]}
         >
             { challenges.map((item, i) => (
                 <ActiveChallengeItem 
