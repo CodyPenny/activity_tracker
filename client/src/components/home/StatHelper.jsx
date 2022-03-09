@@ -5,10 +5,11 @@ const StatHelper = ({stat}) => {
   return (
     <Center
             bg="brand.700"
-            rounded="10px"
+            rounded="8px"
             flexDir="column"
             p="1rem"
             fontWeight="600"
+            width="30%"
         >
             {stat.name}
             <Center
@@ -16,7 +17,7 @@ const StatHelper = ({stat}) => {
               width="100%"
               p=".2rem"
               m=".8rem"
-              rounded="10px"
+              rounded="3px"
             >
                 {stat.val}
             </Center>

@@ -5,10 +5,13 @@ const ActiveChallengeItem = () => {
   return (
     <SimpleGrid
       columns="3"
+      bg="brand.200"
+      rounded="3px"
+      p=".2rem"
     >
-        <Box>1</Box>
-        <Box>2</Box>
-        <Box>3</Box>
+        <Box pl=".3rem">1</Box>
+        <Box textAlign="center">2</Box>
+        <Box textAlign="center">3 day(s)</Box>
     </SimpleGrid>
   )
 }
