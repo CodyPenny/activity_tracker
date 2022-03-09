@@ -1,6 +1,5 @@
 import React, { useState } from 'react' 
 import { Grid, GridItem, Text } from '@chakra-ui/react'
-import ChallengeNav from './ChallengeNav'
 import ChallangeForm from './ChallangeForm'
 
 const BuildChallenge = () => {
@@ -31,9 +30,9 @@ const BuildChallenge = () => {
         >
             <ChallangeForm />
         </GridItem>
-        {/* <GridItem>
-            <ChallengeNav back={"/home"} next={"/"} handleSubmit={handleChallengeSubmit}/>
-        </GridItem> */}
+        <GridItem>
+           
+        </GridItem>
 
     </Grid>
   )

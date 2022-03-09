@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Flex, IconButton, useBreakpointValue, Button } from '@chakra-ui/react'
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 
-const ChallengeNav = ({back, next, handleSubmit}) => {
+const ChallengeAddFriendDoneButton = ({back, next, handleSubmit}) => {
   const iconSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
 
@@ -11,11 +11,12 @@ const ChallengeNav = ({back, next, handleSubmit}) => {
     <Button
       bg="brand.500"
       rounded="20px"
-      isLoading={true}
       variant="solid"
       width="100%"
       height="40px"
       fontSize={['sm', 'lg']}
+      as={Link}
+      to="/home"
     >
         {/* <Flex align="center" justify="center" justifyContent="space-evenly">
             {/* <IconButton
@@ -41,4 +42,4 @@ const ChallengeNav = ({back, next, handleSubmit}) => {
   )
 }
 
-export default ChallengeNav
+export default ChallengeAddFriendDoneButton
