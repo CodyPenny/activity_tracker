@@ -3,16 +3,17 @@ import { UserContext } from '../providers/UsersProvider.jsx';
 import { useNavigate } from 'react-router-dom';
 
 // Chakra + Forms
-import { Avatar,Grid, GridItem, Text, useBreakpointValue, Flex, Center } from '@chakra-ui/react';
+import { Avatar,Grid, GridItem, useBreakpointValue, Flex, Center } from '@chakra-ui/react';
 
 import test_pic from '../../../static/avatar.png'
 import NavButton from './NavButton.jsx';
 import Stats from './Stats.jsx';
 import ActiveChallenges from './ActiveChallenges.jsx';
 
-// Components + Styles
-// import ActiveChallenges from './ActiveChallenges.jsx';
-
+/**
+ * 
+ * @returns Landing page
+ */
 const Home = () => {
   const user = useContext(UserContext);
   let navigate = useNavigate();
@@ -43,7 +44,7 @@ const Home = () => {
     pl="10%" 
     >
       <GridItem 
-        pt="5%"
+        pt={["10%", "5%"]}
       >
         <Flex
           flexDirection="column"
@@ -53,6 +54,7 @@ const Home = () => {
             name={user && user.user.displayName}
             src={user && user.user.photoURL}
             size={avatarSize}
+            
           />
         </Flex>
       </GridItem>

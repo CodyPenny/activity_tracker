@@ -6,6 +6,7 @@ import StatHelper from './StatHelper'
 const Stats = () => {
   const user = useContext(UserContext);
   const [ userStats, setUserStats ] = useState([])
+  const [ show, setShow ] = useState(true)
 
   const getStats = () => {
     setUserStats([
@@ -13,6 +14,7 @@ const Stats = () => {
         {name: "Wins", val: user.user.wins}, 
         {name: "Friends", val: user.friends.length}
     ])
+    setShow(false)
   }
 
   useEffect(() => {
@@ -32,6 +34,7 @@ const Stats = () => {
             <StatHelper
                 stat={stat}
                 key={i}
+                show={show}
             />
         ))}
     </Flex>
