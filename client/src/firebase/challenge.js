@@ -13,6 +13,7 @@ export const createChallenge = async ( criteria, user_uid ) => {
   const cuid = uuidv4()
 
   try {
+    criteria.uid = cuid
     const c_ref = getRef("challenges", cuid)
     const c_u_ref = getRef("challenges-user", cuid)
     const u_c_ref = getRef("user-challenges", user_uid) 
@@ -61,32 +62,24 @@ export const addFriendToChallenge = async ( f_uid, c_uid) => {
   }
 }
 
+
 /**
- * Collects the ids of the user's challenges and fetches the data for each of the challenge
- * @param {*} u_uid user's uid
+ * Looks up the participant count for a challenge
+ * @param {*} cuid challenge uid
  */
-export const getAllChallengesForUser = async ( u_uid ) => {
-  const challenge_keys = []
-
+export const getChallengeMemberCount = async ( cuid ) => {
+  let count = 0;
   try {
-    const u_c_ref = getRef("user-challenges", u_uid) 
-    onValue( u_c_ref, (snapshot) => {
-      snapshot.forEach( doc => {
-        challenge_keys.push(doc.key)
-    })
-
-      Promise.all( challenge_keys.map( async (id) => {
-        return await getChallenge( id )
-      }))
-      .then((val) => {
-        console.log('ret val', val)
-        return val
+    const c_u_ref = getRef("challenges-user", cuid)
+      onValue( c_u_ref, ( members ) => {
+       members.forEach( doc => { 
+         count++ 
+        })
       })
-
-    })
-
+    return count
+    
   } catch (error) {
-    console.error('getAllChallengesForUser error:', error)
+    console.error('getChallengeMemberCount error:', error)
   }
 }
 
@@ -109,8 +102,14 @@ export const getChallenge = async ( c_uid ) => {
    }
 }
 
-
-
+/**
+ * 
+ * @param {*} uid user's uid
+ * @returns reference to the challenges associated with a user's uid
+ */
+export const getUserChallengeCollection = ( uid ) => {
+  return getRef("user-challenges", uid) 
+}
 
 
 

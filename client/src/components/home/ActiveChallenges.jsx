@@ -1,27 +1,56 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { getAllChallengesForUser } from '../../firebase/challenge'
+import { getChallengeMemberCount, getUserChallengeCollection } from '../../firebase/challenge'
 import { UserContext } from '../providers/UsersProvider'
+import { onValue } from "firebase/database";
+import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
 import { Flex, Center,  } from '@chakra-ui/react'
 
 const ActiveChallenges = () => {
   const { user } = useContext(UserContext)
   const [ challenges, setChallenges ] = useState([])
-  const [ participants, setParticipants ] = useState([])
 
+  /**
+   * Looks up the challenges associated with the user, then collects
+   * the data for each challenge
+   * It runs another query to lookup the number of participants for each challenge
+   * @param {*} uid user's uid
+   */
   const updateChallenges = async ( uid ) => {
-    let result = await getAllChallengesForUser( uid )
+    const challenge_keys = []
+    try {
+        const u_c_ref = getUserChallengeCollection( uid )
+        onValue( u_c_ref, (snapshot) => {
+            snapshot.forEach( doc => {
+                challenge_keys.push(doc.key)
+            })
+
+            Promise.all( challenge_keys.map( async (cuid) => { 
+                return await getChallenge( cuid )
+              }))
+              .then((new_challenge_data) => {
+                Promise.all( challenge_keys.map( async (id) => {
+                    return await getChallengeMemberCount( id )
+                }))
+                .then(( num => {
+                    for (let i = 0; i < new_challenge_data.length; i++) {
+                        new_challenge_data[i].member_count = num[i]
+                    }
+                    setChallenges([...new_challenge_data])
+                    
+                }))
+              })
+        })
+    } catch (error) {
+        console.error('updateChallenges error:', error)
+    }
   }
 
 
-  useEffect(() => {
+  useEffect( () => {
       if (user) {
-          // get all the challenges for the user
-          // set a limit to 5 per load
-          // get member count for each challenge
-          updateChallenges(user.uid)
+       updateChallenges(user.uid)
       }
-
   }, [])
 
   return (

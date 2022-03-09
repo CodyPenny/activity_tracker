@@ -56,8 +56,8 @@ import { resetPasswordWithEmail } from './auth.js';
   }
 
   /**
-   * 
-   * @param {*} text 
+   * Performs a partial and full text search -reason for using realtime db
+   * @param {*} text search input
    * @returns 
    */
   export const searchMatchingFriends = async ( text ) => {
