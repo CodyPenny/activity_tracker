@@ -4,12 +4,16 @@ import { MdPersonAddAlt1, MdCheck } from 'react-icons/md'
 
 const ChallengeFriendListHelper = ({ friend, cuid }) => {
   const [showConfirmation, setShowConfirmation ] = useState(false)
+  const [ showLoading, setShowLoading ] = useState(false)
   const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
       console.log('in friend', friend.id, cuid)
+      setShowLoading(true)
+      
       // add friend
       // then show check
+
   }
   return (
     <Flex 
@@ -44,6 +48,7 @@ const ChallengeFriendListHelper = ({ friend, cuid }) => {
             position="absolute"
             icon={<MdPersonAddAlt1 />}
             onClick={clickHandler}
+            isLoading={showLoading}
         />
         <IconButton
             visibility={showConfirmation ? 'visible' : 'hidden'}
