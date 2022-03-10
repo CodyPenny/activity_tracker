@@ -5,20 +5,19 @@ import { saveImageToStorage } from '../../firebase/user'
 const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
   const [ imageInput, setImageInput ] = useState(null)
   const [ isAvatarError, setIsAvatarError ] = useState(false)
+  const [ showLoading, setShowLoading ] = useState(false)
   const inputFileRef = useRef()
 
   const handleFileSubmit = async ( e ) => {
     e.preventDefault();
     console.log('handling file submit', imageInput)
-  
     if (!imageInput) {
         setIsAvatarError(true)
         return
     }
-
+    setShowLoading(true)
     await saveImageToStorage( imageInput, uid )
-
-    // save to db
+    setShowLoading(false)
   }
 
   const handleOnFileChange = (e) => {
@@ -87,6 +86,7 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                                 h="1.7rem"
                                 type='submit'
                                 float="right"
+                                isLoading={showLoading}
                                 _hover={{
                                   bg: "brand.500"
                                 }}

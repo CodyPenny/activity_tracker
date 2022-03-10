@@ -69,11 +69,9 @@ export const saveImageToStorage = async ( image, uid ) => {
       const metadata = {
         contentType: image.type
       };
-
       const storageRef = ref(storage, `user_profiles/${uid}/${image.name}`)
       const snapshot = await uploadBytes( storageRef, image, metadata )
       const url = await getDownloadURL(snapshot.ref)
-      console.log('after done', url)
       await updateUserAvatar( url, uid )
     }
     

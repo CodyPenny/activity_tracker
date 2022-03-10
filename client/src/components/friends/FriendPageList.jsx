@@ -4,7 +4,6 @@ import FriendPageListHelper from './FriendPageListHelper.jsx';
 
 const FriendPageList = () => {
     const { friends } = useContext(UserContext);
-    console.log('friends in friendpagelist ', friends, friends.length)
 
   return (
       <div>
