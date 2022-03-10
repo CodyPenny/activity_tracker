@@ -13,6 +13,7 @@ const SearchFriends = () => {
     const toast = useToast();
 
     const getFriends = async () => {
+        // adds user-1, oreo
         let defaultFriend = await getUser('DtDkNYyJYNZdT5o4wUmgBBnvh3I2')
         setFriendResults([...friendResults, defaultFriend])
     }
@@ -38,6 +39,7 @@ const SearchFriends = () => {
                         onSubmit={async (data, { resetForm }) => {
                             try {
                             const results = await searchMatchingFriends(data.searchText.toUpperCase());
+                            console.log('test', results)
                             setFriendResults([...results])
                             resetForm();
                             } catch (error) {

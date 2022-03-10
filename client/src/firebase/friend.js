@@ -44,6 +44,7 @@ import { resetPasswordWithEmail } from './auth.js';
  * @param {*} user 
  */
   export const addFriendToUser = async (friend, user) => {
+    console.log('in add friend to user', friend, "**", user)
     const u_Ref = getRef("friends", user)
     const f_Ref = getRef("friends", friend)
 

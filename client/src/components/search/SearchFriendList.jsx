@@ -19,7 +19,7 @@ const SearchFriendList = ({friends}) => {
                 key={i} 
                 name={friend.displayName} 
                 photoURL={friend.photoURL}
-                id={friend.id}
+                uid={friend.uid}
             />
         ))}
     </Stack>

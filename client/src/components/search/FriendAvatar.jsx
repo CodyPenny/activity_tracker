@@ -9,14 +9,15 @@ import { addFriendToUser } from '../../firebase/friend.js';
  * @param {name, photoURL, id} user  
  * @returns 
  */
-const FriendAvatar = ({name, photoURL, id}) => {
+const FriendAvatar = ({name, photoURL, uid}) => {
     const user = useContext(UserContext);
     const [showConfirmation, setShowConfirmation ] = useState(false)
     const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
-    const addFriend = () => {
-        console.log('fid', id)
+    
+    const addFriend = async () => {
+        console.log('fid', uid)
         console.log('uid', user.user.uid)
-        //addFriendToUser(id, user.user.uid)
+        await addFriendToUser(uid, user.user.uid)
         setShowConfirmation(true)
     }
 
