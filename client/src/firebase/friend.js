@@ -1,5 +1,5 @@
 import { getRef, performUpdate, getCollection, getDocsAsAList, db } from '../firebase/index.js'
-import { query, ref, orderByChild, orderByKey, get, startAt, endAt, limitToFirst, set, onValue } from "firebase/database";
+import { query, ref, orderByChild, orderByKey, get, startAt, endAt, limitToFirst, set, onValue, update } from "firebase/database";
 import { resetPasswordWithEmail } from './auth.js';
 
 
@@ -47,10 +47,10 @@ import { resetPasswordWithEmail } from './auth.js';
     const u_Ref = getRef("friends", user)
     const f_Ref = getRef("friends", friend)
 
-    await set( u_Ref, {
+    await update( u_Ref, {
       [friend]: true
     })
-    await set( f_Ref, {
+    await update( f_Ref, {
       [user]: true
     })
   }

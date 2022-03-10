@@ -14,7 +14,9 @@ const FriendAvatar = ({name, photoURL, id}) => {
     const [showConfirmation, setShowConfirmation ] = useState(false)
     const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
     const addFriend = () => {
-        addFriendToUser(id, user.user.uid)
+        console.log('fid', id)
+        console.log('uid', user.user.uid)
+        //addFriendToUser(id, user.user.uid)
         setShowConfirmation(true)
     }
 

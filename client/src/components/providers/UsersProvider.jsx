@@ -19,18 +19,23 @@ class UsersProvider extends Component {
     unsubscribeFromAuth = null;
 
     getFriends = async () => {
+        console.log('this state user.uid', this.state.user.uid)
         const db_Ref = getFriendsCollection( this.state.user.uid  )
         const friendsToFetch = []
 
         onValue( db_Ref, (snapshot) => {
             snapshot.forEach( doc => {
-                friendsToFetch.push(doc.key)
+                if(doc.key && doc.key !== "undefined"){
+                    friendsToFetch.push(doc.key)
+                }
             })
 
             Promise.all( friendsToFetch.map( async (id) => {
                 return await getUser( id )
             }))
             .then((val) => {
+                console.log('friends to fetch', friendsToFetch)
+                console.log('friends in state', this.state.friends)
                 this.setState({
                     friends:[...this.state.friends, ...val]
                 })
@@ -49,12 +54,13 @@ class UsersProvider extends Component {
 
                 // get user info from db
                 let profile = await getUser( user.uid )
+                console.log('the profile of the user', profile)
                 this.setState({
                     user: profile
                 })
                 sessionStorage.setItem('Auth Token', user.accessToken)
 
-            this.getFriends()
+                this.getFriends()
           
             } else {
             // user is signed out
