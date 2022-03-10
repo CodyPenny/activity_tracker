@@ -1,9 +1,17 @@
-import { Box, SimpleGrid, Button } from '@chakra-ui/react'
 import React from 'react'
+import { Box, SimpleGrid, Button, useDisclosure } from '@chakra-ui/react'
+import ActiveChallengeModal from './ActiveChallengeModal'
 
 const ActiveChallengeItem = ({data}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <Button
+      onClick={() => {
+        console.log('data ', data)
+        onOpen()
+      }
+      }
     >
       <SimpleGrid
         columns="3"
@@ -17,6 +25,11 @@ const ActiveChallengeItem = ({data}) => {
           <Box textAlign="center">{data.member_count}</Box>
           <Box textAlign="right">{data.duration} day(s)</Box>
       </SimpleGrid>
+      <ActiveChallengeModal 
+        onOpen={onOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </Button>
   )
 }
