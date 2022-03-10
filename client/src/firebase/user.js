@@ -58,6 +58,11 @@ export const getUser = async (UID) => {
   }
 };
 
+/**
+ * Saves the image to the storage and updates the db
+ * @param {*} image avatar image file- png, jpeg, jpg
+ * @param {*} uid user's uid
+ */
 export const saveImageToStorage = async ( image, uid ) => {
   try {
     if(image){
@@ -77,6 +82,11 @@ export const saveImageToStorage = async ( image, uid ) => {
   }
 }
 
+/**
+ * Updates the user's profile with the avatar url
+ * @param {*} url storage reference url
+ * @param {*} uid user's uid
+ */
 export const updateUserAvatar = async ( url, uid ) => {
   try {
     const uRef = getRef('users', uid);
