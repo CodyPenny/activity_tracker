@@ -1,24 +1,47 @@
-import React, { useState } from 'react'
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Text, Heading, Box, Input, FormControl, FormLabel } from '@chakra-ui/react'
+import React, { useState, useRef } from 'react'
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Input, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react'
 
 const EditAccount = ({isOpen, onOpen, onClose}) => {
   const [ imageInput, setImageInput ] = useState(null)
+  const [ isAvatarError, setIsAvatarError ] = useState(false)
+  const inputFileRef = useRef()
 
   const handleFileSubmit = async ( e ) => {
     e.preventDefault();
-    console.log('handling file submit', imageInput, imageInput.files)
-    // verify there is a file
-    if(imageInput.files.length < 1){
-        //throw error
+    console.log('handling file submit', imageInput)
+  
+    if (!imageInput) {
+        setIsAvatarError(true)
         return
     }
+
+
 
     // save to db
   }
 
+  const handleOnFileChange = (e) => {
+      console.log('onChenge', e.target.files[0])
+      setImageInput(e.target.files[0])
+      if (isAvatarError) {
+        setIsAvatarError(false)
+    }
+  }
+
+
+  /**
+   * Clear any errors before closing the modal
+   */
+  const handleReset = () => {
+    if(isAvatarError){
+        setIsAvatarError(false)
+    }
+    onClose()
+  }
+
   return (
     <>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={handleReset}>
             <ModalOverlay />
                 <ModalContent>
                 <ModalHeader
@@ -35,9 +58,9 @@ const EditAccount = ({isOpen, onOpen, onClose}) => {
                             bg="brand.300"
                             p="1.5rem"
                             rounded="5px"
-                            onSubmit={handleFileSubmit}
                             mt=".8rem"
                             textAlign={["left","center"]}
+                            isInvalid={isAvatarError}
                         >
                             <FormLabel
                               color="brand.800"
@@ -51,26 +74,31 @@ const EditAccount = ({isOpen, onOpen, onClose}) => {
                                 accept=".png, .jpeg, .jpg"
                                 textAlign="center"
                                 fontSize="14px"
-                                // bg="brand.200"
                                 w={["100%", "60%"]}
                                 border="none"
                                 p="0"
                                 borderRadius="0"
-
                                 mr={["1rem"]}
-                                ref={(ref) => (setImageInput(ref))}
+                                ref={inputFileRef}
+                                onChange={handleOnFileChange}
                             />
                             <Button
                                 fontSize='14px'
                                 h="1.7rem"
-                                type="submit"
+                                type='submit'
                                 float="right"
                                 _hover={{
                                   bg: "brand.500"
                                 }}
+                                onClick={handleFileSubmit}
                             >
                                 Submit
                             </Button>
+                            {isAvatarError && (
+                                <FormErrorMessage>
+                                    Upload an image file you'd like your avatar to show.
+                                </FormErrorMessage>
+                            )}
                         </FormControl>
      
                     </Flex>
