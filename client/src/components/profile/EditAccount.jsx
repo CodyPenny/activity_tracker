@@ -66,6 +66,7 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                 <ModalBody>
                     <Flex
                       flexDir="column"
+                      gap={["1rem", "1.5rem"]}
                     >
                         <FormControl
                             bg="brand.300"
@@ -118,12 +119,25 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                         <Box
                           bg="brand.300"
                           rounded="5px"
+                          p="1.5rem"
                         >
-                            <Text>
-                                Account
+                            <Text
+                              color="brand.800"
+                              fontSize={["sm", "lg"]}
+                              fontWeight="500"
+                            >
+                                Account Settings
                             </Text>
-                            <Button>
-                                Delete
+                            <Button
+                              float="right"
+                              fontSize='14px'
+                              h="1.7rem"
+                              bg="brand.400"
+                              color="white"
+                              mt=".5rem"
+                              _hover={{ bg: 'red' }}
+                            >
+                                Delete Account
                             </Button>
                         </Box>
      
