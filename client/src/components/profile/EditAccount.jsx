@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Input, FormControl, FormLabel, FormErrorMessage, Box, Text } from '@chakra-ui/react'
 import { MdDone } from 'react-icons/md'
 import { saveImageToStorage } from '../../firebase/user'
+import DeleteAccount from './DeleteAccount'
 
 // TODO: add delete account function and ask are you sure?
 
@@ -14,7 +15,12 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
   const [ isAvatarError, setIsAvatarError ] = useState(false)
   const [ showLoading, setShowLoading ] = useState(false)
   const [ submittedFile, setSubmittedFile ] = useState(false)
+  const [ isDeleteDialogOpen, setIsDeleteDialog ] = useState(false)
   const inputFileRef = useRef()
+
+  const onCloseDeleteDialog = () => {
+      setIsDeleteDialog(false)
+  }
 
   const handleFileSubmit = async ( e ) => {
     e.preventDefault();
@@ -136,9 +142,14 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                               color="white"
                               mt=".5rem"
                               _hover={{ bg: 'red' }}
+                              onClick={() => setIsDeleteDialog(true)}
                             >
                                 Delete Account
                             </Button>
+                            <DeleteAccount
+                                isOpen={isDeleteDialogOpen}
+                                onClose={onCloseDeleteDialog}
+                            />
                         </Box>
      
                     </Flex>
@@ -146,9 +157,8 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
 
                 <ModalFooter>
                     <Button colorScheme='blue' mr={3} onClick={onClose}>
-                    Close
+                        Close
                     </Button>
-                    <Button variant='ghost'>Secondary Action</Button>
                 </ModalFooter>
                 </ModalContent>
         </Modal>
