@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Box, Flex, IconButton, useBreakpointValue } from '@chakra-ui/react'
-import { MdHomeFilled, MdEdit, MdGroup, MdPersonSearch, MdPlaylistAdd, MdLogout } from 'react-icons/md';
+import { MdHomeFilled, MdEdit, MdGroup, MdPersonSearch, MdLogout } from 'react-icons/md';
 import { signOutOfApp } from '../../firebase/auth';
 
 const NavButton = () => {
@@ -32,7 +32,7 @@ const NavButton = () => {
                 aria-label="Edit"
                 icon={<MdEdit />}
                 as={Link}
-                to="/editProfile"
+                to="/buildChallenge"
                 variant="solid"
                 bg="brand.500"
                 size={iconSize}
@@ -49,14 +49,6 @@ const NavButton = () => {
                 icon={<MdPersonSearch />}
                 as={Link}
                 to="/searchFriends"
-                variant="solid"
-                bg="brand.500"
-                size={iconSize}
-            />
-            <IconButton
-                icon={<MdPlaylistAdd />}
-                as={Link}
-                to="/buildChallenge"
                 variant="solid"
                 bg="brand.500"
                 size={iconSize}

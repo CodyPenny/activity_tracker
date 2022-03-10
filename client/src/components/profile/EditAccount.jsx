@@ -1,8 +1,14 @@
 import React, { useState, useRef } from 'react'
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Input, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react'
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Input, FormControl, FormLabel, FormErrorMessage, Box, Text } from '@chakra-ui/react'
 import { MdDone } from 'react-icons/md'
 import { saveImageToStorage } from '../../firebase/user'
 
+// TODO: add delete account function and ask are you sure?
+
+/**
+ * 
+ * @param {*} 
+ */
 const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
   const [ imageInput, setImageInput ] = useState(null)
   const [ isAvatarError, setIsAvatarError ] = useState(false)
@@ -71,7 +77,7 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                         >
                             <FormLabel
                               color="brand.800"
-                              fontSize={["sm", "md"]}
+                              fontSize={["sm", "lg"]}
                             >
                                 Avatar
                             </FormLabel>
@@ -109,6 +115,17 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                                 </FormErrorMessage>
                             )}
                         </FormControl>
+                        <Box
+                          bg="brand.300"
+                          rounded="5px"
+                        >
+                            <Text>
+                                Account
+                            </Text>
+                            <Button>
+                                Delete
+                            </Button>
+                        </Box>
      
                     </Flex>
                 </ModalBody>
