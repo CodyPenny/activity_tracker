@@ -1,5 +1,6 @@
 import { set, get } from "firebase/database";
-import { getRef, auth } from ".";
+import { getRef, auth, storage } from ".";
+import { ref, uploadBytesResumable, getDownloadURL, uploadBytes } from "firebase/storage";
 
 /**
  * Creates a new user document 
@@ -56,3 +57,24 @@ export const getUser = async (UID) => {
     return 'getUserDocument Error';
   }
 };
+
+export const saveImageToUserProfile = async ( image, uid ) => {
+  try {
+    if(image){
+      const metadata = {
+        contentType: image.type
+      };
+
+      const storageRef = ref(storage, `user_profiles/${uid}/${image.name}`)
+      const snapshot = await uploadBytes( storageRef, image, metadata )
+      //const url = await snapshot.ref.getDownloadURL()
+      //const url = await getDownloadURL(snapshot.ref)
+      //console.log('after done', url)
+
+
+    }
+    
+  } catch (error) {
+    console.error('saveImageToUserProfile Error:', error);
+  }
+}

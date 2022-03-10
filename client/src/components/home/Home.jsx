@@ -68,6 +68,7 @@ const Home = () => {
             isOpen={isOpen}
             onOpen={onOpen}
             onClose={onClose}
+            uid={user.user.uid}
           />
         </Flex>
       </GridItem>

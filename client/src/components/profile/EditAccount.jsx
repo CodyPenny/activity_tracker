@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Input, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react'
+import { saveImageToUserProfile } from '../../firebase/user'
 
-const EditAccount = ({isOpen, onOpen, onClose}) => {
+const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
   const [ imageInput, setImageInput ] = useState(null)
   const [ isAvatarError, setIsAvatarError ] = useState(false)
   const inputFileRef = useRef()
@@ -15,7 +16,7 @@ const EditAccount = ({isOpen, onOpen, onClose}) => {
         return
     }
 
-
+    await saveImageToUserProfile( imageInput, uid )
 
     // save to db
   }
@@ -27,7 +28,6 @@ const EditAccount = ({isOpen, onOpen, onClose}) => {
         setIsAvatarError(false)
     }
   }
-
 
   /**
    * Clear any errors before closing the modal
