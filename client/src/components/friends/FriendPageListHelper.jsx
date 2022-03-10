@@ -3,7 +3,7 @@ import { Avatar, Flex, Box, Text, useBreakpointValue } from '@chakra-ui/react'
 
 const FriendPageListHelper = ({ friend }) => {
   const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })
-
+  console.log('friend in friendpagelisthelper ', friend)
   return (
     <Flex 
       pb={[".5rem", "1rem"]}

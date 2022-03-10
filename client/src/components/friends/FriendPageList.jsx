@@ -4,11 +4,11 @@ import FriendPageListHelper from './FriendPageListHelper.jsx';
 
 const FriendPageList = () => {
     const { friends } = useContext(UserContext);
-
+    console.log('friends in friendpagelist ', friends, friends.length)
   return (
       <div>
-          { friends.map((friend, i) => (
-              <FriendPageListHelper friend={friend} key={i}/>
+          { friends.length > 0 && friends.map((friend, i) => (
+             friend && <FriendPageListHelper friend={friend} key={i}/>
           ))
           }
 
