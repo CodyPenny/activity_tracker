@@ -3,12 +3,13 @@ import { UserContext } from '../providers/UsersProvider.jsx';
 import { useNavigate } from 'react-router-dom';
 
 // Chakra + Forms
-import { Avatar,Grid, GridItem, useBreakpointValue, Flex, Center } from '@chakra-ui/react';
+import { Avatar,Grid, GridItem, useBreakpointValue, Flex, Center, useDisclosure } from '@chakra-ui/react';
 
 import test_pic from '../../../static/avatar.png'
 import NavButton from './NavButton.jsx';
 import Stats from './Stats.jsx';
 import ActiveChallenges from './ActiveChallenges.jsx';
+import EditAccount from '../profile/EditAccount.jsx';
 
 /**
  * 
@@ -18,6 +19,12 @@ const Home = () => {
   const user = useContext(UserContext);
   let navigate = useNavigate();
   const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const openEditAccountPage = () => {
+    console.log('opening')
+    onOpen()
+  }
 
   /**
    * If token exists, remain on the page, or be pushed to the login screen
@@ -54,7 +61,13 @@ const Home = () => {
             name={user && user.user.displayName}
             src={user && user.user.photoURL}
             size={avatarSize}
-            
+            cursor="pointer"
+            onClick={openEditAccountPage}
+          />
+          <EditAccount 
+            isOpen={isOpen}
+            onOpen={onOpen}
+            onClose={onClose}
           />
         </Flex>
       </GridItem>
