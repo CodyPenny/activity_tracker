@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, ModalCloseButton, Flex, Input, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react'
-import { saveImageToUserProfile } from '../../firebase/user'
+import { saveImageToStorage } from '../../firebase/user'
 
 const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
   const [ imageInput, setImageInput ] = useState(null)
@@ -16,7 +16,7 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
         return
     }
 
-    await saveImageToUserProfile( imageInput, uid )
+    await saveImageToStorage( imageInput, uid )
 
     // save to db
   }

@@ -1,4 +1,4 @@
-import { set, get } from "firebase/database";
+import { set, get, update } from "firebase/database";
 import { getRef, auth, storage } from ".";
 import { ref, uploadBytesResumable, getDownloadURL, uploadBytes } from "firebase/storage";
 
@@ -58,7 +58,7 @@ export const getUser = async (UID) => {
   }
 };
 
-export const saveImageToUserProfile = async ( image, uid ) => {
+export const saveImageToStorage = async ( image, uid ) => {
   try {
     if(image){
       const metadata = {
@@ -67,14 +67,24 @@ export const saveImageToUserProfile = async ( image, uid ) => {
 
       const storageRef = ref(storage, `user_profiles/${uid}/${image.name}`)
       const snapshot = await uploadBytes( storageRef, image, metadata )
-      //const url = await snapshot.ref.getDownloadURL()
-      //const url = await getDownloadURL(snapshot.ref)
-      //console.log('after done', url)
-
-
+      const url = await getDownloadURL(snapshot.ref)
+      console.log('after done', url)
+      await updateUserAvatar( url, uid )
     }
     
   } catch (error) {
     console.error('saveImageToUserProfile Error:', error);
+  }
+}
+
+export const updateUserAvatar = async ( url, uid ) => {
+  try {
+    const uRef = getRef('users', uid);
+    await update( uRef, {
+      photoURL: url
+    })
+
+  } catch (error) {
+    console.error('updateUserAvatar:', error);
   }
 }
