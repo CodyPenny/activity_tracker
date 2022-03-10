@@ -21,9 +21,9 @@ class UsersProvider extends Component {
     getFriends = async () => {
         console.log('this state user.uid', this.state.user.uid)
         const db_Ref = getFriendsCollection( this.state.user.uid  )
-        const friendsToFetch = []
-
+        
         onValue( db_Ref, (snapshot) => {
+            const friendsToFetch = []
             snapshot.forEach( doc => {
                 if(doc.key && doc.key !== "undefined"){
                     friendsToFetch.push(doc.key)
@@ -34,10 +34,8 @@ class UsersProvider extends Component {
                 return await getUser( id )
             }))
             .then((val) => {
-                console.log('friends to fetch', friendsToFetch)
-                console.log('friends in state', this.state.friends)
                 this.setState({
-                    friends:[...this.state.friends, ...val]
+                    friends:[...val]
                 })
             })
             

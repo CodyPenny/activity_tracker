@@ -11,6 +11,8 @@ const ActiveChallenges = () => {
   const [ challenges, setChallenges ] = useState([])
   const [ showSpinner, setShowSpinner ] = useState(true)
 
+  //TODO: add listener to challenger
+
   /**
    * Looks up the challenges associated with the user, then collects
    * the data for each challenge
