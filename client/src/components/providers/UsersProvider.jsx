@@ -2,7 +2,7 @@ import React, { Component, createContext } from 'react';
 import { auth, getRef } from '../../firebase/index.js';
 import  { onAuthStateChanged } from "firebase/auth";
 import { getFriendsCollection } from '../../firebase/friend.js';
-import { getUserChallengeCollection, getChallenge,  } from '../../firebase/challenge.js';
+import { getUserChallengeCollection, getChallenge, getChallengeMemberCount } from '../../firebase/challenge.js';
 import { onValue, onChildAdded } from "firebase/database";
 import { getUser } from '../../firebase/user.js';
 
@@ -24,35 +24,18 @@ class UsersProvider extends Component {
 
     getChallenges = async ( uid ) => {
         const u_c_ref = getUserChallengeCollection( uid )
-        onChildAdded( u_c_ref, (data) => {
-            console.log('getting challenges from user provider')
-            const challenge_keys = []
-            data.forEach( doc => {
-                challenge_keys.push(doc.key)
-            })
-
-            Promise.all( challenge_keys.map( async (cuid) => { 
-                return await getChallenge( cuid )
-            }))
-            .then((new_challenge_data) => {
-                console.log('new_challenge_data', new_challenge_data)
-                Promise.all( challenge_keys.map( async (id) => {
-                    return await getChallengeMemberCount( id )
-                }))
-                .then(( num => {
-                    console.log('the num in the promise', num)
-                    for (let i = 0; i < new_challenge_data.length; i++) {
-                        new_challenge_data[i].member_count = num[i]
-                    }
-                    this.setState({
-                        challenges: [...this.state.challenges, ...new_challenge_data]
-                    })
-                    
-                }))
+        onChildAdded( u_c_ref, async (challenge_id) => {
+            console.log('the child data', challenge_id.key)
+            const challenge_data = await getChallenge( challenge_id.key )
+            console.log('new_challenge_data', challenge_data)
+            const members = await getChallengeMemberCount( challenge_id.key )
+            console.log("members", members)
+            challenge_data.member_count = members
+            this.setState({
+                challenges: [...this.state.challenges, challenge_data]
             })
 
         })
-
     }
 
     getFriends = ( uid ) => {

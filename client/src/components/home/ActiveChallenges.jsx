@@ -52,11 +52,11 @@ const ActiveChallenges = () => {
   }
 
 
-  useEffect( () => {
-      // if (user.user) {
-      //  updateChallenges(user.user.uid)
-      // }
-  }, [])
+  // useEffect( () => {
+  //     // if (user.user) {
+  //     //  updateChallenges(user.user.uid)
+  //     // }
+  // }, [])
 
   return (
     <Flex
@@ -89,7 +89,7 @@ const ActiveChallenges = () => {
           flexDir="column"
           gap=".5rem"
           overflowY="auto"
-          visibility={showSpinner ? "hidden" : "visible"}
+          //visibility={showSpinner ? "hidden" : "visible"}
         >
             { user.challenges.map((item, i) => (
                 <ActiveChallengeItem 
@@ -98,16 +98,16 @@ const ActiveChallenges = () => {
                 />
             ))}
         </Flex>
-        <Button
+        {/* <Button
           bg="brand.700"
           position="absolute"
           width="92%"
           height="92%"
           overflow="hidden"
-          isLoading={showSpinner}
-          visibility={showSpinner ? "visible" : "hidden"}
+          //isLoading={showSpinner}
+          //visibility={showSpinner ? "visible" : "hidden"}
         >
-        </Button>
+        </Button> */}
     </Flex>
   )
 }
