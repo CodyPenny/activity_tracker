@@ -7,7 +7,7 @@ import ActiveChallengeItem from './ActiveChallengeItem'
 import { Flex, Center, Button } from '@chakra-ui/react'
 
 const ActiveChallenges = () => {
-  const { user } = useContext(UserContext)
+  const user  = useContext(UserContext)
   const [ challenges, setChallenges ] = useState([])
   const [ showSpinner, setShowSpinner ] = useState(true)
 
@@ -20,7 +20,7 @@ const ActiveChallenges = () => {
    * @param {*} uid user's uid
    */
   const updateChallenges = async ( uid ) => {
-    const challenge_keys = []
+    const challenge_keys = [] 
     try {
         const u_c_ref = getUserChallengeCollection( uid )
         const snapshot= await get( query( u_c_ref, limitToFirst(8)))
@@ -53,9 +53,9 @@ const ActiveChallenges = () => {
 
 
   useEffect( () => {
-      if (user) {
-       updateChallenges(user.uid)
-      }
+      // if (user.user) {
+      //  updateChallenges(user.user.uid)
+      // }
   }, [])
 
   return (
@@ -91,7 +91,7 @@ const ActiveChallenges = () => {
           overflowY="auto"
           visibility={showSpinner ? "hidden" : "visible"}
         >
-            { challenges.map((item, i) => (
+            { user.challenges.map((item, i) => (
                 <ActiveChallengeItem 
                     key={i}
                     data={item}

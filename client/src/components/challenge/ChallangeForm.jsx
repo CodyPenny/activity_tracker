@@ -19,7 +19,7 @@ const ChallangeForm = ({}) => {
         validationSchema={challengeValid}
         onSubmit= { async ( data, { resetForm }) => {
             try {
-                const cuid = await createChallenge( data, user.user.uid )
+                const cuid = await createChallenge( data )
                 resetForm()
                 navigate(`/challengeAddFriends/${cuid}`)
             } catch (error) {

@@ -1,6 +1,9 @@
 import React, { useRef } from 'react'
 import { AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, Button, } from '@chakra-ui/react'
 
+
+// TODO: delete account functionality
+
 const DeleteAccount = ({ isOpen, onClose}) => {
   const cancelRef = useRef()
 

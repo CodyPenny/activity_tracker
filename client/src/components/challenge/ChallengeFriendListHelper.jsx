@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Flex, Box, Text, useBreakpointValue, IconButton, Center } from '@chakra-ui/react'
 import { MdPersonAddAlt1, MdCheck } from 'react-icons/md'
-import { addFriendToChallenge } from '../../firebase/challenge'
+import { addUserToChallenge } from '../../firebase/challenge'
 
 const ChallengeFriendListHelper = ({ friend, cuid }) => {
   const [showConfirmation, setShowConfirmation ] = useState(false)
@@ -10,7 +10,7 @@ const ChallengeFriendListHelper = ({ friend, cuid }) => {
 
   const clickHandler = async () => {
       setShowLoading(true)
-      await addFriendToChallenge(friend.id, cuid)
+      await addUserToChallenge(friend.uid, cuid)
       setShowLoading(false)
       setShowConfirmation(true)
   }

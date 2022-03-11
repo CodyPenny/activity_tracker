@@ -6,7 +6,7 @@ import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
 import ChallengeAddFriendDoneButton from './ChallengeAddFriendDoneButton.jsx';
 
 const ChallengeAddFriends = () => {
-  const { friends } = useContext(UserContext);
+  const { friends, user } = useContext(UserContext);
   let { cuid } = useParams();
 
   return (
@@ -39,7 +39,10 @@ const ChallengeAddFriends = () => {
            }
         </GridItem>
         <GridItem> 
-            <ChallengeAddFriendDoneButton />
+            <ChallengeAddFriendDoneButton 
+                cuid={cuid}
+                user={user.uid}
+            />
         </GridItem>
     </Grid>
   )

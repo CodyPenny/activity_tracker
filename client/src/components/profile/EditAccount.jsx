@@ -4,7 +4,7 @@ import { MdDone } from 'react-icons/md'
 import { saveImageToStorage } from '../../firebase/user'
 import DeleteAccount from './DeleteAccount'
 
-// TODO: add delete account function and ask are you sure?
+
 
 /**
  * 

@@ -1,6 +1,6 @@
 import { set, get, update } from "firebase/database";
 import { getRef, auth, storage } from ".";
-import { ref, uploadBytesResumable, getDownloadURL, uploadBytes } from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 /**
  * Creates a new user document 
