@@ -3,12 +3,12 @@ import { UserContext } from '../providers/UsersProvider.jsx';
 import { Grid, GridItem, Text } from '@chakra-ui/react'
 import { useParams } from 'react-router'
 import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
-import ChallengeAddFriendDoneButton from './ChallengeAddFriendDoneButton.jsx';
+import ChallengeAddFriendButton from './ChallengeAddFriendButton.jsx';
 
 const ChallengeAddFriends = () => {
-  const { friends, user } = useContext(UserContext);
+  const user = useContext(UserContext);
   let { cuid } = useParams();
-
+    console.log('user in challenge add friends', user)
   return (
     <Grid
         h='100%'
@@ -33,15 +33,15 @@ const ChallengeAddFriends = () => {
         <GridItem
             mt="1rem"
         >
-           { friends.map((friend, i) => (
+           { user.friends.length > 0 && user.friends.map((friend, i) => (
               <ChallengeFriendListHelper friend={friend} key={i} cuid={cuid}/>
             ))
            }
         </GridItem>
         <GridItem> 
-            <ChallengeAddFriendDoneButton 
+            <ChallengeAddFriendButton 
                 cuid={cuid}
-                user={user.uid}
+                uid={user.user.uid}
             />
         </GridItem>
     </Grid>

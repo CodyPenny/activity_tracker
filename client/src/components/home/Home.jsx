@@ -58,8 +58,8 @@ const Home = () => {
           alignItems="center"
         >
           <Avatar
-            name={user && user.user.displayName}
-            src={user && user.user.photoURL}
+            name={user.user && user.user.displayName}
+            src={user.user && user.user.photoURL}
             size={avatarSize}
             cursor="pointer"
             onClick={openEditAccountPage}

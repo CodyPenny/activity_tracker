@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../providers/UsersProvider.jsx';
+import React from 'react'
 import { Flex, HStack, Button, Box, Input, Textarea, Text, Slider, SliderTrack, SliderFilledTrack, SliderThumb, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, useToast } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
@@ -8,7 +7,6 @@ import { createChallenge } from '../../firebase/challenge';
 
 
 const ChallangeForm = ({}) => {
-  const user = useContext(UserContext);
   let navigate = useNavigate();
   const toast = useToast();
 
@@ -20,6 +18,7 @@ const ChallangeForm = ({}) => {
         onSubmit= { async ( data, { resetForm }) => {
             try {
                 const cuid = await createChallenge( data )
+                console.log('cuid returned', cuid)
                 resetForm()
                 navigate(`/challengeAddFriends/${cuid}`)
             } catch (error) {

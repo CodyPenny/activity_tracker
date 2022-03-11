@@ -14,7 +14,9 @@ export const createChallenge = async ( criteria ) => {
   try {
     criteria.uid = cuid
     const c_ref = getRef("challenges", cuid)
+    console.log('creating challenge', criteria)
     await set( c_ref, criteria )
+    
     return cuid
     
   } catch (error) {
