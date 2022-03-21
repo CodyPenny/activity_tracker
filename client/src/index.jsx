@@ -21,12 +21,22 @@ const theme = extendTheme({
   },
   colors: {
     brand: {
-      100: "#BEEBE9", //blue
+      // 100: "#BEEBE9", //blue
+      // 200: "#f7fafc", //off-white
+      // 300: "#FFB6BA", //pink
+      // 400: "#FF6161", //tomato
+      // 500: "#F7EEC7", //pastel yellow
+      // 600: "#d2f1f0", // lighter blue
+      // 700: "#97dfdc", // darker blue
+      // 800: '#36454F', // dark gray
+      100: "#9ADCFF", //blue,
+      110: "#7C99AC", // lt grey blue
+      120: "#476072", // darker grey blue
       200: "#f7fafc", //off-white
-      300: "#FFB6BA", //pink
+      300: "#FF8AAE", //pink
+      310: "#FFB2A6", //peach
       400: "#FF6161", //tomato
-      500: "#F7EEC7", //pastel yellow
-      600: "#d2f1f0", // lighter blue
+      500: "#FFF89A", //pastel yellow
       700: "#97dfdc", // darker blue
       800: '#36454F', // dark gray
       // // ...

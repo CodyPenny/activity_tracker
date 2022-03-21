@@ -55,6 +55,7 @@ const Register = () => {
                 data.password,
                );
               user.displayName = data.displayName
+              // create the user in the db
               await createUserProfileDocument( user );
               resetForm();
               navigate('/home')

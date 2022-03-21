@@ -12,7 +12,7 @@ import { auth, provider } from ".";
  await signInWithEmailAndPassword(auth, email, password);
 
  /**
- * Authenticates with Firebase
+ * Authenticates with Firebase and creates a new user in FireBase
  * Stores the token in session storage
  * @param {*} email 
  * @param {*} password 

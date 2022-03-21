@@ -1,5 +1,5 @@
 import React from 'react';
-import { useField, Field } from 'formik';
+import { useField, Field, FastField } from 'formik';
 import { Input, FormControl, FormErrorMessage, Box } from '@chakra-ui/react';
 
 const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
@@ -8,7 +8,7 @@ const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
   const errorText = meta.error && meta.touched ? meta.error : '';
 
   return (
-    <Field name={field.name} validate={callback}>
+    <FastField name={field.name} validate={callback}>
       {({ form }) => {
         return (
           <FormControl
@@ -23,12 +23,13 @@ const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
               {...field}
               isInvalid={!!errorText}
               bg={props.bg && props.bg}
+              size={props.size}
             />
             <FormErrorMessage>{form.errors[field.name]}</FormErrorMessage>
           </FormControl>
         );
       }}
-    </Field>
+    </FastField>
   );
 };
 

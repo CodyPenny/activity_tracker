@@ -33,7 +33,7 @@ const Home = () => {
     console.log('test in Home',  user)
     let authToken = sessionStorage.getItem('Auth Token')
 
-    if (authToken) {
+    if (authToken && user.user) {
         navigate('/home')
     }
 
