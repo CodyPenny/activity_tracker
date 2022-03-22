@@ -23,15 +23,6 @@ const Login = () => {
         ml="auto"
         mr="auto"
      >
-        {/* <Image
-          rounded="full"
-          //size="50px"
-          src="https://mvp2020.s3-us-west-1.amazonaws.com/enter.png"
-          ml="auto"
-          mr="auto"
-          mt="5%"
-          width="20%"
-        /> */}
         <Flex 
         flexDir="column" 
         //justifyContent="center"
@@ -124,15 +115,11 @@ const Login = () => {
                 onClick={signInWithGoogle}
                 color="white"
                 w="100%"
-                //h="40px"
-                //variant="outline"
                 mb="10%"
                 p="1.5rem"
-                //size="xl"
                 fontSize="2.5rem"
                 border="2px solid white"
                 icon={<FcGoogle />}
-                //color="#373737"
                 _hover={{ bg: 'brand.500' }}
                 _focus={{ boxShadow: 'outline' }}
               >
@@ -154,42 +141,7 @@ const Login = () => {
           </Link>
         </Text>
       </Flex>
-        {/* <Flex align="center" pl="10%" pr="10%" justifyContent="space-between"> */}
-          {/* <Link to="/reset" style={{ textDecoration: 'none' }}>
-            <Button
-              bg="#F7EEC7"
-              pt="10px"
-              pb="10px"
-              rounded="20px"
-              fontWeight="semibold"
-              color="white"
-              w="100%"
-              h="40px"
-              color="#747474"
-              _hover={{ bg: '#FF5454' }}
-              _focus={{ boxShadow: 'outline' }}
-            >
-              Forgot Password
-            </Button>
-          </Link> */}
-          {/* <Link to="/" style={{ textDecoration: 'none' }}>
-            <Button
-              bg="#F7EEC7"
-              pt="10px"
-              pb="10px"
-              rounded="15px"
-              fontWeight="semibold"
-              color="white"
-              w="100%"
-              h="40px"
-              color="#747474"
-              _hover={{ bg: '#FF5454' }}
-              _focus={{ boxShadow: 'outline' }}
-            >
-              Cancel
-            </Button>
-          </Link>
-        </Flex> */}
+       
       </GridItem>
      
    

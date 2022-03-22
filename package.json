@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --watch",
+    "dev": "webpack serve --config ./webpack.config.js",
     "start": "nodemon server/index.js"
   },
   "dependencies": {
@@ -19,6 +19,9 @@
     "firebase": "^9.4.1",
     "formik": "^2.1.4",
     "framer-motion": "^6.2.8",
+    "html-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "portfinder-sync": "0.0.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-icons": "^4.3.1",
@@ -40,6 +43,7 @@
     "dotenv-webpack": "^7.1.0",
     "nodemon": "^2.0.15",
     "webpack": "^5.69.1",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }
