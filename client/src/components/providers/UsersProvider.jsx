@@ -80,7 +80,7 @@ class UsersProvider extends Component {
                 sessionStorage.setItem('Auth Token', user.accessToken)
                 this.getUserData( user.uid )
                 this.getFriends( user.uid )
-                this.getChallenges( user.uid )
+                //this.getChallenges( user.uid )
           
             } else {
             // user is signed out

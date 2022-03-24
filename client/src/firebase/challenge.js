@@ -179,12 +179,20 @@ export const getChallengeMemberCount = async ( cuid ) => {
   let count = 0;
   try {
     const c_u_ref = getRef("challenges-user", cuid)
-      onValue( c_u_ref, ( members ) => {
+    const members = await get( c_u_ref );
        members.forEach( doc => { 
          count++ 
         })
-      })
-    return count
+        return count
+   
+    // onValue( c_u_ref, ( members ) => {
+    //   members.forEach( doc => { 
+    //     count++ 
+    //     console.log('doc', doc.val(), count)
+    //   })
+    //   console.log('the total member count', count)
+    //   return count
+    // })
     
   } catch (error) {
     console.error('getChallengeMemberCount error:', error)

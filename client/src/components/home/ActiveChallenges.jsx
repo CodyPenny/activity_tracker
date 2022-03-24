@@ -5,6 +5,8 @@ import { limitToFirst, query, get } from "firebase/database";
 import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
 import { Flex, Center, Button } from '@chakra-ui/react'
+import { getRef } from '../../firebase';
+import { onValue } from 'firebase/database';
 
 const ActiveChallenges = () => {
   const user  = useContext(UserContext)
@@ -22,7 +24,9 @@ const ActiveChallenges = () => {
   const updateChallenges = async ( uid ) => {
     const challenge_keys = [] 
     try {
+        // gets all the challenges for this user
         const u_c_ref = getUserChallengeCollection( uid )
+
         const snapshot= await get( query( u_c_ref, limitToFirst(8)))
 
         snapshot.forEach( doc => {
@@ -52,11 +56,11 @@ const ActiveChallenges = () => {
   }
 
 
-  // useEffect( () => {
-  //     // if (user.user) {
-  //     //  updateChallenges(user.user.uid)
-  //     // }
-  // }, [])
+  useEffect( () => {
+      if (user.user) {
+       updateChallenges(user.user.uid)
+      }
+  }, [])
 
   return (
     <Flex
@@ -92,7 +96,7 @@ const ActiveChallenges = () => {
           overflowY="auto"
           //visibility={showSpinner ? "hidden" : "visible"}
         >
-            { user.challenges.map((item, i) => (
+            { challenges.map((item, i) => (
                 <ActiveChallengeItem 
                     key={i}
                     data={item}

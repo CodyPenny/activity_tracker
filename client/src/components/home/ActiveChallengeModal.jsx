@@ -11,6 +11,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data}) => {
   const [ players, setPlayers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(false)
   const [ isAdded, setIsAdded ] = useState(false)
+  const [ isDone, setIsDone ] = useState(false)
 
   console.log("the data coming thru modal ", data)
 
@@ -36,7 +37,10 @@ const ActiveChallengeModal = ({isOpen, onClose, data}) => {
 
   useEffect(() => {
     getPlayers()
-  }, [])
+    if(data.completed){
+      console.log('challenge is completed')
+    }
+  }, [data])
 
   return (
       <>
