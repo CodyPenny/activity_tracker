@@ -17,7 +17,9 @@ const ChallangeForm = ({}) => {
         validationSchema={challengeValid}
         onSubmit= { async ( data, { resetForm }) => {
             try {
-                data.duration = Number(data.duration)
+                data.duration = Number(data.duration);
+                data.completed = false;
+                data.winner = '';
                 const cuid = await createChallenge( data )
                 console.log('cuid returned', cuid)
                 resetForm()
