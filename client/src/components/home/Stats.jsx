@@ -27,7 +27,7 @@ const Stats = () => {
   return (
     <Flex
         justifyContent="space-between"
-        fontSize={['sm', 'lg']}
+        fontSize={['sm', 'md']}
         fontWeight="500"
     >
         {userStats.map( (stat, i) => (

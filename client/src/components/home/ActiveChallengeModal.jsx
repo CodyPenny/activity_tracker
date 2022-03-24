@@ -1,30 +1,114 @@
-import React from 'react'
-import { Modal,ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, } from '@chakra-ui/react'
+import React, { useState, useEffect, useContext } from 'react'
+import { Modal,ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Flex, Text, Divider, IconButton } from '@chakra-ui/react'
+import { getStreakToChallenges, addStreakToChallenge } from '../../firebase/challenge'
+import Player from '../player/Player'
+import { FiPlus, FiCheck } from "react-icons/fi";
+import { UserContext } from '../providers/UsersProvider'
 
-const ActiveChallengeModal = ({isOpen, onClose, onOpen}) => {
+const ActiveChallengeModal = ({isOpen, onClose, data}) => {
+  const user  = useContext(UserContext)
+  const [ challenges, setChallenges ] = useState({})
+  const [ players, setPlayers ] = useState([])
+  const [ isLoading, setIsLoading ] = useState(false)
+  const [ isAdded, setIsAdded ] = useState(false)
+
+  console.log("the data coming thru modal ", data)
+
+  const getPlayers = async () => {
+    const participants = await getStreakToChallenges(data.uid)
+    if(participants){
+      setPlayers([...participants])
+    }
+  }
+
+  const addStreak = async () => {
+    setIsLoading(true)
+    await addStreakToChallenge( data.uid, user.user.uid, data.duration )
+    getPlayers()
+    setIsAdded(true)
+    setIsLoading(false)
+  }
+
+  const exitModal = () => {
+    setIsAdded(false)
+    onClose()
+  }
+
+  useEffect(() => {
+    getPlayers()
+  }, [])
+
   return (
       <>
         <Modal 
           isOpen={isOpen} 
-          onClose={onClose} 
+          onClose={exitModal} 
           isCentered
           motionPreset='slideInBottom'
           size="sm"
+          alignItems="center"
         >
           <ModalOverlay />
-            <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalContent
+              textAlign="center"
+            >
+            <ModalHeader>Challenge - {data ? data.name : ''}</ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
-                {/* <Lorem count={2} /> */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil optio ipsa voluptatum repellendus doloribus corporis laboriosam laudantium perferendis cum aspernatur consequuntur vel illo est molestias iure sapiente, sit cumque. Reprehenderit.
+            <ModalBody
+              width="100%"
+            >
+              <Flex
+                flexDir="column"
+                textAlign="center"
+                minH="200px"
+              >
+                <Text
+                  bg="brand.510"
+                  p=".5rem"
+                  rounded="10px"
+                >{data ? data.task : ''}</Text>
+                <Flex
+                  justifyContent="space-around"
+                  mt=".5rem"
+                  fontWeight="500"
+                >
+                  <Text>Participants</Text>
+                  <Text>Streaks</Text>
+                </Flex>
+                <Divider p=".5rem"/>
+                {
+                  players.length > 0 && players.map(
+                    (player, i) => (
+                      <Player 
+                        data={player}
+                        key={i}
+                        i={i}
+                        duration={data.duration}
+                      />
+                    )
+                  )
+                }
+              </Flex>
+              <Flex
+                bg="brand.310"
+                justifyContent="space-around"
+                p="1rem"
+                alignItems="center"
+                rounded="10px"
+              >
+                <Text color="brand.200">Add Streak</Text>
+                <IconButton
+                  icon={isAdded ? <FiCheck /> : <FiPlus />}
+                  onClick={addStreak}
+                  isLoading={isLoading}
+                />
+              </Flex>
             </ModalBody>
 
             <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={onClose}>
+                <Button colorScheme='blue' mr={3} onClick={exitModal}>
                 Close
                 </Button>
-                <Button variant='ghost'>Secondary Action</Button>
             </ModalFooter>
            </ModalContent>
         </Modal>

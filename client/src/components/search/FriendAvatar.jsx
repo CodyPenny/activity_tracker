@@ -12,7 +12,7 @@ import { addFriendToUser } from '../../firebase/friend.js';
 const FriendAvatar = ({name, photoURL, uid}) => {
     const user = useContext(UserContext);
     const [showConfirmation, setShowConfirmation ] = useState(false)
-    const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
+    const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })
     
     const addFriend = async () => {
         console.log('fid', uid)

@@ -61,16 +61,17 @@ const ActiveChallenges = () => {
   return (
     <Flex
       flexDir="column"
-      bg="brand.700"
+      bg="brand.140"
       p="1rem"
       rounded="10px"
       overflowY="hidden"
       fontSize={['md', 'xl']}
       position="relative"
+      height="100%"
     >
         <Center
-          p="1rem"
-          fontSize={["md", "xl"]}
+          pb="1rem"
+          fontSize={["md", "lg"]}
           fontWeight="600"
         >
             Active Challenges
@@ -78,7 +79,7 @@ const ActiveChallenges = () => {
         <Flex
           justifyContent="space-around"
           fontWeight="500"
-          fontSize={["sm", "lg"]}
+          fontSize={["sm", "md"]}
           mb=".5rem"
         >
             {["Challenge", "Members", "Duration"].map((title, i) => (

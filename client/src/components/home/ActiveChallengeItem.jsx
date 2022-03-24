@@ -7,11 +7,11 @@ const ActiveChallengeItem = ({data}) => {
 
   return (
     <Button
+      height={['2.5rem', '3rem']}
       onClick={() => {
         console.log('data ', data)
         onOpen()
-      }
-      }
+      }}
     >
       <SimpleGrid
         columns="3"
@@ -26,9 +26,10 @@ const ActiveChallengeItem = ({data}) => {
           <Box textAlign="right">{data.duration} day(s)</Box>
       </SimpleGrid>
       <ActiveChallengeModal 
-        onOpen={onOpen}
+        //onOpen={onOpen}
         onClose={onClose}
         isOpen={isOpen}
+        data={data}
       />
     </Button>
   )

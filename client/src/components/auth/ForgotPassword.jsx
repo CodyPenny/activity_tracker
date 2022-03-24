@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordWithEmail } from '../../firebase/auth'
 
 // Chakra + Forms
-import { useToast, Flex, Text, Button, Image, Grid, GridItem } from '@chakra-ui/react';
+import { useToast, Flex, Text, Button, Image, Grid, GridItem, Box } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import ValidatorForm from '../formHelpers/ValidateForm.jsx';
 import { emailValid } from '../../helpers/formValidators';
@@ -21,18 +21,33 @@ const ForgotPassword = () => {
       <GridItem 
        pl="10%"
        pr="10%"
-       pt="18%"
+       pt="10%"
+       ml="auto"
+       mr="auto"
+       width="100%"
+       display="flex"
+       justifyContent="center"
+       flexDir="column"
+       alignItems="center"
       >
-        <Flex direction="column" align="center" justify="center">
-          <Text textAlign="center" color="#747474" mb="3%">FORGOT PASSWORD</Text>
-          <Image
-            w="300px"
-            src="https://mvp2020.s3-us-west-1.amazonaws.com/bluelock.png"
-            ml="auto"
-            mr="auto"
-            mb="20%"
-          />
-        </Flex>
+          <Text 
+            textAlign="center" 
+            color="#747474" 
+            mb="3%"
+            fontSize={["md", "xl"]}
+          >FORGOT PASSWORD</Text>
+          <Box
+            borderRadius="lg"
+            overflow='hidden'
+            width={["100%", "80%"]}
+            //bg="#bbebeb"
+          >
+            <Image
+              w="100%"
+              src="https://mvp2020.s3-us-west-1.amazonaws.com/bluelock.png"
+              mb="20%"
+            />
+          </Box>
       </GridItem>
       <GridItem
         pl="10%" 
@@ -59,13 +74,16 @@ const ForgotPassword = () => {
         >
           {({ values, isSubmitting }) => (
             <Form>
+              <Flex
+                flexDir="column"
+                //gap="5%"
+              >
                 <ValidatorForm
                   placeholder="Enter Email Address"
                   name="email"
                   value={values.email}
                   type="input"
                 />
-
                 <Button
                   bg="#FFB6BA"
                   rounded="20px"
@@ -73,31 +91,31 @@ const ForgotPassword = () => {
                   isDisabled={isSubmitting}
                   isLoading={isSubmitting}
                   type="submit"
-                  color="white"
                   w="100%"
-                  h="40px"
+                  height={['2.5rem', '3rem']}
                   mt="15%"
                   color="#373737"
+                  fontSize={["md", "xl"]}
                   _hover={{ bg: '#FFB6BA' }}
                   _focus={{ boxShadow: 'outline' }}
                 >
                   Reset Password
                 </Button>
-
                 <Button
                   as={Link}
                   to="/login"
                   align="center"
                   w="100%"
-                  h="40px"
-                  mt="10%"
+                  height={['2.5rem', '3rem']}
+                  mt="15%"
                   bg="#F7EEC7"
                   rounded="20px"
                   mb="30%"
+                  fontSize={["md", "xl"]}
                 >
                   Cancel
                 </Button>
-            
+              </Flex>
             </Form>
           )}
         </Formik>

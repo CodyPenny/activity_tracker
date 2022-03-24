@@ -17,6 +17,7 @@ const ChallangeForm = ({}) => {
         validationSchema={challengeValid}
         onSubmit= { async ( data, { resetForm }) => {
             try {
+                data.duration = Number(data.duration)
                 const cuid = await createChallenge( data )
                 console.log('cuid returned', cuid)
                 resetForm()
@@ -44,7 +45,7 @@ const ChallangeForm = ({}) => {
                 >
                     <Box
                     borderRadius='lg'
-                    background="brand.500"
+                    background="brand.510"
                     >
                         <Input
                             placeholder='Challenge Name'
@@ -59,7 +60,7 @@ const ChallangeForm = ({}) => {
                         {errors.name && touched.name && errors.name}
                     <Box
                     borderRadius='lg'
-                    background="brand.500"
+                    background="brand.510"
                     >
                         <Textarea
                             placeholder="Enter the challenge to be completed!"
@@ -74,7 +75,7 @@ const ChallangeForm = ({}) => {
                         {errors.task && touched.task && errors.task}
                     <Box
                         borderRadius='lg'
-                        background="brand.500"
+                        background="brand.510"
                         p={["0.5rem", "1rem"]}
                     >
                         <Text>How many times should participants check in their challenge progress throughout the day?</Text>
@@ -100,7 +101,7 @@ const ChallangeForm = ({}) => {
                     </Box>
                     <HStack
                         borderRadius='lg'
-                        background="brand.500"
+                        background="brand.510"
                         p={["0.5rem", "1rem"]}
                     >
                         <Text>How many days should the challenge last?</Text>
@@ -131,7 +132,7 @@ const ChallangeForm = ({}) => {
                             to="/home"
                             background="brand.300"
                             variant="solid"
-                            rounded="20px"
+                            rounded="10px"
                             width="40%"
                             fontSize={['sm', 'lg']}
                         >
@@ -140,7 +141,7 @@ const ChallangeForm = ({}) => {
                         <Button
                             background="brand.300"
                             variant="solid"
-                            rounded="20px"
+                            rounded="10px"
                             width="40%"
                             fontSize={['sm', 'lg']}
                             isDisabled={isSubmitting}

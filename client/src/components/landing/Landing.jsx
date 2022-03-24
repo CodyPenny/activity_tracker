@@ -1,102 +1,81 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Box, Button, Grid, GridItem, Heading, Flex, Text, IconButton } from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem, Heading, Flex, Text, IconButton, Image } from '@chakra-ui/react';
 import { FiArrowRight } from "react-icons/fi";
+import art from '../../../static/streak2.jpg'
 
 const Landing = () => {
 
   return (
-    // <Box
-    //     top="0"
-    //     bg="brand.100"
-    //     pos="relative"
-    //     height="100%"
-    //  >
-    //      <Box 
-    //     boxSize="sm" 
-    //     background="#FFFFFF"
-    //     />
-    //         <Box
-    //         w="100%"
-    //         pos="absolute"
-    //         bottom="0"
-    //         textAlign="center"
-    //         mb="5%"
-    //         >
-    //          <Link to="/login" style={{ width: '80%' }}>
-    //              <Box
-    //              as={Button}
-    //              rounded="20px"
-    //              background="brand.300"
-    //              color="#373737"
-    //              width="90%"
-    //              height="40px"
-    //              marginTop="5%"
-    //              marginBottom="10%"
-    //              fontWeight="semibold"
-    //              textAlign="center"
-    //              _hover={{ bg: '#FFB6BA' }}
-    //              _focus={{ boxShadow: 'outline' }}
-    //              >
-    //                  Log In
-    //              </Box>
-    //          </Link>
-    //          <Link to="/register" style={{ width: '80%' }}>
-    //              <Box
-    //              as={Button}
-    //              background="brand.300"
-    //              color="#373737"
-    //              rounded="20px"
-    //              width="90%"
-    //              height="40px"
-    //              marginBottom="10%"
-    //              fontWeight="semibold"
-    //              _hover={{ bg: '#FFB6BA' }}
-    //              _focus={{ boxShadow: 'outline' }}
-    //              >
-    //              Register
-    //              </Box>
-    //          </Link>
-    //      </Box>
-    // </Box>
     <Grid
     h='100%'
     bg="brand.100"
-    templateRows='2fr 1fr'
+    templateRows='1fr 1fr'
     >
      <GridItem
-      ml="auto"
-      mr="auto"
+      // ml="auto"
+      // mr="auto"
+      // pl="10%"
+      // pr="10%"
+      width="100%"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      //pt="8%"
      >
          <Box
-          borderRadius="lg"
-          bg="brand.310"
-          height="90%"
-          width="300px"
+           borderRadius="lg"
+           overflow='hidden'
+           bg="#fff"
+           display="flex"
+           alignItems="center"
+           justifyContent="center"
+           width="80%"
+           height="80%"
          >
-
+            <Image 
+            src={art} 
+            alt="Image of characters" 
+            width="100%"
+            />
          </Box>
     </GridItem>
 
-     <GridItem
-      ml="auto"
-      mr="auto"
+    <GridItem
+      // ml="auto"
+      // mr="auto"
+      display="flex"
+      flexDir="column"
+      alignItems="center"
+      gap="8%"
+      //justifyContent="center"
+      // textAlign="center"
+      // mt={["10%", "5%"]}
      >
-         <Flex 
-            flexDir="column"
-         >
-            <Heading>Streak</Heading>
-            <Text>Challenge your friends</Text>
-            <Link to="/login">
-                <IconButton
-                fontSize="2rem"
+        <Heading 
+        fontSize={["5xl", "6xl"]} 
+        letterSpacing=".2rem"
+        >
+            Streak
+        </Heading>
+        <Text 
+            fontSize={["3xl", "4xl"]} 
+           // mt="8%"
+        >Challenge your friends
+        </Text>
+            <IconButton
+                fontSize={["2rem", "3rem"]} 
                 icon={<FiArrowRight />}
-                >
-                </IconButton>
-            </Link>
-         </Flex>
+                mt="5%"
+                width="75%"
+                bg="brand.310"
+                as={Link}
+                to="/login"
+                p={["1.5rem","2rem"]}
+                rounded="20px"
+            >
+            </IconButton>
     </GridItem>
-
     </Grid>
   )
 }

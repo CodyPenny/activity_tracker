@@ -76,7 +76,7 @@ const SearchFriends = () => {
                                 isDisabled={isSubmitting}
                                 isLoading={isSubmitting}
                                 type="submit"
-                                color="white"
+                                //color="white"
                                 // w="100%"
                                 h="40px"
                                 mt="10%"

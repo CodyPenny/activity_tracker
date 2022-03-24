@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@chakra-ui/react'
 import { addUserToChallenge } from '../../firebase/challenge'
+import { UserContext } from '../providers/UsersProvider.jsx';
 
 
 const ChallengeAddFriendButton = ({cuid, uid}) => {
   const [ inProgress, setInProgress ] = useState(false)
+  const user = useContext(UserContext);
   let navigate = useNavigate()
 
   /**
@@ -13,7 +15,7 @@ const ChallengeAddFriendButton = ({cuid, uid}) => {
    */
   const finalizeChallenge = async () => {
     setInProgress(true)
-    await addUserToChallenge( uid, cuid )
+    await addUserToChallenge( uid, cuid, user.user.displayName )
     setInProgress(false)
     navigate('/home')
   }

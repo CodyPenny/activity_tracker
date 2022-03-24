@@ -15,7 +15,7 @@ const NavButton = () => {
 
   return (
     <Box
-    bg="brand.500"
+    bg="brand.510"
     rounded="20px"
   >
         <Flex align="center" justify="center" justifyContent="space-evenly">
@@ -25,7 +25,7 @@ const NavButton = () => {
                 as={Link}
                 to="/home"
                 variant="solid"
-                bg="brand.500"
+                bg="brand.510"
                 size={iconSize}
             />
             <IconButton
@@ -34,7 +34,7 @@ const NavButton = () => {
                 as={Link}
                 to="/buildChallenge"
                 variant="solid"
-                bg="brand.500"
+                bg="brand.510"
                 size={iconSize}
             />
             <IconButton
@@ -42,7 +42,7 @@ const NavButton = () => {
                 as={Link}
                 to="/friends"
                 variant="solid"
-                bg="brand.500"
+                bg="brand.510"
                 size={iconSize}
             />
             <IconButton
@@ -50,7 +50,7 @@ const NavButton = () => {
                 as={Link}
                 to="/searchFriends"
                 variant="solid"
-                bg="brand.500"
+                bg="brand.510"
                 size={iconSize}
             />
             <IconButton
@@ -58,7 +58,7 @@ const NavButton = () => {
                 icon={<MdLogout />}
                 variant="solid"
                 onClick={sign_out}
-                bg="brand.500"
+                bg="brand.510"
                 size={iconSize}
             />
         </Flex>

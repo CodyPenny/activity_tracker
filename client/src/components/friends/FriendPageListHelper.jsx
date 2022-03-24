@@ -9,8 +9,9 @@ const FriendPageListHelper = ({ friend }) => {
       pb={[".5rem", "1rem"]}
       pl={[".5rem", "1rem"]}
       pt={[".5rem", "1rem"]}
-      backgroundColor="brand.600"
+      backgroundColor="brand.310"
       alignItems="center"
+      rounded="5px"
     >
       <Avatar 
         name={friend.displayName}
@@ -23,9 +24,9 @@ const FriendPageListHelper = ({ friend }) => {
        
       >
         <Text 
-          fontSize={["lg", "xl"]}
+          fontSize={["md", "lg"]}
           p='1rem' 
-          color='brand.400'
+          color='brand.800'
         >
           {friend.displayName}
         </Text>

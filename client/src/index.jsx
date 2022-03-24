@@ -32,11 +32,14 @@ const theme = extendTheme({
       100: "#9ADCFF", //blue,
       110: "#7C99AC", // lt grey blue
       120: "#476072", // darker grey blue
+      130: "#BEEBE9", // original pastel blue
+      140: "#56BBF1", //sky blue
       200: "#f7fafc", //off-white
       300: "#FF8AAE", //pink
       310: "#FFB2A6", //peach
       400: "#FF6161", //tomato
       500: "#FFF89A", //pastel yellow
+      510: "#F7EEC7", //lighter yellow
       700: "#97dfdc", // darker blue
       800: '#36454F', // dark gray
       // // ...

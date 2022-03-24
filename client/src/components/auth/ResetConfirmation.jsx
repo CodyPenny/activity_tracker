@@ -1,44 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiCheckCircle } from "react-icons/fi";
 
-import { Box, Flex, Text, Button, Icon } from '@chakra-ui/react';
+import { Box, Flex, Text, Button, Icon, Grid, GridItem } from '@chakra-ui/react';
 
 const ResetConfirmation = () => {
   return (
-    <Box
-      bg="#BEEBE9"
-      p={[2, 4, 6, 8]}
-      height="full"
-      width={[
-        '100%', // base
-        '50%', // 480px upwards
-        '25%', // 768px upwards
-        '15%' // 992px upwards
-      ]}
-      pl="10%" pr="10%" pt="10%"
+    <Grid
+    h='100%'
+    bg="brand.100"
+    templateRows='1fr 1fr'
     >
-      <Flex direction="column" align="center" justify="center" pt="10%">
-        <Text pt="18%" textAlign="center" color="#8B8B8B">
+      <GridItem 
+        pl="10%"
+        pr="10%"
+        display="flex"
+        flexDir="column"
+        justifyContent="center"
+        alignItems="center"
+        gap="10%"
+      >
+          <FiCheckCircle size="10%"/>
+
+        <Text 
+        textAlign="center" 
+        color="#5D5D5D"
+        fontSize={["lg", "2xl"]}
+        >
           Check your email
         </Text>
-        <Icon pt="15%" name="check-circle" size="150px" color="#F7EEC7" />
-        <Text pt="15%" pb="18%" textAlign="center" pl="5%" pr="5%" color="#5D5D5D">
-          We have sent you a reset password link.
-        </Text>
-      </Flex>
 
-      {/* <Flex direction="column" align="center" justify="center" pb="20%"> */}
+        <Text 
+         textAlign="center"
+         color="#5D5D5D"
+         fontSize={["lg", "2xl"]}
+         >
+          Reset password link sent.
+        </Text>
+      </GridItem>
+      <GridItem 
+        pl="10%"
+        pr="10%"
+      >
         <Link to="/login">
           <Button
             bg="#FFB6BA"
             rounded="20px"
             fontWeight="semibold"
-            color="white"
             w="100%"
-            h="40px"
+            //h="40px"
             color="#373737"
             _hover={{ bg: '#FFB6BA' }}
             _focus={{ boxShadow: 'outline' }}
+            fontSize={["md", "xl"]}
+            height={['2.5rem', '3rem']}
           >
             Log In
           </Button>
@@ -49,19 +64,21 @@ const ResetConfirmation = () => {
             bg="#FFB6BA"
             rounded="20px"
             fontWeight="semibold"
-            color="white"
+            //color="white"
             w="100%"
-            h="40px"
+            //h="40px"
             color="#373737"
             _hover={{ bg: '#FFB6BA' }}
             _focus={{ boxShadow: 'outline' }}
+            fontSize={["md", "xl"]}
+            height={['2.5rem', '3rem']}
           >
-            Home
+            Cancel
           </Button>
         </Link>
         <Box mb="35%"></Box>
-      {/* </Flex> */}
-    </Box>
+    </GridItem>
+    </Grid>
   );
 };
 

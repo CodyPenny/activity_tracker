@@ -10,7 +10,7 @@ const ChallengeFriendListHelper = ({ friend, cuid }) => {
 
   const clickHandler = async () => {
       setShowLoading(true)
-      await addUserToChallenge(friend.uid, cuid)
+      await addUserToChallenge(friend.uid, cuid, friend.displayName)
       setShowLoading(false)
       setShowConfirmation(true)
   }

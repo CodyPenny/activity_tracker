@@ -20,7 +20,7 @@ const BuildChallenge = () => {
                 textAlign="center" 
                 fontSize={["xl", "2xl"]}
                 color="#464646"
-                mt={["25%", "30%"]}
+                mt={["20%", "25%"]}
             >
                 Create a Challenge
             </Text>
