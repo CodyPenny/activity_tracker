@@ -96,3 +96,71 @@ export const updateUserAvatar = async ( url, uid ) => {
     console.error('updateUserAvatar:', error);
   }
 }
+
+/**
+ * Gets the user's current completed count
+ * @param {*} u_uid user's id
+ * @returns count value
+ */
+ export const getUserCompletedCount = async ( u_uid ) => {
+  try {
+    const u_ref = getRef('users', u_uid)
+    const count = await get( u_ref )
+    if(count){
+      return count.val().completed
+    }
+    return 0
+  } catch (error) {
+    console.error('getUserCompletedCount error:', error)
+  }
+}
+
+/**
+ * Gets the wins count of the user
+ * @param {*} u_uid user id
+ * @returns the wins count
+ */
+ export const getUserWinsCount = async ( u_uid ) => {
+  try {
+    const u_ref = getRef('users', u_uid)
+    const count = await get( u_ref )
+    if(count){
+      return count.val().wins
+    }
+    return 0
+  } catch (error) {
+    console.error('getUserWinsCount error:', error)
+  }
+}
+
+/**
+ * Increments the completed count of the user
+ * @param {*} u_uid user id
+ * @param {*} newVal incremented completed value
+ */
+export const setUserCompletedCount = async ( u_uid, newVal ) => {
+  try {
+    const u_ref = getRef('users', u_uid)
+    await update( u_ref, {
+      'completed': newVal
+    })
+  } catch (error) {
+    console.error('setUserCompletedCount error:', error)
+  }
+}
+
+/**
+ * Sets the wins count of the user
+ * @param {*} u_uid user id
+ * @param {*} newVal incremented win value
+ */
+export const setUserWinCount = async ( u_uid, newVal ) => {
+  try {
+    const u_ref = getRef('users', u_uid)
+    await update( u_ref, {
+      'wins': newVal
+    })
+  } catch (error) {
+    console.error('setUserWinCount error:', error)
+  }
+}

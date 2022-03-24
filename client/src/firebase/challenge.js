@@ -2,6 +2,7 @@ import { validateContextObject } from '@firebase/util';
 import { onValue, set, update, get, child } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { getRef } from '../firebase/index.js'
+import { getUserCompletedCount, getUserWinsCount, setUserCompletedCount, setUserWinCount } from './user.js';
 
 
 /**
@@ -91,7 +92,7 @@ export const getUserStreakCount = async ( cuid, uuid) => {
   try {
     const c_u_ref = getRef("challenges-user", `${cuid}/${uuid}`)
     const curr_val = await get( c_u_ref );
-    console.log('val ret', curr_val.val())
+    //console.log('val ret', curr_val.val())
     if(curr_val) {
       return curr_val.val().streak
     }
@@ -103,23 +104,71 @@ export const getUserStreakCount = async ( cuid, uuid) => {
 }
 
 /**
- * Increment streak
- * @param {*} c_uid 
- * @param {*} u_uid 
- * @param {*} newValue 
+ * Increments the streak
+ * @param {*} c_uid challenge id
+ * @param {*} u_uid user id
+ * @param {*} duration challenge duration
+ * @param {*} status  challenge's completed status
+ * @param {*} name user's name
  */
-export const addStreakToChallenge = async ( c_uid, u_uid, duration ) => {
+export const addStreakToChallenge = async ( c_uid, u_uid, duration, status, name ) => {
   try {
     const path_str = `${c_uid}/${u_uid}`;
     const c_u_ref = getRef("challenges-user", path_str)
     let val = await getUserStreakCount( c_uid, u_uid )
-    await update( c_u_ref, {'streak': val + 1})
-    // add conditional for completed and wins
+    let incremented = val + 1
+    // increment does not exceed duration points
+    if(incremented <= duration){
+      await update( c_u_ref, {'streak': incremented})
+    }
+
+    // challenge is completed
+    if(incremented === duration){
+      if(!status){
+        // we have a winner
+        await setWinnerToChallenge( c_uid, u_uid, name )
+        return
+      } 
+      // update just completed, already a winner
+      let curr_completed = await getUserCompletedCount( u_uid )
+      await setUserCompletedCount( u_uid, curr_completed + 1 )
+    }
 
   } catch (error) {
     console.error('addStreakToChallenge error:', error)
   }
 }
+
+/**
+ * Sets the winner of the challenge
+ * Updates the user's and challenge's profile
+ * @param {*} c_uid challenge id
+ * @param {*} u_uid user id
+ * @param {*} name user's display name
+ */
+export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
+  console.log('setting winner to challenge')
+  try {
+    const c_ref = getRef('challenges', c_uid)
+    await update( c_ref, {
+      'completed': true,
+      'winner': name
+    })
+    // also update the user's completed stats wins and completed
+    let curr_completed = await getUserCompletedCount( u_uid )
+    console.log('curr completed', curr_completed)
+    await setUserCompletedCount( u_uid, curr_completed + 1 )
+    let curr_wins = await getUserWinsCount( u_uid )
+    console.log('wins count', curr_wins)
+    await setUserWinCount( u_uid, curr_wins + 1 )
+
+
+  } catch (error) {
+    console.error('setWinnerToChallenge error:', error)
+  }
+}
+
+
 
 
 /**

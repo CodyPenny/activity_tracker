@@ -23,7 +23,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data}) => {
 
   const addStreak = async () => {
     setIsLoading(true)
-    await addStreakToChallenge( data.uid, user.user.uid, data.duration )
+    await addStreakToChallenge( data.uid, user.user.uid, data.duration, data.completed, user.user.displayName )
     getPlayers()
     setIsAdded(true)
     setIsLoading(false)
