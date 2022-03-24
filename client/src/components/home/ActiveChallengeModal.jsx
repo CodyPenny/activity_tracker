@@ -5,7 +5,7 @@ import Player from '../player/Player'
 import { FiPlus, FiCheck } from "react-icons/fi";
 import { UserContext } from '../providers/UsersProvider'
 
-const ActiveChallengeModal = ({isOpen, onClose, data}) => {
+const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
   const user  = useContext(UserContext)
   const [ challenges, setChallenges ] = useState({})
   const [ players, setPlayers ] = useState([])
@@ -25,6 +25,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data}) => {
   const addStreak = async () => {
     setIsLoading(true)
     await addStreakToChallenge( data.uid, user.user.uid, data.duration, data.completed, user.user.displayName )
+    updateChallenges(user.user.uid)
     getPlayers()
     setIsAdded(true)
     setIsLoading(false)
@@ -93,6 +94,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data}) => {
                   )
                 }
               </Flex>
+              
               <Flex
                 bg="brand.310"
                 justifyContent="space-around"
@@ -106,6 +108,18 @@ const ActiveChallengeModal = ({isOpen, onClose, data}) => {
                   onClick={addStreak}
                   isLoading={isLoading}
                 />
+              </Flex>
+              <Flex
+                justifyContent="center"
+                bg="brand.130"
+                rounded="10px"
+                p=".5rem"
+                mt="1rem"
+              >
+                <Text>
+                  {data.winner ? "Winner: " : "Status: "}
+                  {data.winner ? data.winner : "Active"}
+                </Text>
               </Flex>
             </ModalBody>
 

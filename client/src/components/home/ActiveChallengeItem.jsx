@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, SimpleGrid, Button, useDisclosure } from '@chakra-ui/react'
 import ActiveChallengeModal from './ActiveChallengeModal'
 
-const ActiveChallengeItem = ({data}) => {
+const ActiveChallengeItem = ({data, updateChallenges}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -30,6 +30,7 @@ const ActiveChallengeItem = ({data}) => {
         onClose={onClose}
         isOpen={isOpen}
         data={data}
+        updateChallenges={updateChallenges}
       />
     </Button>
   )

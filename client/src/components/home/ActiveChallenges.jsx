@@ -5,8 +5,6 @@ import { limitToFirst, query, get } from "firebase/database";
 import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
 import { Flex, Center, Button } from '@chakra-ui/react'
-import { getRef } from '../../firebase';
-import { onValue } from 'firebase/database';
 
 const ActiveChallenges = () => {
   const user  = useContext(UserContext)
@@ -100,6 +98,7 @@ const ActiveChallenges = () => {
                 <ActiveChallengeItem 
                     key={i}
                     data={item}
+                    updateChallenges={updateChallenges}
                 />
             ))}
         </Flex>

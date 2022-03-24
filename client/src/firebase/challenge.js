@@ -126,6 +126,7 @@ export const addStreakToChallenge = async ( c_uid, u_uid, duration, status, name
     if(incremented === duration){
       if(!status){
         // we have a winner
+        console.log('we have a winner')
         await setWinnerToChallenge( c_uid, u_uid, name )
         return
       } 
@@ -173,6 +174,7 @@ export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
 
 /**
  * Looks up the participant count for a challenge
+ * Using onValue method does not return a promise but undefined, async await also does not work, throws error
  * @param {*} cuid challenge uid
  */
 export const getChallengeMemberCount = async ( cuid ) => {
