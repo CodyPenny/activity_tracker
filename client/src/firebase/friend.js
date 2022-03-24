@@ -1,41 +1,47 @@
 import { getRef, performUpdate, getCollection, getDocsAsAList, db } from '../firebase/index.js'
 import { query, ref, orderByChild, orderByKey, get, startAt, endAt, limitToFirst, set, onValue, update } from "firebase/database";
 import { resetPasswordWithEmail } from './auth.js';
+import { getUser } from './user.js';
 
 
+/**
+ * Get default friends for search friends page less self and friends already added
+ * @param {*} u_uid user uid
+ */
+export const getDefaultFriends = async ( u_uid ) => {
+  const friends = [];
+  const defaults = ['9axfWVP9tGPM0ojhqGIq2ytd18l2', 'DtDkNYyJYNZdT5o4wUmgBBnvh3I2', 'KGOsPZBVdnQWNPEMX95cPkHThN82', 'XSfkuy1YqoRupDcq7Cm0bf2T34w1', 'YOqcYN5EAwTfAKvfg6flpg056TF3', 'ZSYD5pogOQO0SLZaJeEfzv0wTqZ2', 'qHmVFdBIi7Oj4LbFwlccsJSleea2', 's9T3AobqH2bsMWPoTdojire6Wm22']
+  let i = 0
+  while(i < defaults.length){
+    if( ( defaults[i] !== u_uid ) && ( await isUserFriend(u_uid, defaults[i]) === null ) ){
+      //console.log('adding to friends')
+      let friend = await getUser( defaults[i] )
+      friends.push(friend)
+    }
+    i++
+    if(friends.length > 2){
+      break;
+    }
+  }
+  //console.log('i', i)
+  return friends
+}
 
-// export const addFriend = async (UID, friendUID) => {
-//     if (!UID || !friendUID) return null;
-  
-//     const uRef = getRef('users', UID);
-//     const fRef = getRef('users', friendUID);
-  
-//     try {
-//       const fDoc = await fRef.get();
-  
-//       if (fDoc.exists) {
-//         const uDoc = await uRef.get();
-//         const userUpdates = {
-//           friends: { ...{ [friendUID]: 1 }, ...uDoc.data().friends }
-//         };
-//         const friendUpdates = {
-//           friends: { ...{ [UID]: 1 }, ...fDoc.data().friends }
-//         };
-  
-//         await Promise.all([
-//           performUpdate(uRef, userUpdates),
-//           performUpdate(fRef, friendUpdates)
-//         ]);
-  
-//         return fDoc.data().displayName;
-//       }
-  
-//       return false;
-//     } catch (error) {
-//       console.error('addFriend Error:', error);
-//       return 'addFriend Error';
-//     }
-//   };
+/**
+ * Returns null if friend id exists in user's friend list
+ * @param {*} u_uid user id
+ * @param {*} f_uid friend id
+ */
+export const isUserFriend = async ( u_uid, f_uid ) => {
+  try {
+    let friend_ref = getRef(`friends/${u_uid}`, f_uid )
+    let res = await get( friend_ref )
+    //console.log('res in isUserFriend for ', f_uid, '-', res.val())
+    return res.val()
+  } catch (error) {
+    console.error("isUserFriend Error", error)
+  }
+}
 
 /**
  * Adds friend uid to the user uid on a joint collection
@@ -72,11 +78,6 @@ import { resetPasswordWithEmail } from './auth.js';
     } )
    
     return results
-
-   // const q = query(friend_Ref, where("displayName", "startAt", text));
-   // const snapshot = await getDocs(q);
-    //return snapshot.docs.map(doc => doc.data());
-
   }
 
 

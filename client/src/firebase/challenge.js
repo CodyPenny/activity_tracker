@@ -150,7 +150,7 @@ export const addStreakToChallenge = async ( c_uid, u_uid, duration, status, name
  * @param {*} name user's display name
  */
 export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
-  console.log('setting winner to challenge')
+  //console.log('setting winner to challenge')
   try {
     const c_ref = getRef('challenges', c_uid)
     await update( c_ref, {
@@ -159,10 +159,10 @@ export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
     })
     // also update the user's completed stats wins and completed
     let curr_completed = await getUserCompletedCount( u_uid )
-    console.log('curr completed', curr_completed)
+    //console.log('curr completed', curr_completed)
     await setUserCompletedCount( u_uid, curr_completed + 1 )
     let curr_wins = await getUserWinsCount( u_uid )
-    console.log('wins count', curr_wins)
+    //console.log('wins count', curr_wins)
     await setUserWinCount( u_uid, curr_wins + 1 )
 
 

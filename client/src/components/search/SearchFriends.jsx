@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../providers/UsersProvider.jsx';
 import { Formik, Form,  } from 'formik';
 import { validateSearchFriend } from '../../helpers/formValidators';
 import { Grid, GridItem, Button, useToast } from '@chakra-ui/react';
@@ -6,16 +7,18 @@ import ValidateForm from '../formHelpers/ValidateForm.jsx';
 import SearchFriendList from './SearchFriendList';
 import NavButton from '../home/NavButton';
 import { getUser } from '../../firebase/user';
-import { searchMatchingFriends } from '../../firebase/friend';
+import { getDefaultFriends, searchMatchingFriends } from '../../firebase/friend';
 
 const SearchFriends = () => {
     const [ friendResults, setFriendResults ] = useState([])
+    const user = useContext(UserContext);
     const toast = useToast();
 
     const getFriends = async () => {
         // adds user-1, oreo
-        let defaultFriend = await getUser('DtDkNYyJYNZdT5o4wUmgBBnvh3I2')
-        setFriendResults([...friendResults, defaultFriend])
+        // let defaultFriend = await getUser('DtDkNYyJYNZdT5o4wUmgBBnvh3I2')
+        let defaults = await getDefaultFriends( user.user.uid )
+        setFriendResults([...defaults])
     }
 
     useEffect( () => {

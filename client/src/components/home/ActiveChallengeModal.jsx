@@ -46,9 +46,8 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
 
   useEffect(() => {
     getPlayers()
-    if(data.completed){
-      console.log('challenge is completed')
-    }
+    getOwnStat()
+
   }, [])
 
   return (
