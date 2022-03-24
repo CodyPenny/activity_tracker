@@ -63,7 +63,7 @@ const challengeValid = yup.object().shape({
     .string()
     .required("A challenge task is required")
     .test(errorHTML, errorHTML, (value) => !containsHTML(value))
-    .max(200, "Let's keep it shorter and bring it down to no more than 200 chars.")
+    .max(30, "Let's keep it shorter and bring it down to no more than 30 chars.")
 
 })
 

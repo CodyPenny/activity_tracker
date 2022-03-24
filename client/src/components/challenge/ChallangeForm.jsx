@@ -21,7 +21,6 @@ const ChallangeForm = ({}) => {
                 data.completed = false;
                 data.winner = '';
                 const cuid = await createChallenge( data )
-                console.log('cuid returned', cuid)
                 resetForm()
                 navigate(`/challengeAddFriends/${cuid}`)
             } catch (error) {
