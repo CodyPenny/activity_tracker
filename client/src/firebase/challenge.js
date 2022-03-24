@@ -140,6 +140,8 @@ export const addStreakToChallenge = async ( c_uid, u_uid, duration, status, name
   }
 }
 
+
+
 /**
  * Sets the winner of the challenge
  * Updates the user's and challenge's profile

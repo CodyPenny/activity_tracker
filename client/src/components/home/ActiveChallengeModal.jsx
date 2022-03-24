@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Modal,ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Flex, Text, Divider, IconButton } from '@chakra-ui/react'
-import { getStreakToChallenges, addStreakToChallenge } from '../../firebase/challenge'
+import { getStreakToChallenges, addStreakToChallenge, getUserStreakCount } from '../../firebase/challenge'
 import Player from '../player/Player'
 import { FiPlus, FiCheck } from "react-icons/fi";
 import { UserContext } from '../providers/UsersProvider'
@@ -12,6 +12,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
   const [ isLoading, setIsLoading ] = useState(false)
   const [ isAdded, setIsAdded ] = useState(false)
   const [ isDone, setIsDone ] = useState(false)
+  const [ ownStat, setOwnStat ] = useState(0)
 
   console.log("the data coming thru modal ", data)
 
@@ -22,10 +23,17 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
     }
   }
 
+  const getOwnStat = async () => {
+    let val = await getUserStreakCount( data.uid, user.user.uid );
+    console.log('the stat val', val)
+    setOwnStat(val)
+  }
+
   const addStreak = async () => {
     setIsLoading(true)
     await addStreakToChallenge( data.uid, user.user.uid, data.duration, data.completed, user.user.displayName )
     updateChallenges(user.user.uid)
+    getOwnStat()
     getPlayers()
     setIsAdded(true)
     setIsLoading(false)
@@ -41,7 +49,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
     if(data.completed){
       console.log('challenge is completed')
     }
-  }, [data])
+  }, [])
 
   return (
       <>
@@ -94,8 +102,8 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
                   )
                 }
               </Flex>
-              
-              <Flex
+              { ownStat < data.duration ? (
+                <Flex
                 bg="brand.310"
                 justifyContent="space-around"
                 p="1rem"
@@ -109,6 +117,12 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
                   isLoading={isLoading}
                 />
               </Flex>
+
+              ) :
+                <>
+                <Text>Completed</Text>
+                </>
+              }
               <Flex
                 justifyContent="center"
                 bg="brand.130"
