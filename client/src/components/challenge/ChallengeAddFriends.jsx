@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../providers/UsersProvider.jsx';
+import { useNavigate } from 'react-router-dom';
 import { Grid, GridItem, Text } from '@chakra-ui/react'
 import { useParams } from 'react-router'
 import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
@@ -7,8 +8,22 @@ import ChallengeAddFriendButton from './ChallengeAddFriendButton.jsx';
 
 const ChallengeAddFriends = () => {
   const user = useContext(UserContext);
+  let navigate = useNavigate();
   let { cuid } = useParams();
-    console.log('user in challenge add friends', user)
+    //console.log('user in challenge add friends', user)
+
+    useEffect(() => {
+        let authToken = sessionStorage.getItem('Auth Token')
+
+        if (authToken && user.user) {
+            navigate('challengeAddFriends/:cuid')
+        }
+
+        if (!authToken) {
+            navigate('/login')
+        }
+    }, [])
+
   return (
     <Grid
         h='100%'

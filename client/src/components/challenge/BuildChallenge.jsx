@@ -1,8 +1,24 @@
-import React, { useState } from 'react' 
+import React, { useEffect, useContext } from 'react' 
 import { Grid, GridItem, Text } from '@chakra-ui/react'
 import ChallangeForm from './ChallangeForm'
+import { UserContext } from '../providers/UsersProvider.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const BuildChallenge = () => {
+  const user = useContext(UserContext);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    let authToken = sessionStorage.getItem('Auth Token')
+
+    if (authToken && user.user) {
+        navigate('/buildChallenge')
+    }
+
+    if (!authToken) {
+        navigate('/login')
+    }
+  }, [])
 
   return (
     <Grid

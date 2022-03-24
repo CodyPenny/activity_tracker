@@ -54,7 +54,9 @@ const Login = () => {
               // if invalid, throws error in catch
               console.log('res from signing in', res)
               resetForm();
-              navigate('/home')
+              if(res.user.accessToken){
+                navigate('/home')
+              }
             } catch (error) {
               toast({
                 title: 'An error occurred.',

@@ -8,21 +8,29 @@ import SearchFriendList from './SearchFriendList';
 import NavButton from '../home/NavButton';
 import { getUser } from '../../firebase/user';
 import { getDefaultFriends, searchMatchingFriends } from '../../firebase/friend';
+import { useNavigate } from 'react-router-dom';
 
 const SearchFriends = () => {
     const [ friendResults, setFriendResults ] = useState([])
     const user = useContext(UserContext);
+    let navigate = useNavigate();
     const toast = useToast();
 
     const getFriends = async () => {
-        // adds user-1, oreo
-        // let defaultFriend = await getUser('DtDkNYyJYNZdT5o4wUmgBBnvh3I2')
         let defaults = await getDefaultFriends( user.user.uid )
         setFriendResults([...defaults])
     }
 
     useEffect( () => {
-        getFriends()
+        let authToken = sessionStorage.getItem('Auth Token')
+
+        if (authToken && user.user) {
+            navigate('/searchFriends')
+            getFriends()
+        }
+        if (!authToken) {
+            navigate('/login')
+        }
     }, [])
 
     return (

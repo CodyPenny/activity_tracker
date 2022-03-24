@@ -10,7 +10,6 @@ const FriendPage = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    //console.log('test in Home',  user)
     let authToken = sessionStorage.getItem('Auth Token')
 
     if (authToken && user.user) {

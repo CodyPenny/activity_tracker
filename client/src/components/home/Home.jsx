@@ -35,10 +35,12 @@ const Home = () => {
 
     if (authToken && user.user) {
         navigate('/home')
+        return
     }
 
     if (!authToken) {
         navigate('/login')
+        return
     }
   }, [])
 
