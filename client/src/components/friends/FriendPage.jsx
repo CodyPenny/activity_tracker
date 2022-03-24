@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { GridItem, Grid, Text } from '@chakra-ui/react';
 import NavButton from '../home/NavButton';
 import FriendPageList from './FriendPageList';
-
+import { UserContext } from '../providers/UsersProvider.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const FriendPage = () => {
+  const user = useContext(UserContext);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    //console.log('test in Home',  user)
+    let authToken = sessionStorage.getItem('Auth Token')
+
+    if (authToken && user.user) {
+        navigate('/friends')
+    }
+
+    if (!authToken) {
+        navigate('/login')
+    }
+  }, [])
 
   return (
     <Grid
