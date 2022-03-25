@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-//import { getFirestore, doc, collection, onSnapshot } from "firebase/firestore";
 import { getDatabase, ref } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
@@ -34,7 +33,6 @@ export const provider = new GoogleAuthProvider();
  * @returns document object matching the UID
  */
  export const getRef = (collection, UID) => {
-  //return doc( db, collection, UID )
   return ref(db, collection + '/' + UID)
 }
 
@@ -44,9 +42,7 @@ export const provider = new GoogleAuthProvider();
  * @returns reference to the collection
  */
  export const getCollection = (collection_name) => {
-   //return collection(db, collection_name)
    return ref(db, collection_name + '/')
-   //return ref(db, collection_name )
  }
 
 /**

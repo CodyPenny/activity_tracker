@@ -18,7 +18,7 @@ const SearchFriends = () => {
 
     const getFriends = async () => {
         let defaults = await getDefaultFriends( user.uid )
-        console.log('defaults', defaults)
+        //console.log('defaults', defaults)
         setFriendResults([...defaults])
     }
 

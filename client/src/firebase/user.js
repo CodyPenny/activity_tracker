@@ -76,7 +76,7 @@ export const saveImageToStorage = async ( image, uid ) => {
     }
     
   } catch (error) {
-    console.error('saveImageToUserProfile Error:', error);
+    //console.error('saveImageToUserProfile Error:', error);
   }
 }
 
@@ -93,7 +93,7 @@ export const updateUserAvatar = async ( url, uid ) => {
     })
 
   } catch (error) {
-    console.error('updateUserAvatar:', error);
+    //console.error('updateUserAvatar:', error);
   }
 }
 
@@ -111,7 +111,8 @@ export const updateUserAvatar = async ( url, uid ) => {
     }
     return 0
   } catch (error) {
-    console.error('getUserCompletedCount error:', error)
+    //console.error('getUserCompletedCount error:', error)
+    return 0
   }
 }
 
@@ -129,7 +130,8 @@ export const updateUserAvatar = async ( url, uid ) => {
     }
     return 0
   } catch (error) {
-    console.error('getUserWinsCount error:', error)
+    //console.error('getUserWinsCount error:', error)
+    return 0
   }
 }
 
@@ -145,7 +147,7 @@ export const setUserCompletedCount = async ( u_uid, newVal ) => {
       'completed': newVal
     })
   } catch (error) {
-    console.error('setUserCompletedCount error:', error)
+    //console.error('setUserCompletedCount error:', error)
   }
 }
 
@@ -161,6 +163,6 @@ export const setUserWinCount = async ( u_uid, newVal ) => {
       'wins': newVal
     })
   } catch (error) {
-    console.error('setUserWinCount error:', error)
+    //console.error('setUserWinCount error:', error)
   }
 }

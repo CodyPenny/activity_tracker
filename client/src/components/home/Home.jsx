@@ -96,7 +96,9 @@ const Home = () => {
         </Grid> 
     ) : (
       <>
+      <Center mt="45%">
          <Spinner size='xl' />
+      </Center>
       </>
     )
     

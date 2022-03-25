@@ -37,7 +37,7 @@ export const resetPasswordWithEmail = async (email) => {
  * Authenticate with Google's OAuth
  * @returns 
  */
- export const signInWithGoogle = () => signInWithPopup(auth, provider);
+ export const signInWithGoogle = async () => await signInWithPopup(auth, provider);
 
  /**
  * 

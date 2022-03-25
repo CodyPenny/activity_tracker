@@ -1,6 +1,5 @@
 import { getRef, getCollection } from '../firebase/index.js'
-import { query, ref, orderByChild, orderByKey, get, startAt, endAt, limitToFirst, set, onValue, update } from "firebase/database";
-import { resetPasswordWithEmail } from './auth.js';
+import { query, orderByChild, get, startAt, endAt, limitToFirst, update } from "firebase/database";
 import { getUser } from './user.js';
 
 

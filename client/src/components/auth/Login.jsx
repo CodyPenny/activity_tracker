@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signInWithGoogle, signInWithEmail } from '../../firebase/auth';
 
 import { Formik, Form } from 'formik';
-import { useToast, Box, Flex, Button, Image, Grid, GridItem, Text, IconButton, Heading } from '@chakra-ui/react';
+import { useToast, Box, Flex, Button, Grid, GridItem, Text, IconButton, Heading } from '@chakra-ui/react';
 import { FcGoogle } from "react-icons/fc";
 import { validateEmailPasswordFormat } from '../../helpers/formValidators';
 import ValidateForm from '../formHelpers/ValidateForm.jsx';
@@ -12,6 +12,15 @@ import { BarDivider } from '../styles/appStyles';
 const Login = () => {
   const toast = useToast();
   let navigate = useNavigate();
+
+  const useGoogle = async () => {
+    let res = await signInWithGoogle()
+    console.log('res', res)
+    if (res.user.accessToken) {
+      navigate('/home')
+      return
+    }
+  }
 
   return (
     <Grid
@@ -52,15 +61,15 @@ const Login = () => {
             try {
               const res = await signInWithEmail(data.email, data.password);
               // if invalid, throws error in catch
-              console.log('res from signing in', res)
+              //console.log('res from signing in', res)
               resetForm();
               if(res.user.accessToken){
-                console.log("navigating to home")
+                //console.log("navigating to home")
                 navigate('/home')
                 return
               }
               else {
-                console.log('not sign in')
+                //console.log('not sign in')
               }
             } catch (error) {
               toast({
@@ -146,7 +155,7 @@ const Login = () => {
                 fontWeight="semibold"
                 isDisabled={isSubmitting}
                 isLoading={isSubmitting}
-                onClick={signInWithGoogle}
+                onClick={useGoogle}
                 color="white"
                 w="100%"
                 mb="10%"

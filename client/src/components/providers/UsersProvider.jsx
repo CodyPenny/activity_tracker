@@ -66,7 +66,7 @@ class UsersProvider extends Component {
 
         this.unsubscribeFromAuth = onAuthStateChanged( auth, async (user ) => {
             if (user) {
-               // console.log('user in user provider-setting auth token ', user)
+                console.log('user in user provider-setting auth token ', user)
                 sessionStorage.setItem('Auth Token', user.accessToken)
                 this.getUserData( user.uid )
                 this.getFriends( user.uid )

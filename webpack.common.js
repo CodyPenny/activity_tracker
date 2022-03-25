@@ -1,20 +1,16 @@
 const path = require('path');
 const dotenv = require('dotenv-webpack')
-const portFinderSync = require('portfinder-sync')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+//const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-// Directories
 const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
-  mode: 'development',
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './client/dist')
   },
-  stats: 'errors-warnings',
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
@@ -23,27 +19,13 @@ module.exports = {
     }),
     new dotenv({
       path: path.join(__dirname, '/.env')
-    })
+    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [
+    //     { from: path.resolve(__dirname, './client/static')}
+    //   ]
+    // })
   ],
-  devServer: {
-    host: 'local-ip',
-    historyApiFallback: true,
-    port: portFinderSync.getPort(8080),
-    open: true,
-    https: false,
-    allowedHosts: 'auto',
-    hot: false,
-    watchFiles: ['src/**', 'static/**'],
-    static: {
-      watch: true,
-      directory: path.join(__dirname, '../static')
-    },
-    client: {
-      logging: 'none',
-      overlay: true,
-      progress: false
-    }
-  },
   module: {
     rules: [
       {
