@@ -165,13 +165,13 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
                       <Player 
                         data={player}
                         key={i}
-                        duration={data.duration}
+                        streak={data.streak}
                       />
                     )
                   )
                 }
               </Flex>
-              { ownStat < data.duration ? (
+              { ownStat < data.streak ? (
                 <Flex
                 bg="brand.310"
                 justifyContent="space-around"

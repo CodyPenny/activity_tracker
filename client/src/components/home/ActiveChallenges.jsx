@@ -48,7 +48,7 @@ const ActiveChallenges = () => {
         return unsubscribeSnapshot
 
     } catch (error) {
-        console.error('updateChallenges error:', error)
+        //console.error('updateChallenges error:', error)
         navigate('/notFound')
     }
   }
