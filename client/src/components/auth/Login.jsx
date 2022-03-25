@@ -8,14 +8,30 @@ import { FcGoogle } from "react-icons/fc";
 import { validateEmailPasswordFormat } from '../../helpers/formValidators';
 import ValidateForm from '../formHelpers/ValidateForm.jsx';
 import { BarDivider } from '../styles/appStyles';
+import { createUserProfileDocument, getUser } from '../../firebase/user';
 
 const Login = () => {
   const toast = useToast();
   let navigate = useNavigate();
 
+  /**
+   * Users can sign in with Google
+   * If user is new, creates a profile in the db so the user can proceed
+   * user profile needs to be created for user provider
+   */
   const useGoogle = async () => {
     let res = await signInWithGoogle()
-    console.log('res', res)
+    //console.log('res', res)
+    const isRegistered = await getUser(res.user.uid)
+    //console.log('is registered', isRegistered)
+    if(!isRegistered){
+      await createUserProfileDocument({
+        email: res.user.email,
+        photoURL: res.user.photoURL,
+        displayName: res.user.displayName,
+        uid: res.user.uid
+      })
+    }
     if (res.user.accessToken) {
       navigate('/home')
       return
