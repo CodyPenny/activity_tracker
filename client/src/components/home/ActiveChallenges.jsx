@@ -57,7 +57,6 @@ const ActiveChallenges = () => {
     let isMounted = null;
       if ( user ) {
        updateChallenges().then( res => {
-         //console.log('res', res)
          isMounted = res
        })
       }

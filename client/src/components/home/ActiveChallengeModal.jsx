@@ -14,7 +14,7 @@ import * as dayjs from 'dayjs'
  */
 const ActiveChallengeModal = ({isOpen, onClose, data }) => {
   const { user }  = useContext(UserContext)
-  const { uid, streak, duration, completed, time } = data
+  const { uid, streak, duration, completed, time, winner, task, name } = data
   // challenge friends
   const [ players, setPlayers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(false)
@@ -135,7 +135,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
             <ModalContent
               textAlign="center"
             >
-            <ModalHeader> Challenge - {data ? data.name : ''} </ModalHeader>
+            <ModalHeader> Challenge - {data ? name : ''} </ModalHeader>
             <ModalCloseButton />
             <ModalBody
               width="100%"
@@ -149,7 +149,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
                   bg="brand.510"
                   p=".5rem"
                   rounded="10px"
-                >{data ? data.task : ''}</Text>
+                >{data ? task : ''}</Text>
                 <Flex
                   justifyContent="space-around"
                   mt=".5rem"
@@ -165,13 +165,13 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
                       <Player 
                         data={player}
                         key={i}
-                        streak={data.streak}
+                        streak={streak}
                       />
                     )
                   )
                 }
               </Flex>
-              { ownStat < data.streak ? (
+              { ownStat < streak ? (
                 <Flex
                 bg="brand.310"
                 justifyContent="space-around"
@@ -200,8 +200,8 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
                 mt="1rem"
               >
                 <Text>
-                  {data.winner ? "Winner: " : timeRemaining ? "Time Remaining: " : "Status: "}
-                  {data.winner ? data.winner: timeRemaining ? `${timeRemaining}`: "Expired" }
+                  {winner ? "Winner: " : timeRemaining ? "Time Remaining: " : "Status: "}
+                  {winner ? `${winner}`: timeRemaining ? `${timeRemaining}`: "Expired" }
                 </Text>
               </Flex>
             </ModalBody>
