@@ -120,12 +120,9 @@ const Login = () => {
                 type="submit"
                 color="white"
                 w="100%"
-                //h="40px"
                 mt="8%"
-                //size="lg"
                 fontSize={["md", "xl"]}
                 height={['2.5rem', '3rem']}
-                //color="#373737"
                 _hover={{ bg: 'brand.500', color: "brand.120" }}
                 _focus={{ boxShadow: 'outline' }}
               >

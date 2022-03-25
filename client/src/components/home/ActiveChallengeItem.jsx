@@ -2,7 +2,12 @@ import React from 'react'
 import { Box, SimpleGrid, Button, useDisclosure } from '@chakra-ui/react'
 import ActiveChallengeModal from './ActiveChallengeModal'
 
-const ActiveChallengeItem = ({data, updateChallenges}) => {
+/**
+ * Itemized challenge
+ * @param {*} data challenge details
+ * @returns 
+ */
+const ActiveChallengeItem = ({ data }) => {
   const { name, member_count, duration } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -21,13 +26,12 @@ const ActiveChallengeItem = ({data, updateChallenges}) => {
       >
           <Box textAlign="left">{name}</Box>
           <Box textAlign="center">{member_count}</Box>
-          <Box textAlign="right">{duration} day(s)</Box>
+          <Box textAlign="right">{duration} {duration > 1 ? "days" : "day"}</Box>
       </SimpleGrid>
       <ActiveChallengeModal 
         onClose={onClose}
         isOpen={isOpen}
         data={data}
-        updateChallenges={updateChallenges}
       />
     </Button>
   )

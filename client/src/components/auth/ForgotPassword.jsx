@@ -40,7 +40,6 @@ const ForgotPassword = () => {
             borderRadius="lg"
             overflow='hidden'
             width={["100%", "80%"]}
-            //bg="#bbebeb"
           >
             <Image
               w="100%"
@@ -76,7 +75,6 @@ const ForgotPassword = () => {
             <Form>
               <Flex
                 flexDir="column"
-                //gap="5%"
               >
                 <ValidatorForm
                   placeholder="Enter Email Address"

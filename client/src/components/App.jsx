@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import { BoxWrapper } from './styles/appStyles.js';
 
 // Componenets 
@@ -39,7 +38,6 @@ const App = () => {
             <Route path="buildChallenge" element={<BuildChallenge />} /> 
             <Route path="challengeAddFriends/:cuid" element={<ChallengeAddFriends />} /> 
             <Route path="notFound" element={<FourOFour />} />
-
         </Routes>
       </Router> 
     </BoxWrapper>

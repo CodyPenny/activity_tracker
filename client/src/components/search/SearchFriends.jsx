@@ -6,25 +6,24 @@ import { Grid, GridItem, Button, useToast } from '@chakra-ui/react';
 import ValidateForm from '../formHelpers/ValidateForm.jsx';
 import SearchFriendList from './SearchFriendList';
 import NavButton from '../home/NavButton';
-import { getUser } from '../../firebase/user';
 import { getDefaultFriends, searchMatchingFriends } from '../../firebase/friend';
 import { useNavigate } from 'react-router-dom';
 
 const SearchFriends = () => {
     const [ friendResults, setFriendResults ] = useState([])
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
     let navigate = useNavigate();
     const toast = useToast();
 
     const getFriends = async () => {
-        let defaults = await getDefaultFriends( user.user.uid )
+        let defaults = await getDefaultFriends( user.uid )
         setFriendResults([...defaults])
     }
 
     useEffect( () => {
         let authToken = sessionStorage.getItem('Auth Token')
 
-        if (authToken && user.user) {
+        if (authToken && user) {
             navigate('/searchFriends')
             getFriends()
         }
@@ -49,12 +48,12 @@ const SearchFriends = () => {
                         validationSchema={validateSearchFriend}
                         onSubmit={async (data, { resetForm }) => {
                             try {
-                            const results = await searchMatchingFriends(data.searchText.toUpperCase());
-                            console.log('test', results)
+                            const results = await searchMatchingFriends( data.searchText.toUpperCase(), user.uid);
+                            console.log('matching friends', results)
                             setFriendResults([...results])
                             resetForm();
                             } catch (error) {
-                            console.log('err', error)
+                            //console.log('err', error)
                             toast({
                                 title: 'An error occurred.',
                                 description: 'No results.',
@@ -87,8 +86,6 @@ const SearchFriends = () => {
                                 isDisabled={isSubmitting}
                                 isLoading={isSubmitting}
                                 type="submit"
-                                //color="white"
-                                // w="100%"
                                 h="40px"
                                 mt="10%"
                                 color="#373737"
@@ -104,7 +101,10 @@ const SearchFriends = () => {
             <GridItem
                 pt="3rem"
             >
-                <SearchFriendList friends={friendResults}/>
+                <SearchFriendList 
+                friends={friendResults}
+                isSubmitting={isSubmitting}
+                />
             </GridItem>
             <GridItem>
                 <NavButton />

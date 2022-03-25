@@ -5,7 +5,6 @@ import { saveImageToStorage } from '../../firebase/user'
 import DeleteAccount from './DeleteAccount'
 
 
-
 /**
  * 
  * @param {*} 
@@ -118,7 +117,7 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                             </Button>
                             {isAvatarError && (
                                 <FormErrorMessage>
-                                    Upload an image file you'd like your avatar to show.
+                                    Upload an image file for your avatar.
                                 </FormErrorMessage>
                             )}
                         </FormControl>

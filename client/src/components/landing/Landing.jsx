@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Box, Button, Grid, GridItem, Heading, Flex, Text, IconButton, Image } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Text, IconButton, Image } from '@chakra-ui/react';
 import { FiArrowRight } from "react-icons/fi";
 import art from '../../../static/streak2.jpg'
 
@@ -13,15 +13,10 @@ const Landing = () => {
     templateRows='1fr 1fr'
     >
      <GridItem
-      // ml="auto"
-      // mr="auto"
-      // pl="10%"
-      // pr="10%"
       width="100%"
       display="flex"
       justifyContent="center"
       alignItems="center"
-      //pt="8%"
      >
          <Box
            borderRadius="lg"
@@ -42,15 +37,10 @@ const Landing = () => {
     </GridItem>
 
     <GridItem
-      // ml="auto"
-      // mr="auto"
       display="flex"
       flexDir="column"
       alignItems="center"
       gap="8%"
-      //justifyContent="center"
-      // textAlign="center"
-      // mt={["10%", "5%"]}
      >
         <Heading 
         fontSize={["5xl", "6xl"]} 
@@ -60,7 +50,6 @@ const Landing = () => {
         </Heading>
         <Text 
             fontSize={["3xl", "4xl"]} 
-           // mt="8%"
         >Challenge your friends
         </Text>
             <IconButton

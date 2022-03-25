@@ -38,17 +38,12 @@ const Register = () => {
           overflow='hidden'
           bg="#bbebeb"
           display="flex"
-          //alignItems="center"
           justifyContent="center"
           width="100%"
         >
 
         <Image
-          //rounded="full"
-          //width="220px"
           width="75%"
-          //marginLeft={["auto","30%"]}
-          //marginBottom="10%"
           src="https://mvp2020.s3-us-west-1.amazonaws.com/blueemail2.png"
         />
         </Box>
@@ -73,7 +68,7 @@ const Register = () => {
               resetForm();
               navigate('/home')
             } catch (error) {
-              console.log('error in form', error)
+              //console.log('error in form', error)
               toast({
                 title: 'An error occurred.',
                 description: 'Email already in use.',
@@ -116,7 +111,6 @@ const Register = () => {
                 variant="solid"
                 rounded="20px"
                 width="100%"
-                //height="40px"
                 marginTop="18%"
                 isDisabled={isSubmitting}
                 isLoading={isSubmitting}
@@ -134,7 +128,6 @@ const Register = () => {
                 variant="solid"
                 rounded="20px"
                 width="100%"
-                //height="40px"
                 marginTop="10%"
                 fontSize={["md", "xl"]}
                 isDisabled={isSubmitting}

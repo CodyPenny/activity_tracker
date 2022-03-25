@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../providers/UsersProvider.jsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,6 @@ import EditAccount from '../profile/EditAccount.jsx';
  */
 const Home = () => {
   const { user } = useContext(UserContext);
-  //const [ user, setUser ] = useState(useContext(UserContext).user)
   let navigate = useNavigate();
   const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -25,10 +24,8 @@ const Home = () => {
    * If token exists, remain on the page, or be pushed to the login screen
    */
   useEffect(() => {
-    console.log('test in Home',  user)
     let authToken = sessionStorage.getItem('Auth Token')
 
-    //console.log("going home?", authToken, user.user)
     if (authToken && user) {
         navigate('/home')
     }
@@ -36,11 +33,6 @@ const Home = () => {
     if (!authToken) {
         navigate('/login')
     }
-
-    // if(!user.uid){
-    //   console.log("user is null", user)
-    //   navigate('/notFound')
-    // }
 
   }, [])
 

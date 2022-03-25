@@ -6,16 +6,24 @@ import { FiPlus, FiCheck } from "react-icons/fi";
 import { UserContext } from '../providers/UsersProvider'
 import * as dayjs from 'dayjs'
 
-const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
-  const { user,}  = useContext(UserContext)
+/**
+ * Opens and displays the challenge details
+ * Allows user to add a streak to their score
+ * @param {*} data challenge data
+ * @returns 
+ */
+const ActiveChallengeModal = ({isOpen, onClose, data }) => {
+  const { user }  = useContext(UserContext)
   const { uid, streak, duration, completed, time } = data
+  // challenge friends
   const [ players, setPlayers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(false)
+  // indicates if a streak has been incremented
   const [ isAdded, setIsAdded ] = useState(false)
   const [ ownStat, setOwnStat ] = useState(0)
-  const [ timeRemaining, setTimeRemaining ] = useState()
+  const [ timeRemaining, setTimeRemaining ] = useState('')
 
-  console.log("the data coming thru modal ", data)
+  //console.log("the data coming thru modal ", data)
 
   /**
    * Gets the number of streaks of all the participants to the challenge
@@ -32,7 +40,7 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
    */
   const getOwnStat = async () => {
     let val = await getUserStreakCount( uid, user.uid );
-    console.log('the stat val', val)
+    //console.log('the stat val', val)
     setOwnStat(val)
   }
 
@@ -42,7 +50,6 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
   const addStreak = async () => {
     setIsLoading(true)
     await addStreakToChallenge( uid, user.uid, streak, completed, user.displayName )
-    updateChallenges(user.uid)
     getOwnStat()
     getPlayers()
     setIsAdded(true)
@@ -54,21 +61,26 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
     onClose()
   }
 
+  /**
+   * Takes time string and calculates remaining time
+   * Shows days if day is greater than 0, shows hours if hour is greater than 0, shows mins if time is remaining but days and hours is 0
+   * @returns 
+   */
   const calcTimeRemaining = () => {
-    console.log('time', time)
+    //console.log('time', time)
     const current =  dayjs().format('YYYY-MM-DDTHH:mm:ss')
-    const test = '2022-03-24T00:12:26'
+    //const test = '2022-03-24T00:12:26'
     let mins = dayjs(current).diff(time,'m')
-    console.log("mins before calc", mins)
+    //console.log("mins before calc", mins)
     let hours = Math.floor(mins / 60);
     const days = Math.floor(hours / 24);
     mins = mins - (hours * 60);
     hours = hours - (days * 24);
 
-    console.log({current})
-    console.log({hours})
-    console.log({days})
-    console.log({mins})
+    // console.log({current})
+    // console.log({hours})
+    // console.log({days})
+    // console.log({mins})
     if (days < duration ){
       let day = duration - days
       if (day > 1){
@@ -153,7 +165,6 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
                       <Player 
                         data={player}
                         key={i}
-                        i={i}
                         duration={data.duration}
                       />
                     )

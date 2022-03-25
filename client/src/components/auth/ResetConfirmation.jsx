@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiCheckCircle } from "react-icons/fi";
 
-import { Box, Flex, Text, Button, Icon, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Text, Button, Grid, GridItem } from '@chakra-ui/react';
 
 const ResetConfirmation = () => {
   return (
@@ -48,7 +48,6 @@ const ResetConfirmation = () => {
             rounded="20px"
             fontWeight="semibold"
             w="100%"
-            //h="40px"
             color="#373737"
             _hover={{ bg: '#FFB6BA' }}
             _focus={{ boxShadow: 'outline' }}
@@ -64,9 +63,7 @@ const ResetConfirmation = () => {
             bg="#FFB6BA"
             rounded="20px"
             fontWeight="semibold"
-            //color="white"
             w="100%"
-            //h="40px"
             color="#373737"
             _hover={{ bg: '#FFB6BA' }}
             _focus={{ boxShadow: 'outline' }}

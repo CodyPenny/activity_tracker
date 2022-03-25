@@ -1,5 +1,4 @@
-import { validateContextObject } from '@firebase/util';
-import { onValue, set, update, get, child } from 'firebase/database';
+import { set, update, get } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { getRef } from '../firebase/index.js'
 import { getUserCompletedCount, getUserWinsCount, setUserCompletedCount, setUserWinCount } from './user.js';
@@ -14,19 +13,20 @@ import * as dayjs from 'dayjs'
 export const createChallenge = async ( criteria ) => {
   const cuid = uuidv4()
   const date = dayjs().format('YYYY-MM-DDTHH:mm:ss');
-  console.log('date from dayjs', date)
+  //console.log('date from dayjs', date)
 
   try {
     criteria.uid = cuid
     criteria.time = date
     const c_ref = getRef("challenges", cuid)
-    console.log('creating challenge', criteria)
+    //console.log('creating challenge', criteria)
     await set( c_ref, criteria )
     
     return cuid
     
   } catch (error) {
-    console.error('createChallenge error:', error)
+    //console.error('createChallenge error:', error)
+    return null
   }
 
 }
@@ -58,16 +58,16 @@ export const addUserToChallenge = async ( u_uid, c_uid, displayName) => {
     return
 
   } catch (error) {
-    console.error('addFriendToChallenge error:', error)
+    //console.error('addFriendToChallenge error:', error)
+    return null
   }
 }
 
 /**
- * 
+ * Gets list of streaks by all challenge participants
  * @param {*} c_uid 
- * @param {*} u_uid 
  */
-export const getStreakToChallenges = async (c_uid, u_uid) => {
+export const getStreakToChallenges = async (c_uid) => {
   try {
     const c_u_ref = getRef("challenges-user", c_uid)
     const current_point = await get( c_u_ref )
@@ -78,12 +78,13 @@ export const getStreakToChallenges = async (c_uid, u_uid) => {
       })
       return res
     } else {
-      console.log('no curr point')
-      return null
+      //console.log('no curr point')
+      return []
     }
     
   } catch (error) {
-    console.error('getStreakToChallenges error:', error)
+    //console.error('getStreakToChallenges error:', error)
+    return []
   }
 }
 
@@ -103,12 +104,13 @@ export const getUserStreakCount = async ( cuid, uuid) => {
     return 0
     
   } catch (error) {
-    console.error('getUserStreakCount error:', error)
+    //console.error('getUserStreakCount error:', error)
+    return 0
   }
 }
 
 /**
- * Increments the streak
+ * Increments the streak of the user
  * @param {*} c_uid challenge id
  * @param {*} u_uid user id
  * @param {*} duration challenge duration
@@ -130,7 +132,7 @@ export const addStreakToChallenge = async ( c_uid, u_uid, streak, status, name )
     if(incremented === streak){
       if(!status){
         // we have a winner
-        console.log('we have a winner')
+        //console.log('we have a winner')
         await setWinnerToChallenge( c_uid, u_uid, name )
         return
       } 
@@ -140,7 +142,7 @@ export const addStreakToChallenge = async ( c_uid, u_uid, streak, status, name )
     }
 
   } catch (error) {
-    console.error('addStreakToChallenge error:', error)
+    //console.error('addStreakToChallenge error:', error)
   }
 }
 
@@ -167,9 +169,8 @@ export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
     //console.log('wins count', curr_wins)
     await setUserWinCount( u_uid, curr_wins + 1 )
 
-
   } catch (error) {
-    console.error('setWinnerToChallenge error:', error)
+    //console.error('setWinnerToChallenge error:', error)
   }
 }
 
@@ -187,18 +188,10 @@ export const getChallengeMemberCount = async ( cuid ) => {
          count++ 
         })
         return count
-   
-    // onValue( c_u_ref, ( members ) => {
-    //   members.forEach( doc => { 
-    //     count++ 
-    //     console.log('doc', doc.val(), count)
-    //   })
-    //   console.log('the total member count', count)
-    //   return count
-    // })
     
   } catch (error) {
-    console.error('getChallengeMemberCount error:', error)
+    //console.error('getChallengeMemberCount error:', error)
+    return 0
   }
 }
 
@@ -216,8 +209,8 @@ export const getChallenge = async ( c_uid ) => {
      return snapshot.val();
      
    } catch (error) {
-    console.error('getChallenge Error:', error);
-    return 'getUserDocument Error';
+    //console.error('getChallenge Error:', error);
+    return 
    }
 }
 

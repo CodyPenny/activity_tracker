@@ -1,7 +1,7 @@
 import React from 'react'
-import { Flex, Text, SimpleGrid, Box } from '@chakra-ui/react'
+import { SimpleGrid, Box } from '@chakra-ui/react'
 
-const Player = ({data, i, duration}) => {
+const Player = ({data, duration}) => {
   return (
     <SimpleGrid
       gridTemplateColumns= "1fr 1fr"

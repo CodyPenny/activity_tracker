@@ -1,4 +1,4 @@
-import { getRef, performUpdate, getCollection, getDocsAsAList, db } from '../firebase/index.js'
+import { getRef, getCollection } from '../firebase/index.js'
 import { query, ref, orderByChild, orderByKey, get, startAt, endAt, limitToFirst, set, onValue, update } from "firebase/database";
 import { resetPasswordWithEmail } from './auth.js';
 import { getUser } from './user.js';
@@ -23,7 +23,6 @@ export const getDefaultFriends = async ( u_uid ) => {
       break;
     }
   }
-  //console.log('i', i)
   return friends
 }
 
@@ -39,7 +38,7 @@ export const isUserFriend = async ( u_uid, f_uid ) => {
     //console.log('res in isUserFriend for ', f_uid, '-', res.val())
     return res.val()
   } catch (error) {
-    console.error("isUserFriend Error", error)
+    //console.error("isUserFriend Error", error)
   }
 }
 
@@ -50,7 +49,7 @@ export const isUserFriend = async ( u_uid, f_uid ) => {
  * @param {*} user 
  */
   export const addFriendToUser = async (friend, user) => {
-    console.log('in add friend to user', friend, "**", user)
+    //console.log('in add friend to user', friend, "**", user)
     const u_Ref = getRef("friends", user)
     const f_Ref = getRef("friends", friend)
 
@@ -67,14 +66,16 @@ export const isUserFriend = async ( u_uid, f_uid ) => {
    * @param {*} text search input
    * @returns 
    */
-  export const searchMatchingFriends = async ( text ) => {
+  export const searchMatchingFriends = async ( text, u_uid ) => {
     const results = []
     const db_Ref = getCollection("users")
     const snapshot = await get(query( db_Ref, ...[ orderByChild("displayName"), startAt(text), endAt(text + '\uf8ff'), limitToFirst(10) ] ))
     
-    //TODO: filter out self
+    //filter out self
     snapshot.forEach( doc => { 
-      results.push( doc.val() ) 
+      if(doc.val().uid !== u_uid){
+        results.push( doc.val() ) 
+      }
     } )
    
     return results

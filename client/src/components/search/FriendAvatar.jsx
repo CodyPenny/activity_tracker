@@ -15,8 +15,8 @@ const FriendAvatar = ({name, photoURL, uid}) => {
     const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })
     
     const addFriend = async () => {
-        console.log('fid', uid)
-        console.log('uid', user.user.uid)
+        //console.log('fid', uid)
+        //console.log('uid', user.user.uid)
         await addFriendToUser(uid, user.user.uid)
         setShowConfirmation(true)
     }

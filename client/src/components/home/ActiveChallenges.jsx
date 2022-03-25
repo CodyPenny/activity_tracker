@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useContext, useCallback } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { getChallengeMemberCount, getUserChallengeCollection } from '../../firebase/challenge'
 import { UserContext } from '../providers/UsersProvider'
-import { limitToFirst, query, get } from "firebase/database";
 import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
 import { Flex, Center } from '@chakra-ui/react'
 import { onValue } from "firebase/database";
+import { useNavigate } from 'react-router-dom';
 
 const ActiveChallenges = () => {
-  const { user }   = useContext(UserContext)
+  const { user }   = useContext( UserContext )
   const [ challenges, setChallenges ] = useState([])
-
+  let navigate = useNavigate();
   /**
    * Looks up the challenges associated with the user, then collects
    * the data for each challenge
@@ -19,7 +19,6 @@ const ActiveChallenges = () => {
    * Will update the state if there are new challenges for the user
    */
   const updateChallenges = async () => {
-    console.log('updating challenges')
     try {
         // gets all the challenges for this user
         const u_c_ref = getUserChallengeCollection( user.uid )
@@ -34,12 +33,10 @@ const ActiveChallenges = () => {
               return await getChallenge( cuid )
           }))
           .then((new_challenge_data) => {
-            console.log('new challenge data', new_challenge_data)
               Promise.all( challenge_keys.map( async (id) => {
                   return await getChallengeMemberCount( id )
               }))
               .then(( num => {
-                console.log('num from promise', num)
                   for (let i = 0; i < new_challenge_data.length; i++) {
                       new_challenge_data[i].member_count = num[i]
                   }
@@ -49,7 +46,8 @@ const ActiveChallenges = () => {
       })
 
     } catch (error) {
-        console.error('updateChallenges error:', error)
+        //console.error('updateChallenges error:', error)
+        navigate('/notFound')
     }
   }
 
@@ -96,7 +94,6 @@ const ActiveChallenges = () => {
                 <ActiveChallengeItem 
                     key={i}
                     data={item}
-                    updateChallenges={updateChallenges}
                 />
             ))
             }

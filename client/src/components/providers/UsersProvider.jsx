@@ -2,7 +2,6 @@ import React, { Component, createContext } from 'react';
 import { auth, getRef } from '../../firebase/index.js';
 import  { onAuthStateChanged } from "firebase/auth";
 import { getFriendsCollection } from '../../firebase/friend.js';
-import { getUserChallengeCollection, getChallenge, getChallengeMemberCount } from '../../firebase/challenge.js';
 import { onValue } from "firebase/database";
 import { getUser } from '../../firebase/user.js';
 
@@ -18,28 +17,12 @@ class UsersProvider extends Component {
     state = { 
         user: null,
        friends: [],
-       //challenges: [] 
     };
     unsubscribeFromAuth = null;
 
-    // getChallenges = async ( uid ) => {
-    //     const u_c_ref = getUserChallengeCollection( uid )
-    //     onChildAdded( u_c_ref, async (challenge_id) => {
-    //         console.log('the child data', challenge_id.key)
-    //         const challenge_data = await getChallenge( challenge_id.key )
-    //         console.log('new_challenge_data', challenge_data)
-    //         const members = await getChallengeMemberCount( challenge_id.key )
-    //         console.log("members", members)
-    //         challenge_data.member_count = members
-    //         this.setState({
-    //             challenges: [...this.state.challenges, challenge_data]
-    //         })
-
-    //     })
-    // }
-
+    // fetches friends also listens for new friends and updates state
     getFriends = ( uid ) => {
-        console.log('getting friend data')
+        //console.log('getting friend data')
         const db_Ref = getFriendsCollection( uid  )
         
         onValue( db_Ref, (snapshot) => {
@@ -67,11 +50,11 @@ class UsersProvider extends Component {
      * @param {*} user_uid user's uid
      */
     getUserData = ( user_uid ) => {
-        console.log('getting user data')
+        //console.log('getting user data')
         const u_ref = getRef("users", user_uid)
         // this method here is the observer
         onValue( u_ref, (snapshot) => {
-            console.log('getting another snapshot of user')
+            //console.log('getting another snapshot of user')
             this.setState({
                 user: snapshot.val()
             })
@@ -83,22 +66,18 @@ class UsersProvider extends Component {
 
         this.unsubscribeFromAuth = onAuthStateChanged( auth, async (user ) => {
             if (user) {
-                console.log('user in user provider-setting auth token ', user)
+               // console.log('user in user provider-setting auth token ', user)
                 sessionStorage.setItem('Auth Token', user.accessToken)
                 this.getUserData( user.uid )
                 this.getFriends( user.uid )
-                //this.getChallenges( user.uid )
           
             } else {
-            // user is signed out
-            console.log('user is signing out', user)
+            // user is signed out, user is null
+            //console.log('user is signing out', user)
             this.setState({ user: user });
             sessionStorage.removeItem("Auth Token")
-            //this.setState({ user: userAuth });
             }
         })
-
-
     };
 
     componentWillUnmount = () => {

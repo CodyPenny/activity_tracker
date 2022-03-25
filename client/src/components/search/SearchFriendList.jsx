@@ -1,11 +1,10 @@
 import React from 'react'
 import FriendAvatar from './FriendAvatar'
-import { Stack } from '@chakra-ui/react'
-import test_pic from '../../../static/avatar.png'
+import { Stack, Center, Text, Spinner } from '@chakra-ui/react'
 
 //TODO: add loader
 
-const SearchFriendList = ({friends}) => {
+const SearchFriendList = ({ friends, isSubmitting }) => {
 
   return (
     <Stack 
@@ -13,15 +12,24 @@ const SearchFriendList = ({friends}) => {
         flexDir="row" 
         gap=".5rem" 
         alignItems="baseline"
-    >
-        {friends && friends.map((friend, i) => (
+    > { isSubmitting ? (
+      <Spinner size='lg'/>
+    ) : friends.length > 0 ? friends.map((friend, i) => (
             <FriendAvatar 
                 key={i} 
                 name={friend.displayName} 
                 photoURL={friend.photoURL}
                 uid={friend.uid}
             />
-        ))}
+        )) : (
+          <>
+            <Center
+              textAlign="center"
+            >
+              <Text>No friends</Text>
+            </Center>
+          </>
+        )}
     </Stack>
   )
 }

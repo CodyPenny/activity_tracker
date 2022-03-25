@@ -4,6 +4,9 @@ import { Box, Flex, IconButton, useBreakpointValue } from '@chakra-ui/react'
 import { MdHomeFilled, MdEdit, MdGroup, MdPersonSearch, MdLogout } from 'react-icons/md';
 import { signOutOfApp } from '../../firebase/auth';
 
+/**
+ * Nav buttons on bottom of screen
+ */
 const NavButton = () => {
   let navigate = useNavigate()
   const iconSize = useBreakpointValue({ base: 'md', sm: 'lg' })
