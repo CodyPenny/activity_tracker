@@ -10,9 +10,7 @@ import { getUserChallengeCollection } from "./challenge";
  * @returns new user document
  */
  export const createUserProfileDocument = async (user) => {
-
     if (!user) return;
-    
     try {
       const { email, photoURL, displayName, uid } = user;
       const uRef = getRef("users", uid );
@@ -26,8 +24,8 @@ import { getUserChallengeCollection } from "./challenge";
       });
 
     } catch (error) {
-      console.error('createUserProfileDocument Error:', error);
-      return 'createUserProfileDocument Error';
+      //console.error('createUserProfileDocument Error:', error);
+      return 
     }
   };
 
@@ -38,16 +36,16 @@ import { getUserChallengeCollection } from "./challenge";
    * @param {*} u_uid user uid
    */
 export const deleteUserFromCollections = async ( u_uid ) => {
-  console.log('uid', u_uid)
+  //console.log('uid', u_uid)
   const u_c_ref = getUserChallengeCollection( u_uid )
   if(u_c_ref){
-    console.log('u_c ref present')
+    //console.log('u_c ref present')
     const challenges = []
     const u_c = await get(u_c_ref)
       u_c.forEach( doc => {
         challenges.push(doc.key)
       })
-    console.log('challenges', challenges)
+    //console.log('challenges', challenges)
     // iterate through challenges
     for (let i = 0; i < challenges.length; i++){
       const users = []
@@ -56,10 +54,10 @@ export const deleteUserFromCollections = async ( u_uid ) => {
         c_u.forEach( doc => {
           users.push(doc.key)
         })
-      console.log('users', users)
+      //console.log('users', users)
       // if only 1 key delete the challenge -user and delete challenge
       if (users.length === 1){
-        console.log('user is only 1')
+        //console.log('user is only 1')
         await remove(c_u_ref)
         const c_ref = getRef('challenges', challenges[i])
         await remove(c_ref)
@@ -105,7 +103,7 @@ export const getUser = async (UID) => {
 
   } catch (error) {
     console.error('getUser Error:', error);
-    return 'getUserDocument Error';
+    return 
   }
 };
 

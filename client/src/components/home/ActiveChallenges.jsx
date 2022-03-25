@@ -23,7 +23,8 @@ const ActiveChallenges = () => {
         // gets all the challenges for this user
         const u_c_ref = getUserChallengeCollection( user.uid )
         //const snapshot= await get( query( u_c_ref, limitToFirst(8)))
-        onValue( u_c_ref, (snapshot) => {
+        // firebase uses streams, unsubscribe from the stream in the cleanup to handle memory leaks
+        let unsubscribeSnapshot = onValue( u_c_ref, (snapshot) => {
           const challenge_keys = [] 
           snapshot.forEach( doc => {
               challenge_keys.push(doc.key)
@@ -43,18 +44,24 @@ const ActiveChallenges = () => {
                   setChallenges([...new_challenge_data])                
               }))
           })
-      })
+        })
+        return unsubscribeSnapshot
 
     } catch (error) {
-        //console.error('updateChallenges error:', error)
+        console.error('updateChallenges error:', error)
         navigate('/notFound')
     }
   }
 
   useEffect( () => {
+    let isMounted = null;
       if ( user ) {
-       updateChallenges()
+       updateChallenges().then( res => {
+         //console.log('res', res)
+         isMounted = res
+       })
       }
+    return () => { isMounted && isMounted() }
   }, [])
 
   return (

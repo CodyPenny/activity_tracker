@@ -24,16 +24,13 @@ const Home = () => {
    * If token exists, remain on the page, or be pushed to the login screen
    */
   useEffect(() => {
-    let authToken = sessionStorage.getItem('Auth Token')
-
-    if (authToken && user) {
-        navigate('/home')
-    }
-
-    if (!authToken) {
-        navigate('/login')
-    }
-
+      let authToken = sessionStorage.getItem('Auth Token')
+      if (authToken && user) {
+          navigate('/home')
+      }
+      if (!authToken) {
+          navigate('/login')
+      }
   }, [])
 
   return (
