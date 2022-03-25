@@ -1,11 +1,28 @@
-import React, { useRef } from 'react'
-import { AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, Button, } from '@chakra-ui/react'
+import React, { useRef, useState } from 'react'
+import { AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, Button, useToast } from '@chakra-ui/react'
+import { deleteThisUser } from '../../firebase/auth'
+import { useNavigate } from 'react-router-dom';
 
 
-// TODO: delete account functionality
-
-const DeleteAccount = ({ isOpen, onClose}) => {
+const DeleteAccount = ({ isOpen, onClose, uid }) => {
+  const [ isDeleting, setIsDeleting ] = useState(false)
   const cancelRef = useRef()
+  let navigate = useNavigate();
+  const toast = useToast()
+
+  const clear = async () => {
+    setIsDeleting(true)
+    await deleteThisUser(uid)
+    sessionStorage.removeItem("Auth Token")
+    toast({
+      title: 'Account deleted.',
+      description: "We've deleted your account.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
+    navigate('/login')
+  }
 
   return (
     <>
@@ -30,13 +47,18 @@ const DeleteAccount = ({ isOpen, onClose}) => {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button 
+              ref={cancelRef}
+              onClick={onClose}
+              isLoading={isDeleting}
+              >
                 Cancel
               </Button>
               <Button 
                 colorScheme='red' 
-                onClick={onClose} 
+                onClick={clear} 
                 ml={3}
+                isLoading={isDeleting}
                 >
                 Delete
               </Button>

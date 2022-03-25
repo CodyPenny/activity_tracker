@@ -7,9 +7,8 @@ import DeleteAccount from './DeleteAccount'
 
 /**
  * 
- * @param {*} 
  */
-const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
+const EditAccount = ({isOpen, onClose, uid}) => {
   const [ imageInput, setImageInput ] = useState(null)
   const [ isAvatarError, setIsAvatarError ] = useState(false)
   const [ showLoading, setShowLoading ] = useState(false)
@@ -148,6 +147,7 @@ const EditAccount = ({isOpen, onOpen, onClose, uid}) => {
                             <DeleteAccount
                                 isOpen={isDeleteDialogOpen}
                                 onClose={onCloseDeleteDialog}
+                                uid={uid}
                             />
                         </Box>
      

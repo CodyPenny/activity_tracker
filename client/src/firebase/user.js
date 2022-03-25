@@ -1,6 +1,7 @@
-import { set, get, update } from "firebase/database";
+import { set, get, update, remove } from "firebase/database";
 import { getRef, auth, storage } from ".";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { getUserChallengeCollection } from "./challenge";
 
 /**
  * Creates a new user document 
@@ -29,6 +30,56 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
       return 'createUserProfileDocument Error';
     }
   };
+
+  /**
+   * Deletes the user from the users collection
+   * Deletes the user from challenges
+   * Deletes the challenges of the user if only user
+   * @param {*} u_uid user uid
+   */
+export const deleteUserFromCollections = async ( u_uid ) => {
+  console.log('uid', u_uid)
+  const u_c_ref = getUserChallengeCollection( u_uid )
+  if(u_c_ref){
+    console.log('u_c ref present')
+    const challenges = []
+    const u_c = await get(u_c_ref)
+      u_c.forEach( doc => {
+        challenges.push(doc.key)
+      })
+    console.log('challenges', challenges)
+    // iterate through challenges
+    for (let i = 0; i < challenges.length; i++){
+      const users = []
+      const c_u_ref = getRef('challenges-user', challenges[i])
+      const c_u = await get(c_u_ref)
+        c_u.forEach( doc => {
+          users.push(doc.key)
+        })
+      console.log('users', users)
+      // if only 1 key delete the challenge -user and delete challenge
+      if (users.length === 1){
+        console.log('user is only 1')
+        await remove(c_u_ref)
+        const c_ref = getRef('challenges', challenges[i])
+        await remove(c_ref)
+      } else {
+        // if more than one -just remove the user from the challenge -don't delete challenege
+        const c_u_u_ref = getRef(`challenges-user/${challenges[i]}`, u_uid )
+        //const test = await get(c_u_u_ref)
+        //console.log('c_u_u_ref', test.val())
+        await remove(c_u_u_ref)
+      }
+
+    }
+    // remove the challenge references of the user
+    await remove(u_c_ref)
+  }
+  // remove user from users collection
+  const u_ref = getRef('users', u_uid)
+  await remove( u_ref )
+
+}
 
   
 /**

@@ -63,7 +63,6 @@ const Home = () => {
               />
               <EditAccount 
                 isOpen={isOpen}
-                onOpen={onOpen}
                 onClose={onClose}
                 uid={user.uid}
               />

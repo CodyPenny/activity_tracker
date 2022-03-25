@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, deleteUser } from "firebase/auth";
 
 import { auth, provider } from ".";
+import { deleteUserFromCollections } from "./user";
 
 /**
  * 
@@ -44,3 +45,15 @@ export const resetPasswordWithEmail = async (email) => {
  * @returns 
  */
 export const signOutOfApp = () => signOut(auth)
+
+/**
+ * Delete user account from auth
+ */
+export const deleteThisUser = async ( u_uid ) => {
+  const user = auth.currentUser;
+  //deletes user from auth provider
+  await deleteUser(user)
+  console.log('user from delete user', user)
+  // removes user from db
+  await deleteUserFromCollections( u_uid )
+}
