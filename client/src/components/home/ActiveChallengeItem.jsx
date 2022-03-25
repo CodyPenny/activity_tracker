@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Box, SimpleGrid, Button, useDisclosure } from '@chakra-ui/react'
 import ActiveChallengeModal from './ActiveChallengeModal'
 
@@ -6,16 +6,10 @@ const ActiveChallengeItem = ({data, updateChallenges}) => {
   const { name, member_count, duration } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // const openModal = () => {
-  //   console.log('data going to modal from active chall item ', data)
-  //   onOpen()
-  // }
-
   return (
     <Button
       height={['2.5rem', '3rem']}
       onClick={onOpen}
-      //onClick={()=>openModal(i)}
     >
       <SimpleGrid
         columns="3"

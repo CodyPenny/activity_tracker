@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 // Chakra + Forms
 import { Avatar,Grid, GridItem, useBreakpointValue, Flex, Center, useDisclosure, Spinner } from '@chakra-ui/react';
 
-import test_pic from '../../../static/avatar.png'
 import NavButton from './NavButton.jsx';
 import Stats from './Stats.jsx';
 import ActiveChallenges from './ActiveChallenges.jsx';
@@ -16,26 +15,21 @@ import EditAccount from '../profile/EditAccount.jsx';
  * @returns Landing page
  */
 const Home = () => {
-  //const { user } = useContext(UserContext);
-  const [ theUser, setUser ] = useState(useContext(UserContext).user)
+  const { user } = useContext(UserContext);
+  //const [ user, setUser ] = useState(useContext(UserContext).user)
   let navigate = useNavigate();
   const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  // const openEditAccountPage = () => {
-  //   console.log('opening')
-  //   onOpen()
-  // }
 
   /**
    * If token exists, remain on the page, or be pushed to the login screen
    */
   useEffect(() => {
-    console.log('test in Home',  theUser)
+    console.log('test in Home',  user)
     let authToken = sessionStorage.getItem('Auth Token')
 
     //console.log("going home?", authToken, user.user)
-    if (authToken && theUser) {
+    if (authToken && user) {
         navigate('/home')
     }
 
@@ -43,16 +37,16 @@ const Home = () => {
         navigate('/login')
     }
 
-    if(!theUser.uid){
-      console.log("user is null", theUser)
-      navigate('/notFound')
-    }
+    // if(!user.uid){
+    //   console.log("user is null", user)
+    //   navigate('/notFound')
+    // }
 
   }, [])
 
   return (
     <>
-    {  theUser  ? 
+    {  user  ? 
       (
         <Grid
         h='100%'
@@ -69,8 +63,8 @@ const Home = () => {
               alignItems="center"
             >
               <Avatar
-                name={theUser.displayName}
-                src={theUser.photoURL}
+                name={user.displayName}
+                src={user.photoURL}
                 size={avatarSize}
                 cursor="pointer"
                 onClick={onOpen}
@@ -79,7 +73,7 @@ const Home = () => {
                 isOpen={isOpen}
                 onOpen={onOpen}
                 onClose={onClose}
-                uid={theUser.uid}
+                uid={user.uid}
               />
             </Flex>
           </GridItem>
@@ -96,9 +90,9 @@ const Home = () => {
                 fontWeight="600"
                 pt=".5rem"
               >
-                { theUser.displayName }
+                { user.displayName }
               </Center>
-              <Stats user={theUser}/> 
+              <Stats/> 
               <ActiveChallenges />
             </Flex>
           </GridItem>

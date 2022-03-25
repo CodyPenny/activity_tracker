@@ -3,7 +3,7 @@ import { auth, getRef } from '../../firebase/index.js';
 import  { onAuthStateChanged } from "firebase/auth";
 import { getFriendsCollection } from '../../firebase/friend.js';
 import { getUserChallengeCollection, getChallenge, getChallengeMemberCount } from '../../firebase/challenge.js';
-import { onValue, onChildAdded } from "firebase/database";
+import { onValue } from "firebase/database";
 import { getUser } from '../../firebase/user.js';
 
 
@@ -62,9 +62,14 @@ class UsersProvider extends Component {
         })
     }
 
+    /**
+     * Listens for any changes from the db and updates the state
+     * @param {*} user_uid user's uid
+     */
     getUserData = ( user_uid ) => {
         console.log('getting user data')
         const u_ref = getRef("users", user_uid)
+        // this method here is the observer
         onValue( u_ref, (snapshot) => {
             console.log('getting another snapshot of user')
             this.setState({

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../providers/UsersProvider.jsx';
 import { useNavigate } from 'react-router-dom';
-import { Grid, GridItem, Text } from '@chakra-ui/react'
+import { Grid, GridItem, Text, Box } from '@chakra-ui/react'
 import { useParams } from 'react-router'
 import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
 import ChallengeAddFriendButton from './ChallengeAddFriendButton.jsx';
 
 const ChallengeAddFriends = () => {
-  const user = useContext(UserContext);
+  const { user, friends } = useContext(UserContext);
   let navigate = useNavigate();
   let { cuid } = useParams();
     //console.log('user in challenge add friends', user)
@@ -44,15 +44,25 @@ const ChallengeAddFriends = () => {
         <GridItem
             mt="1rem"
         >
-           { user.friends.length > 0 && user.friends.map((friend, i) => (
+           { friends.length > 0 ? friends.map((friend, i) => (
               <ChallengeFriendListHelper friend={friend} key={i} cuid={cuid}/>
-            ))
+            )) : (
+                <>
+                <Box
+                  textAlign="center"
+                  mt="20%"
+                >
+                    <Text>No Added Friends.</Text>
+
+                </Box>
+                </>
+            )
            }
         </GridItem>
         <GridItem> 
             <ChallengeAddFriendButton 
                 cuid={cuid}
-                uid={user.user.uid}
+                uid={user.uid}
             />
         </GridItem>
     </Grid>
