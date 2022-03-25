@@ -14,6 +14,9 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
 
   console.log("the data coming thru modal ", data)
 
+  /**
+   * Gets the number of streaks of all the participants to the challenge
+   */
   const getPlayers = async () => {
     const participants = await getStreakToChallenges(data.uid)
     if(participants){
@@ -21,12 +24,18 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
     }
   }
 
+  /**
+   * Gets the user's own streak count
+   */
   const getOwnStat = async () => {
     let val = await getUserStreakCount( data.uid, user.user.uid );
     console.log('the stat val', val)
     setOwnStat(val)
   }
 
+  /**
+   * Increments user's streak and updates the UI
+   */
   const addStreak = async () => {
     setIsLoading(true)
     await addStreakToChallenge( data.uid, user.user.uid, data.duration, data.completed, user.user.displayName )
@@ -145,4 +154,4 @@ const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
   )
 }
 
-export default ActiveChallengeModal
+export default React.memo(ActiveChallengeModal)

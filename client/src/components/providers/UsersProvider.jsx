@@ -66,6 +66,7 @@ class UsersProvider extends Component {
         console.log('getting user data')
         const u_ref = getRef("users", user_uid)
         onValue( u_ref, (snapshot) => {
+            console.log('getting another snapshot of user')
             this.setState({
                 user: snapshot.val()
             })

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../providers/UsersProvider.jsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,25 +16,26 @@ import EditAccount from '../profile/EditAccount.jsx';
  * @returns Landing page
  */
 const Home = () => {
-  const user = useContext(UserContext);
+  //const { user } = useContext(UserContext);
+  const [ theUser, setUser ] = useState(useContext(UserContext).user)
   let navigate = useNavigate();
   const avatarSize = useBreakpointValue({ base: 'lg', sm: 'xl' })
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const openEditAccountPage = () => {
-    console.log('opening')
-    onOpen()
-  }
+  // const openEditAccountPage = () => {
+  //   console.log('opening')
+  //   onOpen()
+  // }
 
   /**
    * If token exists, remain on the page, or be pushed to the login screen
    */
   useEffect(() => {
-    console.log('test in Home',  user)
+    console.log('test in Home',  theUser)
     let authToken = sessionStorage.getItem('Auth Token')
 
     //console.log("going home?", authToken, user.user)
-    if (authToken && user.user) {
+    if (authToken && theUser) {
         navigate('/home')
     }
 
@@ -42,8 +43,8 @@ const Home = () => {
         navigate('/login')
     }
 
-    if(!user.user.uid){
-      console.log("user is null", user)
+    if(!theUser.uid){
+      console.log("user is null", theUser)
       navigate('/notFound')
     }
 
@@ -51,7 +52,7 @@ const Home = () => {
 
   return (
     <>
-    {  user.user  ? 
+    {  theUser  ? 
       (
         <Grid
         h='100%'
@@ -68,17 +69,17 @@ const Home = () => {
               alignItems="center"
             >
               <Avatar
-                name={user.user && user.user.displayName}
-                src={user.user && user.user.photoURL}
+                name={theUser.displayName}
+                src={theUser.photoURL}
                 size={avatarSize}
                 cursor="pointer"
-                onClick={openEditAccountPage}
+                onClick={onOpen}
               />
               <EditAccount 
                 isOpen={isOpen}
                 onOpen={onOpen}
                 onClose={onClose}
-                uid={user.user.uid}
+                uid={theUser.uid}
               />
             </Flex>
           </GridItem>
@@ -95,9 +96,9 @@ const Home = () => {
                 fontWeight="600"
                 pt=".5rem"
               >
-                {user.user.displayName}
+                { theUser.displayName }
               </Center>
-              <Stats /> 
+              <Stats user={theUser}/> 
               <ActiveChallenges />
             </Flex>
           </GridItem>

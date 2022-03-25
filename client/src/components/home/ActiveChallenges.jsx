@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { getChallengeMemberCount, getUserChallengeCollection } from '../../firebase/challenge'
 import { UserContext } from '../providers/UsersProvider'
 import { limitToFirst, query, get } from "firebase/database";
@@ -11,7 +11,7 @@ const ActiveChallenges = () => {
   const user  = useContext(UserContext)
   const [ challenges, setChallenges ] = useState([])
   //const { isOpen, onOpen, onClose } = useDisclosure()
-  const [ selectedChallenge, setSelectedChallenge ] = useState({})
+  //const [ selectedChallenge, setSelectedChallenge ] = useState({})
 
   // const openModal = (i) => {
   //   console.log('data going to modal from active chall item ', i, challenges[i])
@@ -27,7 +27,7 @@ const ActiveChallenges = () => {
    * It runs another query to lookup the number of participants for each challenge
    * @param {*} uid user's uid
    */
-  const updateChallenges = async ( uid ) => {
+  const updateChallenges = useCallback( async ( uid ) => {
     console.log('updating challenges')
     const challenge_keys = [] 
     try {
@@ -60,7 +60,7 @@ const ActiveChallenges = () => {
     } catch (error) {
         console.error('updateChallenges error:', error)
     }
-  }
+  }, [challenges])
 
 
   useEffect( () => {
@@ -103,15 +103,15 @@ const ActiveChallenges = () => {
           overflowY="auto"
           //visibility={showSpinner ? "hidden" : "visible"}
         >
-            { challenges.map((item, i) => (
+            { challenges.length > 0 && challenges.map((item, i) => (
                 <ActiveChallengeItem 
                     key={i}
                     data={item}
                     //openModal={openModal}
-                    i={i}
                     updateChallenges={updateChallenges}
                 />
-            ))}
+            ))
+            }
         </Flex>
         {/* <ActiveChallengeModal 
           onClose={onClose}

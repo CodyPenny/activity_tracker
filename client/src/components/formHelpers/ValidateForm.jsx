@@ -30,9 +30,9 @@ const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
               height={['2.5rem', '2.6rem']}
               fontSize={["md", "lg"]}
             />
-            <FormErrorMessage
-            fontSize={["md", "lg"]}
-            >{form.errors[field.name]}</FormErrorMessage>
+              <FormErrorMessage
+              fontSize={["md", "lg"]}
+              >{form.errors[field.name]}</FormErrorMessage>
           </FormControl>
         );
       }}
