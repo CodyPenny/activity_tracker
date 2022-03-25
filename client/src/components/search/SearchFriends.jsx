@@ -11,12 +11,14 @@ import { useNavigate } from 'react-router-dom';
 
 const SearchFriends = () => {
     const [ friendResults, setFriendResults ] = useState([])
+    const [ isLoading, setIsLoading ] = useState(false)
     const { user } = useContext(UserContext);
     let navigate = useNavigate();
     const toast = useToast();
 
     const getFriends = async () => {
         let defaults = await getDefaultFriends( user.uid )
+        console.log('defaults', defaults)
         setFriendResults([...defaults])
     }
 
@@ -48,10 +50,12 @@ const SearchFriends = () => {
                         validationSchema={validateSearchFriend}
                         onSubmit={async (data, { resetForm }) => {
                             try {
+                            setIsLoading(true)
                             const results = await searchMatchingFriends( data.searchText.toUpperCase(), user.uid);
-                            console.log('matching friends', results)
+                            //console.log('matching friends', results)
                             setFriendResults([...results])
                             resetForm();
+                            setIsLoading(false)
                             } catch (error) {
                             //console.log('err', error)
                             toast({
@@ -103,7 +107,7 @@ const SearchFriends = () => {
             >
                 <SearchFriendList 
                 friends={friendResults}
-                isSubmitting={isSubmitting}
+                isSubmitting={isLoading}
                 />
             </GridItem>
             <GridItem>
