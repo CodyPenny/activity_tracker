@@ -22,8 +22,7 @@ coverage
 .grunt
 
 # Webpack Bundle
-client/dist/bundle.js
-client/dist/bundle.js.map
+
 client/dist/
 
 .env
