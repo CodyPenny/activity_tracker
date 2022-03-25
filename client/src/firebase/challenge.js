@@ -3,6 +3,7 @@ import { onValue, set, update, get, child } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { getRef } from '../firebase/index.js'
 import { getUserCompletedCount, getUserWinsCount, setUserCompletedCount, setUserWinCount } from './user.js';
+import * as dayjs from 'dayjs'
 
 
 /**
@@ -12,9 +13,12 @@ import { getUserCompletedCount, getUserWinsCount, setUserCompletedCount, setUser
  */
 export const createChallenge = async ( criteria ) => {
   const cuid = uuidv4()
+  const date = dayjs().format('YYYY-MM-DDTHH:mm:ss');
+  console.log('date from dayjs', date)
 
   try {
     criteria.uid = cuid
+    criteria.time = date
     const c_ref = getRef("challenges", cuid)
     console.log('creating challenge', criteria)
     await set( c_ref, criteria )
@@ -67,7 +71,7 @@ export const getStreakToChallenges = async (c_uid, u_uid) => {
   try {
     const c_u_ref = getRef("challenges-user", c_uid)
     const current_point = await get( c_u_ref )
-    if (current_point) {
+    if ( current_point ) {
       const res = []
       current_point.forEach(doc => {
         res.push(doc.val())
@@ -93,7 +97,7 @@ export const getUserStreakCount = async ( cuid, uuid) => {
     const c_u_ref = getRef("challenges-user", `${cuid}/${uuid}`)
     const curr_val = await get( c_u_ref );
     //console.log('val ret', curr_val.val())
-    if(curr_val) {
+    if( curr_val ) {
       return curr_val.val().streak
     }
     return 0
@@ -111,19 +115,19 @@ export const getUserStreakCount = async ( cuid, uuid) => {
  * @param {*} status  challenge's completed status
  * @param {*} name user's name
  */
-export const addStreakToChallenge = async ( c_uid, u_uid, duration, status, name ) => {
+export const addStreakToChallenge = async ( c_uid, u_uid, streak, status, name ) => {
   try {
     const path_str = `${c_uid}/${u_uid}`;
     const c_u_ref = getRef("challenges-user", path_str)
     let val = await getUserStreakCount( c_uid, u_uid )
     let incremented = val + 1
-    // increment does not exceed duration points
-    if(incremented <= duration){
+    // increment does not exceed streak points
+    if(incremented <= streak){
       await update( c_u_ref, {'streak': incremented})
     }
 
     // challenge is completed
-    if(incremented === duration){
+    if(incremented === streak){
       if(!status){
         // we have a winner
         console.log('we have a winner')
@@ -139,8 +143,6 @@ export const addStreakToChallenge = async ( c_uid, u_uid, duration, status, name
     console.error('addStreakToChallenge error:', error)
   }
 }
-
-
 
 /**
  * Sets the winner of the challenge
@@ -170,9 +172,6 @@ export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
     console.error('setWinnerToChallenge error:', error)
   }
 }
-
-
-
 
 /**
  * Looks up the participant count for a challenge

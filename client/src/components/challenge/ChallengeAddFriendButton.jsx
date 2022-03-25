@@ -16,9 +16,9 @@ const ChallengeAddFriendButton = ({ cuid }) => {
   const finalizeChallenge = async () => {
     setInProgress(true)
     await addUserToChallenge( user.uid, cuid, user.displayName )
-    setInProgress(false)
+    //setInProgress(false)
     navigate('/home')
-    return
+    
   }
 
   return (

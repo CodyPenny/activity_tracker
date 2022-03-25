@@ -34,10 +34,12 @@ const ActiveChallenges = () => {
               return await getChallenge( cuid )
           }))
           .then((new_challenge_data) => {
+            console.log('new challenge data', new_challenge_data)
               Promise.all( challenge_keys.map( async (id) => {
                   return await getChallengeMemberCount( id )
               }))
               .then(( num => {
+                console.log('num from promise', num)
                   for (let i = 0; i < new_challenge_data.length; i++) {
                       new_challenge_data[i].member_count = num[i]
                   }
