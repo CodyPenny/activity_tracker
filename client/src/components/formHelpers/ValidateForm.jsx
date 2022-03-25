@@ -1,5 +1,5 @@
 import React from 'react';
-import { useField, Field, FastField } from 'formik';
+import { useField, FastField } from 'formik';
 import { Input, FormControl, FormErrorMessage, Box, useBreakpointValue } from '@chakra-ui/react';
 
 const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {

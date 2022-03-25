@@ -7,11 +7,9 @@ import { UserContext } from '../providers/UsersProvider'
 
 const ActiveChallengeModal = ({isOpen, onClose, data, updateChallenges}) => {
   const user  = useContext(UserContext)
-  const [ challenges, setChallenges ] = useState({})
   const [ players, setPlayers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(false)
   const [ isAdded, setIsAdded ] = useState(false)
-  const [ isDone, setIsDone ] = useState(false)
   const [ ownStat, setOwnStat ] = useState(0)
 
   console.log("the data coming thru modal ", data)

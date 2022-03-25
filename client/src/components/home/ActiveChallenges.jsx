@@ -4,12 +4,20 @@ import { UserContext } from '../providers/UsersProvider'
 import { limitToFirst, query, get } from "firebase/database";
 import { getChallenge } from '../../firebase/challenge';
 import ActiveChallengeItem from './ActiveChallengeItem'
-import { Flex, Center, Button } from '@chakra-ui/react'
+import { Flex, Center, Button, useDisclosure  } from '@chakra-ui/react'
+import ActiveChallengeModal from './ActiveChallengeModal'
 
 const ActiveChallenges = () => {
   const user  = useContext(UserContext)
   const [ challenges, setChallenges ] = useState([])
-  const [ showSpinner, setShowSpinner ] = useState(true)
+  //const { isOpen, onOpen, onClose } = useDisclosure()
+  const [ selectedChallenge, setSelectedChallenge ] = useState({})
+
+  // const openModal = (i) => {
+  //   console.log('data going to modal from active chall item ', i, challenges[i])
+  //   setSelectedChallenge(challenges[i])
+  //   onOpen()
+  // }
 
   //TODO: add listener to challenger
 
@@ -20,6 +28,7 @@ const ActiveChallenges = () => {
    * @param {*} uid user's uid
    */
   const updateChallenges = async ( uid ) => {
+    console.log('updating challenges')
     const challenge_keys = [] 
     try {
         // gets all the challenges for this user
@@ -43,7 +52,7 @@ const ActiveChallenges = () => {
                     new_challenge_data[i].member_count = num[i]
                 }
                 setChallenges([...new_challenge_data])
-                setShowSpinner(false)
+                // setShowSpinner(false)
                 
             }))
         })
@@ -98,10 +107,18 @@ const ActiveChallenges = () => {
                 <ActiveChallengeItem 
                     key={i}
                     data={item}
+                    //openModal={openModal}
+                    i={i}
                     updateChallenges={updateChallenges}
                 />
             ))}
         </Flex>
+        {/* <ActiveChallengeModal 
+          onClose={onClose}
+          isOpen={isOpen}
+          data={selectedChallenge}
+          updateChallenges={updateChallenges}
+      /> */}
         {/* <Button
           bg="brand.700"
           position="absolute"

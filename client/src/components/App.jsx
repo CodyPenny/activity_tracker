@@ -14,6 +14,7 @@ import SearchFriends from './search/SearchFriends.jsx';
 import FriendPage from './friends/FriendPage.jsx';
 import BuildChallenge from './challenge/BuildChallenge.jsx';
 import ChallengeAddFriends from './challenge/ChallengeAddFriends.jsx';
+import FourOFour from './auth/FourOFour.jsx';
 
 const App = () => {
   
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="searchFriends" element={<SearchFriends/>} /> 
             <Route path="buildChallenge" element={<BuildChallenge />} /> 
             <Route path="challengeAddFriends/:cuid" element={<ChallengeAddFriends />} /> 
+            <Route path="notFound" element={<FourOFour />} />
 
         </Routes>
       </Router> 

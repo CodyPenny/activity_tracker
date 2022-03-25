@@ -9,6 +9,7 @@ const Stats = () => {
   const [ show, setShow ] = useState(true)
 
   const getStats = () => {
+    console.log('rendering stats')
     setUserStats([
         {name: "Completed", val: user.user.completed}, 
         {name: "Wins", val: user.user.wins}, 
@@ -18,7 +19,7 @@ const Stats = () => {
   }
 
   useEffect(() => {
-      if (user) {
+      if (user.user) {
         getStats()
       }
 

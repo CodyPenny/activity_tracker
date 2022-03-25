@@ -9,6 +9,7 @@ const FriendPageListHelper = ({ friend }) => {
       pb={[".5rem", "1rem"]}
       pl={[".5rem", "1rem"]}
       pt={[".5rem", "1rem"]}
+      mt={[".5rem", "1rem"]}
       backgroundColor="brand.310"
       alignItems="center"
       rounded="5px"

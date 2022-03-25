@@ -2,16 +2,20 @@ import React from 'react'
 import { Box, SimpleGrid, Button, useDisclosure } from '@chakra-ui/react'
 import ActiveChallengeModal from './ActiveChallengeModal'
 
-const ActiveChallengeItem = ({data, updateChallenges}) => {
+const ActiveChallengeItem = ({data, i, updateChallenges}) => {
+  const { name, member_count, duration } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const openModal = () => {
+    console.log('data going to modal from active chall item ', data)
+    onOpen()
+  }
 
   return (
     <Button
       height={['2.5rem', '3rem']}
-      onClick={() => {
-        console.log('data ', data)
-        onOpen()
-      }}
+      onClick={openModal}
+      //onClick={()=>openModal(i)}
     >
       <SimpleGrid
         columns="3"
@@ -21,12 +25,11 @@ const ActiveChallengeItem = ({data, updateChallenges}) => {
         width="100%"
         backgroundColor="transparent"
       >
-          <Box textAlign="left">{data.name}</Box>
-          <Box textAlign="center">{data.member_count}</Box>
-          <Box textAlign="right">{data.duration} day(s)</Box>
+          <Box textAlign="left">{name}</Box>
+          <Box textAlign="center">{member_count}</Box>
+          <Box textAlign="right">{duration} day(s)</Box>
       </SimpleGrid>
       <ActiveChallengeModal 
-        //onOpen={onOpen}
         onClose={onClose}
         isOpen={isOpen}
         data={data}
@@ -36,4 +39,4 @@ const ActiveChallengeItem = ({data, updateChallenges}) => {
   )
 }
 
-export default ActiveChallengeItem
+export default React.memo(ActiveChallengeItem)

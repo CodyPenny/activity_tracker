@@ -35,7 +35,7 @@ export const createChallenge = async ( criteria ) => {
  * @returns 
  */
 export const addUserToChallenge = async ( u_uid, c_uid, displayName) => {
-  console.log('name coming through addUserToChall', displayName)
+  //console.log('name coming through addUserToChall', displayName)
   try {
     const c_u_ref = getRef("challenges-user", c_uid)
     const u_c_ref = getRef("user-challenges", u_uid) 

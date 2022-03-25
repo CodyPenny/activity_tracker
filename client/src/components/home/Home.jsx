@@ -33,15 +33,20 @@ const Home = () => {
     console.log('test in Home',  user)
     let authToken = sessionStorage.getItem('Auth Token')
 
+    //console.log("going home?", authToken, user.user)
     if (authToken && user.user) {
         navigate('/home')
-        return
     }
 
     if (!authToken) {
         navigate('/login')
-        return
     }
+
+    if(!user.user.uid){
+      console.log("user is null", user)
+      navigate('/notFound')
+    }
+
   }, [])
 
   return (
@@ -89,7 +94,7 @@ const Home = () => {
           >
             {user.user.displayName}
           </Center>
-          <Stats />
+          <Stats /> 
           <ActiveChallenges />
         </Flex>
       </GridItem>

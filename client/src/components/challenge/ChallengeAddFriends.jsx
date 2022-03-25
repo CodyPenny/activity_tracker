@@ -15,10 +15,6 @@ const ChallengeAddFriends = () => {
     useEffect(() => {
         let authToken = sessionStorage.getItem('Auth Token')
 
-        if (authToken && user.user) {
-            navigate('challengeAddFriends/:cuid')
-        }
-
         if (!authToken) {
             navigate('/login')
         }

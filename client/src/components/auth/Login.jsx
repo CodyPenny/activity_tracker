@@ -55,7 +55,12 @@ const Login = () => {
               console.log('res from signing in', res)
               resetForm();
               if(res.user.accessToken){
+                console.log("navigating to home")
                 navigate('/home')
+                return
+              }
+              else {
+                console.log('not sign in')
               }
             } catch (error) {
               toast({
@@ -82,6 +87,7 @@ const Login = () => {
                 type="input"
                 variant="outline"
                 bg="brand.200"
+                
                 size="lg"
               />
               <Box mb="5%"></Box>

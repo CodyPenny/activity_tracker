@@ -18,27 +18,28 @@ class UsersProvider extends Component {
     state = { 
         user: null,
        friends: [],
-       challenges: [] 
+       //challenges: [] 
     };
     unsubscribeFromAuth = null;
 
-    getChallenges = async ( uid ) => {
-        const u_c_ref = getUserChallengeCollection( uid )
-        onChildAdded( u_c_ref, async (challenge_id) => {
-            console.log('the child data', challenge_id.key)
-            const challenge_data = await getChallenge( challenge_id.key )
-            console.log('new_challenge_data', challenge_data)
-            const members = await getChallengeMemberCount( challenge_id.key )
-            console.log("members", members)
-            challenge_data.member_count = members
-            this.setState({
-                challenges: [...this.state.challenges, challenge_data]
-            })
+    // getChallenges = async ( uid ) => {
+    //     const u_c_ref = getUserChallengeCollection( uid )
+    //     onChildAdded( u_c_ref, async (challenge_id) => {
+    //         console.log('the child data', challenge_id.key)
+    //         const challenge_data = await getChallenge( challenge_id.key )
+    //         console.log('new_challenge_data', challenge_data)
+    //         const members = await getChallengeMemberCount( challenge_id.key )
+    //         console.log("members", members)
+    //         challenge_data.member_count = members
+    //         this.setState({
+    //             challenges: [...this.state.challenges, challenge_data]
+    //         })
 
-        })
-    }
+    //     })
+    // }
 
     getFriends = ( uid ) => {
+        console.log('getting friend data')
         const db_Ref = getFriendsCollection( uid  )
         
         onValue( db_Ref, (snapshot) => {
@@ -62,6 +63,7 @@ class UsersProvider extends Component {
     }
 
     getUserData = ( user_uid ) => {
+        console.log('getting user data')
         const u_ref = getRef("users", user_uid)
         onValue( u_ref, (snapshot) => {
             this.setState({
@@ -75,8 +77,7 @@ class UsersProvider extends Component {
 
         this.unsubscribeFromAuth = onAuthStateChanged( auth, async (user ) => {
             if (user) {
-            
-                console.log('user in user provider ', user)
+                console.log('user in user provider-setting auth token ', user)
                 sessionStorage.setItem('Auth Token', user.accessToken)
                 this.getUserData( user.uid )
                 this.getFriends( user.uid )
@@ -84,6 +85,9 @@ class UsersProvider extends Component {
           
             } else {
             // user is signed out
+            console.log('user is signing out', user)
+            this.setState({ user: user });
+            sessionStorage.removeItem("Auth Token")
             //this.setState({ user: userAuth });
             }
         })
