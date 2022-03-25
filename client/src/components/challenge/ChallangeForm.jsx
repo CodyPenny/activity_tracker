@@ -79,7 +79,7 @@ const ChallangeForm = ({}) => {
                         background="brand.510"
                         p={["0.5rem", "1rem"]}
                     >
-                        <Text>How many times should participants check in their challenge progress throughout the day?</Text>
+                        <Text>How many streaks?</Text>
                         <Slider
                             flex='1'
                             focusThumbOnChange={false}
@@ -90,7 +90,7 @@ const ChallangeForm = ({}) => {
                             }}
                             aria-label='check-in-slider'
                             min={1}
-                            max={12}
+                            max={30}
                             step={1}
                         >
                             <SliderTrack >

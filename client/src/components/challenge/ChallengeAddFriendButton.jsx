@@ -5,9 +5,9 @@ import { addUserToChallenge } from '../../firebase/challenge'
 import { UserContext } from '../providers/UsersProvider.jsx';
 
 
-const ChallengeAddFriendButton = ({cuid, uid}) => {
+const ChallengeAddFriendButton = ({ cuid }) => {
   const [ inProgress, setInProgress ] = useState(false)
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   let navigate = useNavigate()
 
   /**
@@ -15,11 +15,11 @@ const ChallengeAddFriendButton = ({cuid, uid}) => {
    */
   const finalizeChallenge = async () => {
     setInProgress(true)
-    await addUserToChallenge( uid, cuid, user.user.displayName )
+    await addUserToChallenge( user.uid, cuid, user.displayName )
     setInProgress(false)
     navigate('/home')
+    return
   }
-
 
   return (
     <>

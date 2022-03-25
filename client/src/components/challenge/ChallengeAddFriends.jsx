@@ -7,7 +7,7 @@ import ChallengeFriendListHelper from './ChallengeFriendListHelper.jsx';
 import ChallengeAddFriendButton from './ChallengeAddFriendButton.jsx';
 
 const ChallengeAddFriends = () => {
-  const { user, friends } = useContext(UserContext);
+  const { friends } = useContext(UserContext);
   let navigate = useNavigate();
   let { cuid } = useParams();
     //console.log('user in challenge add friends', user)
@@ -45,7 +45,11 @@ const ChallengeAddFriends = () => {
             mt="1rem"
         >
            { friends.length > 0 ? friends.map((friend, i) => (
-              <ChallengeFriendListHelper friend={friend} key={i} cuid={cuid}/>
+              <ChallengeFriendListHelper 
+                friend={friend} 
+                key={i} 
+                cuid={cuid}
+              />
             )) : (
                 <>
                 <Box
@@ -62,7 +66,6 @@ const ChallengeAddFriends = () => {
         <GridItem> 
             <ChallengeAddFriendButton 
                 cuid={cuid}
-                uid={user.uid}
             />
         </GridItem>
     </Grid>
