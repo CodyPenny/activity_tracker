@@ -77,16 +77,12 @@ const Login = () => {
             try {
               const res = await signInWithEmail(data.email, data.password);
               // if invalid, throws error in catch
-              //console.log('res from signing in', res)
               resetForm();
               if(res.user.accessToken){
-                //console.log("navigating to home")
                 navigate('/home')
                 return
               }
-              else {
-                //console.log('not sign in')
-              }
+      
             } catch (error) {
               toast({
                 title: 'An error occurred.',

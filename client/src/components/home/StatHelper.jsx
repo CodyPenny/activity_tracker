@@ -1,8 +1,7 @@
 import React from 'react'
-import { Center, Button, useBreakpointValue } from '@chakra-ui/react'
+import { Center, Button } from '@chakra-ui/react'
 
 const StatHelper = ({ stat }) => {
-  //const buttonSize = useBreakpointValue({ base: 'md', sm: 'lg' })
   return (
     <Center
             bg="brand.140"
@@ -18,7 +17,6 @@ const StatHelper = ({ stat }) => {
               bg="brand.200"
               width="100%"
               mt=".8rem"
-              //size={buttonSize}
               size="md"
             >
                 {stat.val}

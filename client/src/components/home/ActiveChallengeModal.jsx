@@ -23,8 +23,6 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
   const [ ownStat, setOwnStat ] = useState(0)
   const [ timeRemaining, setTimeRemaining ] = useState('')
 
-  //console.log("the data coming thru modal ", data)
-
   /**
    * Gets the number of streaks of all the participants to the challenge
    */
@@ -40,12 +38,11 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
    */
   const getOwnStat = async () => {
     let val = await getUserStreakCount( uid, user.uid );
-    //console.log('the stat val', val)
     setOwnStat(val)
   }
 
   /**
-   * Increments user's streak and updates the UI
+   * Increments the user's streak and updates the UI
    */
   const addStreak = async () => {
     setIsLoading(true)
@@ -67,20 +64,12 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
    * @returns 
    */
   const calcTimeRemaining = () => {
-    //console.log('time', time)
     const current =  dayjs().format('YYYY-MM-DDTHH:mm:ss')
-    //const test = '2022-03-24T00:12:26'
     let mins = dayjs(current).diff(time,'m')
-    //console.log("mins before calc", mins)
     let hours = Math.floor(mins / 60);
     const days = Math.floor(hours / 24);
     mins = mins - (hours * 60);
     hours = hours - (days * 24);
-
-    // console.log({current})
-    // console.log({hours})
-    // console.log({days})
-    // console.log({mins})
     if (days < duration ){
       let day = duration - days
       if (day > 1){
@@ -117,7 +106,9 @@ const ActiveChallengeModal = ({isOpen, onClose, data }) => {
   useEffect(() => {
     getPlayers()
     getOwnStat()
-    calcTimeRemaining()
+    if (!winner){
+      calcTimeRemaining()
+    }
 
   }, [])
 

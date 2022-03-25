@@ -68,7 +68,6 @@ const Register = () => {
               resetForm();
               navigate('/home')
             } catch (error) {
-              //console.log('error in form', error)
               toast({
                 title: 'An error occurred.',
                 description: 'Email already in use.',

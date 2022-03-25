@@ -2,6 +2,11 @@ import React from 'react';
 import { useField, FastField } from 'formik';
 import { Input, FormControl, FormErrorMessage, Box, useBreakpointValue } from '@chakra-ui/react';
 
+/**
+ * Validates and handles form change for Formik
+ * @param {*} params
+ * @returns 
+ */
 const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
   const [ field, meta ] = useField(props);
 
@@ -26,7 +31,6 @@ const ValidatorForm = ({ placeholder, type, callback = false, ...props }) => {
               {...field}
               isInvalid={!!errorText}
               bg={props.bg && props.bg}
-              //size={inputSize}
               height={['2.5rem', '2.6rem']}
               fontSize={["md", "lg"]}
             />

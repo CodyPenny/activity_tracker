@@ -18,7 +18,6 @@ const SearchFriends = () => {
 
     const getFriends = async () => {
         let defaults = await getDefaultFriends( user.uid )
-        //console.log('defaults', defaults)
         setFriendResults([...defaults])
     }
 
@@ -52,12 +51,10 @@ const SearchFriends = () => {
                             try {
                             setIsLoading(true)
                             const results = await searchMatchingFriends( data.searchText.toUpperCase(), user.uid);
-                            //console.log('matching friends', results)
                             setFriendResults([...results])
                             resetForm();
                             setIsLoading(false)
                             } catch (error) {
-                            //console.log('err', error)
                             toast({
                                 title: 'An error occurred.',
                                 description: 'No results.',

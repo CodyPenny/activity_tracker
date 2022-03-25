@@ -51,9 +51,6 @@ export const signOutOfApp = () => signOut(auth)
  */
 export const deleteThisUser = async ( u_uid ) => {
   const user = auth.currentUser;
-  //deletes user from auth provider
   await deleteUser(user)
-  console.log('user from delete user', user)
-  // removes user from db
   await deleteUserFromCollections( u_uid )
 }

@@ -19,8 +19,6 @@ const App = () => {
   
   return (
     <BoxWrapper 
-      // w={'min(100vw, 820px)'} 
-      // h={'min(100vh, 1180px)'}
       w={'min(100vw, 500px)'} 
       h={'min(100vh, 950px)'}
       

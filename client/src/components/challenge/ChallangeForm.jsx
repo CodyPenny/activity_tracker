@@ -24,7 +24,6 @@ const ChallangeForm = ({}) => {
                 resetForm()
                 navigate(`/challengeAddFriends/${cuid}`)
             } catch (error) {
-                console.log('error in challenge form', error)
                 toast({
                   title: 'An error occurred.',
                   description: 'An error submitting challenge',

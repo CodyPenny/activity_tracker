@@ -13,7 +13,6 @@ export const getDefaultFriends = async ( u_uid ) => {
   let i = 0
   while(i < defaults.length){
     if( ( defaults[i] !== u_uid ) && ( await isUserFriend(u_uid, defaults[i]) === null ) ){
-      //console.log('adding to friends')
       let friend = await getUser( defaults[i] )
       friends.push(friend)
     }
@@ -34,10 +33,8 @@ export const isUserFriend = async ( u_uid, f_uid ) => {
   try {
     let friend_ref = getRef(`friends/${u_uid}`, f_uid )
     let res = await get( friend_ref )
-    //console.log('res in isUserFriend for ', f_uid, '-', res.val())
     return res.val()
   } catch (error) {
-    //console.error("isUserFriend Error", error)
   }
 }
 
@@ -48,7 +45,6 @@ export const isUserFriend = async ( u_uid, f_uid ) => {
  * @param {*} user 
  */
   export const addFriendToUser = async (friend, user) => {
-    //console.log('in add friend to user', friend, "**", user)
     const u_Ref = getRef("friends", user)
     const f_Ref = getRef("friends", friend)
 

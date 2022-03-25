@@ -6,7 +6,6 @@ const FourOFour = () => {
     <Grid
     h='100%'
     bg="brand.100"
-    //templateRows='1fr 6fr'
     pr="10%" 
     pl="10%" 
     >

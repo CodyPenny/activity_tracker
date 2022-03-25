@@ -13,19 +13,15 @@ import * as dayjs from 'dayjs'
 export const createChallenge = async ( criteria ) => {
   const cuid = uuidv4()
   const date = dayjs().format('YYYY-MM-DDTHH:mm:ss');
-  //console.log('date from dayjs', date)
 
   try {
     criteria.uid = cuid
     criteria.time = date
     const c_ref = getRef("challenges", cuid)
-    //console.log('creating challenge', criteria)
     await set( c_ref, criteria )
-    
     return cuid
     
   } catch (error) {
-    //console.error('createChallenge error:', error)
     return null
   }
 
@@ -58,7 +54,6 @@ export const addUserToChallenge = async ( u_uid, c_uid, displayName) => {
     return
 
   } catch (error) {
-    //console.error('addFriendToChallenge error:', error)
     return null
   }
 }
@@ -78,12 +73,10 @@ export const getStreakToChallenges = async (c_uid) => {
       })
       return res
     } else {
-      //console.log('no curr point')
       return []
     }
     
   } catch (error) {
-    //console.error('getStreakToChallenges error:', error)
     return []
   }
 }
@@ -97,14 +90,12 @@ export const getUserStreakCount = async ( cuid, uuid) => {
   try {
     const c_u_ref = getRef("challenges-user", `${cuid}/${uuid}`)
     const curr_val = await get( c_u_ref );
-    //console.log('val ret', curr_val.val())
     if( curr_val ) {
       return curr_val.val().streak
     }
     return 0
     
   } catch (error) {
-    //console.error('getUserStreakCount error:', error)
     return 0
   }
 }
@@ -132,7 +123,6 @@ export const addStreakToChallenge = async ( c_uid, u_uid, streak, status, name )
     if(incremented === streak){
       if(!status){
         // we have a winner
-        //console.log('we have a winner')
         await setWinnerToChallenge( c_uid, u_uid, name )
         return
       } 
@@ -142,7 +132,6 @@ export const addStreakToChallenge = async ( c_uid, u_uid, streak, status, name )
     }
 
   } catch (error) {
-    //console.error('addStreakToChallenge error:', error)
   }
 }
 
@@ -163,14 +152,11 @@ export const setWinnerToChallenge = async ( c_uid, u_uid, name ) => {
     })
     // also update the user's completed stats wins and completed
     let curr_completed = await getUserCompletedCount( u_uid )
-    //console.log('curr completed', curr_completed)
     await setUserCompletedCount( u_uid, curr_completed + 1 )
     let curr_wins = await getUserWinsCount( u_uid )
-    //console.log('wins count', curr_wins)
     await setUserWinCount( u_uid, curr_wins + 1 )
 
   } catch (error) {
-    //console.error('setWinnerToChallenge error:', error)
   }
 }
 
@@ -190,7 +176,6 @@ export const getChallengeMemberCount = async ( cuid ) => {
         return count
     
   } catch (error) {
-    //console.error('getChallengeMemberCount error:', error)
     return 0
   }
 }
@@ -209,7 +194,6 @@ export const getChallenge = async ( c_uid ) => {
      return snapshot.val();
      
    } catch (error) {
-    //console.error('getChallenge Error:', error);
     return 
    }
 }

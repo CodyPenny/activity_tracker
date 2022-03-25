@@ -17,7 +17,6 @@ const ChallengeAddFriendButton = ({ cuid }) => {
     setInProgress(true)
     await addUserToChallenge( user.uid, cuid, user.displayName )
     setInProgress(false)
-    //console.log('challenge added')
     navigate('/home') // unmounts current component
     
   }
