@@ -53,7 +53,8 @@ The application takes a mobile first approach and shifts the development process
 
 <img width="344" alt="Screen Shot 2022-03-26 at 3 45 59 AM" src="https://user-images.githubusercontent.com/53372490/160236031-0e225699-85a1-4bc1-b559-b05c06a6c052.png">
 
-4. Selecting the avatar allows making account changes such as uploading an image file or deleting the account. The image file is uploaded to Firebase Storage and reflected on the user's profile.
+4. Selecting the avatar allows making account changes such as uploading an image file or deleting the account. 
+   The image file is uploaded to Firebase Storage and reflected on the user's profile.
 
 <img width="336" alt="Screen Shot 2022-03-26 at 3 49 50 AM" src="https://user-images.githubusercontent.com/53372490/160236138-b72889df-702e-4681-8f82-91c268fa7f69.png">
 
@@ -64,3 +65,8 @@ The application takes a mobile first approach and shifts the development process
 6. Activities can be composed and friends added to the activity in the challenge creation flow.
 
 <img width="744" alt="Screen Shot 2022-03-26 at 4 10 57 AM" src="https://user-images.githubusercontent.com/53372490/160236806-db86d73b-d3f2-445d-a873-ec0777df627f.png">
+
+7. Users can select challenges from the dashboard to view more details and to add a streak to the challenge. 
+   The app also calculates the time remaining in days, hours, or minutes -whichever is the larger time.
+   
+<img width="346" alt="Screen Shot 2022-03-26 at 4 19 30 AM" src="https://user-images.githubusercontent.com/53372490/160237104-a20eabae-c487-4c37-ac59-70cd10f367d8.png">
