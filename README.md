@@ -6,6 +6,8 @@
 
 Streak is a social networking app that allows users to create an activity and keep track of its progress alongside friends incentivizing completion in a fun and enjoyable way.
 
+Deployed here: https://activity-tracker-peach.vercel.app/
+
 ## Project Description
 
 Revamped a previously worked project with considerations improving the features using Google Firebase. 
@@ -34,4 +36,11 @@ The application takes a mobile first approach and shifts the development process
 3. Run the project
 
        npm run dev
-  
+       
+## Features
+
+1. Users can register or login with an email/password or use their Google account for authentication.
+        
+<img width="353" alt="Screen Shot 2022-03-26 at 2 55 35 AM" src="https://user-images.githubusercontent.com/53372490/160234381-8faf0ae6-f1a0-44ad-b238-a181602cab72.png">
+
+2.  
