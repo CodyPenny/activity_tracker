@@ -69,4 +69,4 @@ The application takes a mobile first approach and shifts the development process
 7. Users can select challenges from the dashboard to view more details and to add a streak to the challenge. 
    The app also calculates the time remaining in days, hours, or minutes -whichever is the larger time.
    
-<img width="346" alt="Screen Shot 2022-03-26 at 4 19 30 AM" src="https://user-images.githubusercontent.com/53372490/160237104-a20eabae-c487-4c37-ac59-70cd10f367d8.png">
+<img width="751" alt="Screen Shot 2022-03-26 at 4 22 18 AM" src="https://user-images.githubusercontent.com/53372490/160237159-6f73d568-c3b0-41c9-a7af-9b8c1c502efa.png">
