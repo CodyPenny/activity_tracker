@@ -10,7 +10,7 @@ import { addUserToChallenge } from '../../firebase/challenge'
  * @returns 
  */
 const ChallengeFriendListHelper = ({ friend, cuid }) => {
-  console.log('friend', friend)
+
   const [showConfirmation, setShowConfirmation ] = useState(false)
   const [ showLoading, setShowLoading ] = useState(false)
   const avatarSize = useBreakpointValue({ base: 'md', sm: 'lg' })

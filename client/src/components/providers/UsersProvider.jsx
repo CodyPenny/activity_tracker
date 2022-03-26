@@ -37,7 +37,6 @@ class UsersProvider extends Component {
             }))
             .then((val) => val.filter( v => v !== null))
             .then(noNull => {
-                //console.log('noNull', noNull)
                 this.setState({
                     friends:[...noNull]
                 })

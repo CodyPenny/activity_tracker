@@ -10,7 +10,6 @@ const ChallengeAddFriends = () => {
   const { friends } = useContext(UserContext);
   let navigate = useNavigate();
   let { cuid } = useParams();
-console.log('friends', friends)
     useEffect(() => {
         let authToken = sessionStorage.getItem('Auth Token')
         if (!authToken) {
