@@ -20,6 +20,7 @@ class UsersProvider extends Component {
     };
     unsubscribeFromAuth = null;
 
+    // filter out nulls from friend results
     getFriends = ( uid ) => {
         const db_Ref = getFriendsCollection( uid  )
         
@@ -34,9 +35,11 @@ class UsersProvider extends Component {
             Promise.all( friendsToFetch.map( async (id) => {
                 return await getUser( id )
             }))
-            .then((val) => {
+            .then((val) => val.filter( v => v !== null))
+            .then(noNull => {
+                //console.log('noNull', noNull)
                 this.setState({
-                    friends:[...val]
+                    friends:[...noNull]
                 })
             })
             
