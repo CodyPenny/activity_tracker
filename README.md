@@ -25,13 +25,13 @@ Users can register and login using an email and password or Google account to ac
 
 ## Frontend Setup
 
-Install specified packages
+1. Install specified packages
 
-  npm i
+        npm i
   
-Setup the dotenv file with Firebase's app configuration
+2. Setup the dotenv file with Firebase's app configuration
   
-Run the project
+3. Run the project
 
-  npm run dev
+       npm run dev
   
