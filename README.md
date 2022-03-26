@@ -10,7 +10,7 @@ Deployed here: https://activity-tracker-peach.vercel.app/
 
 ## Project Description
 
-Revamped a previous project with considerations improving the features with Google Firebase. 
+Revamped a previous project with considerations to improving features with Google Firebase. 
 
 The application takes a mobile first approach and shifts the development process to adapt to mobile screens while scaling down on desktop screens to showcase its capabilities as a mobile product as if it is a iOS or Android app but on the web.
 
@@ -24,6 +24,8 @@ The application takes a mobile first approach and shifts the development process
 - Firebase Web SDK
 - Firebase Authentication
 - Firebase Realtime Database
+- Firebase Storage
+- Webpack
 
 ## Frontend Setup
 
@@ -55,4 +57,10 @@ The application takes a mobile first approach and shifts the development process
 
 <img width="336" alt="Screen Shot 2022-03-26 at 3 49 50 AM" src="https://user-images.githubusercontent.com/53372490/160236138-b72889df-702e-4681-8f82-91c268fa7f69.png">
 
-5. 
+5. Users can run a partial or full name search to find other users and add them as friends. 
+
+<img width="751" alt="Screen Shot 2022-03-26 at 3 56 22 AM" src="https://user-images.githubusercontent.com/53372490/160236349-bbd66e49-fd0a-4f9c-9752-b9595ae9ec51.png">
+
+6. Activities can be composed and friends added to the activity in the challenge creation flow.
+
+<img width="744" alt="Screen Shot 2022-03-26 at 4 10 57 AM" src="https://user-images.githubusercontent.com/53372490/160236806-db86d73b-d3f2-445d-a873-ec0777df627f.png">
