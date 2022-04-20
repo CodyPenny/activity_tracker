@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <Grid
     h='100%'
-    bg="brand.100"
+    bg="#fb436b"
     templateRows='1fr 1fr'
     >
      <GridItem
@@ -45,16 +45,20 @@ const Landing = () => {
         <Heading 
         fontSize={["5xl", "6xl"]} 
         letterSpacing=".2rem"
+        fontFamily="Fredoka One"
+        color="#34fbcb"
         >
-            Streak
+            STREAK
         </Heading>
         <Text 
-            fontSize={["3xl", "4xl"]} 
-        >Challenge your friends
+          fontSize={["xl", "2xl"]} 
+          fontFamily="Fredoka One"
+          color="#b5f0c7"
+        >CHALLENGE YOUR FRIENDS
         </Text>
             <IconButton
                 fontSize={["2rem", "3rem"]} 
-                icon={<FiArrowRight />}
+                icon={<FiArrowRight color="#24201e"/>}
                 mt="5%"
                 width="75%"
                 bg="brand.310"
